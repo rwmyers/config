@@ -1,3 +1,5 @@
 [user]
 	name = Russell Myers
 	email = mezner@russellmyers.com
+[color]
+	ui = true
