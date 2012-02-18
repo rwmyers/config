@@ -3,3 +3,8 @@
 	email = mezner@russellmyers.com
 [color]
 	ui = true
+[alias]
+	s = status
+	d = diff
+	c = commit
+	a = add
