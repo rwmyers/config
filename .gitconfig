@@ -8,3 +8,5 @@
 	d = diff
 	c = commit
 	a = add
+[core]
+	excludesfile = /home/mezner/.gitignore_global
