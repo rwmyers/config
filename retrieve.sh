@@ -3,3 +3,4 @@
 cp -v ~/.gitconfig .
 cp -v ~/.inputrc .
 cp -v ~/.vimrc .
+cp -v ~/.bash_profile .
