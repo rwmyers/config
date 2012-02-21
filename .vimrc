@@ -12,3 +12,6 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" setting terminal colors
+set t_Co=256
