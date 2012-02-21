@@ -9,5 +9,9 @@ cp -v ~/.gitconfig .
 cp -v ~/.screenrc .
 
 cp -v ~/.inputrc .
+
+# Vim configuration
 cp -v ~/.vimrc .
+cp -v -r ~/.vim .
+
 cp -v ~/.bash_profile .
