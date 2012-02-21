@@ -15,3 +15,6 @@ set expandtab
 
 " setting terminal colors
 set t_Co=256
+
+let g:zenburn_high_Contrast=1
+colors zenburn
