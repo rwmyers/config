@@ -14,4 +14,6 @@ cp -v ~/.inputrc .
 cp -v ~/.vimrc .
 cp -v -r ~/.vim .
 
+# Bash configuration files
 cp -v ~/.bash_profile .
+cp -v ~/.bashrc .
