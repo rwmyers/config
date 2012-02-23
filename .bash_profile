@@ -1,3 +1,9 @@
+P4CONFIG=.p4config
+export P4CONFIG
+
+function openex {
+    /cygdrive/c/Windows/explorer.exe /e,`cygpath -w "$1"`
+}
 
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
