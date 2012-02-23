@@ -4,6 +4,9 @@
 
 # Adding directories to path
 PATH=$PATH:/home/mezner/p4
+
+# Adding windows gvim
+PATH=$PATH:/cygdrive/c/vim
 export PATH
 
 # used by perforce to find appropriate configuration files
