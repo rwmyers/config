@@ -141,3 +141,6 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+alias browse='nautilus'
+alias g='git'
