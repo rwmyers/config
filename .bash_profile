@@ -1,6 +1,13 @@
 P4CONFIG=.p4config
 export P4CONFIG
 
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == "Linux" ]]; then
+    platform='linux'
+elif [[ "$unamestr" == CYGWIN* ]]; then
+    platform='cygwin'
+fi
 function openex {
     /cygdrive/c/Windows/explorer.exe /e,`cygpath -w "$1"`
 }
@@ -39,4 +46,11 @@ if [ -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
 else
     export TERM='xterm-color'
+fi
+
+# unset TMP and TEMP in Cygwin as Windows environment variables are
+# case insensitive.
+if [[ $platform == 'cygwin' ]]; then
+    unset TMP
+    unset TEMP
 fi
