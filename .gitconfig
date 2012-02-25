@@ -10,4 +10,4 @@
 	a = add
 	l = log
 [core]
-	excludesfile = /home/mezner/.gitignore_global
+	excludesfile = ~/.gitignore_global
