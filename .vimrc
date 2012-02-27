@@ -16,8 +16,12 @@ set expandtab
 " setting terminal colors
 set t_Co=256
 
-" always show the status bar
+" show status bar
 set laststatus=2
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-" let g:zenburn_high_Contrast=1
 colors zenburn
+
+" syntax
+syntax on
+let g:sql_type_default = "sqlserver"
