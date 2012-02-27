@@ -9,5 +9,6 @@
 	c = commit
 	a = add
 	l = log
+	co = checkout
 [core]
 	excludesfile = ~/.gitignore_global
