@@ -25,3 +25,6 @@ colors zenburn
 " syntax
 syntax on
 let g:sql_type_default = "sqlserver"
+
+map <M-Right> :bn!<CR>
+map <M-Left> :bp!<CR>
