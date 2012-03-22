@@ -20,7 +20,7 @@ set t_Co=256
 set laststatus=2
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-colors zenburn
+colors molokai
 
 " syntax
 syntax on
@@ -28,3 +28,9 @@ let g:sql_type_default = "sqlserver"
 
 map <M-Right> :bn!<CR>
 map <M-Left> :bp!<CR>
+
+" minibufexpl
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1 
