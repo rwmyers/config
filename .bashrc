@@ -7,6 +7,10 @@ elif [[ "$unamestr" == CYGWIN* ]]; then
     platform='cygwin'
 fi
 
+#################### Misc settings ################################
+# case-insensitive tab completion
+set completion-ignore-case on
+
 #################### History settings #############################
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -126,6 +130,9 @@ fi
 P4CONFIG=.p4config
 export P4CONFIG
 PATH=$PATH:/home/mezner/p4
+PATH=$PATH:/cygdrive/c/vim/vim73
 
 #################### FINAL settings ###############################
 export PATH
+
+
