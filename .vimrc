@@ -25,6 +25,7 @@ colors molokai
 " syntax
 syntax on
 let g:sql_type_default = "sqlserver"
+let g:build_type_default = "xml"
 
 map <M-Right> :bn!<CR>
 map <M-Left> :bp!<CR>
@@ -34,3 +35,7 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1 
 let g:miniBufExplMapCTabSwitchBufs = 1 
 let g:miniBufExplModSelTarget = 1 
+
+" filetypes
+filetype on
+au BufNewFile,Bufread *.build set filetype=xml
