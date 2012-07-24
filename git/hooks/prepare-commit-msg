@@ -1,3 +1,5 @@
 #!/bin/sh
+PARTS=$(git diff --cached --name-only | awk --field-separator / '{ printf "%s\n", $2}' | uniq -i | awk '{ printf "%s \\/ ",$1 }' | sed -r 's/.{4}$//')
 BRANCH=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 sed -i {"s/BRANCH/$BRANCH/"} "$1"
+sed -i {"s/PARTS/$PARTS/"} "$1"
