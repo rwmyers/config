@@ -21,14 +21,26 @@
 ; Visible whitespace mode (visws.el)
 (add-to-list 'load-path "~/.emacs.d/")
 (load "~/.emacs.d/visws.el")
-(visible-whitespace-mode)
+;(visible-whitespace-mode)
+
+; helping functions
+
+;; reload configuration function
+(defun reload-config ()
+  (load-file "~/.emacs"))
 
 ; General settings
 ; Allows for deletion of selected text and sets transient-mark-mode
 (delete-selection-mode t)
-(server-start)
+;; Starting 
+(load "server")
+(unless (server-running-p) (server-start))
+
 (setq inhibit-splash-screen t)
 ;; Goto-line short-cut key
 (global-set-key "\C-l" 'goto-line)
 ;; Set kill line / delete like to Shift-delete
 (global-set-key [S-delete] 'kill-line)
+;; Switch to next/prev buffer w/ CTRL(+SHIFT)+TAB
+(global-set-key (kbd "<C-tab>") 'bury-buffer)
+(global-set-key (kbd "<C-S-tab>") 'unbury-buffer)
