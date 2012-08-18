@@ -5,11 +5,18 @@
 
 ; Color-theme settings
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
+(add-to-list 'load-path "~/.emacs.d/color-theme/themes/solarized/")
 (require 'color-theme)
-(eval-after-load "color-theme"
-  '(progn
-     (color-theme-initialize)
-     (color-theme-monokai)))
+(require 'color-theme-solarized)
+(color-theme-solarized-light)
+;(eval-after-load "color-theme"
+;  '(progn
+;     (color-theme-initialize)
+;     (color-theme-solarized-light)))
+
+;(if window-system
+;    (color-theme-subtle-hacker)
+;    (color-theme-hober))
 
 ; Visible whitespace mode (visws.el)
 (add-to-list 'load-path "~/.emacs.d/")
@@ -21,3 +28,5 @@
 (delete-selection-mode t)
 (server-start)
 (setq inhibit-splash-screen t)
+;; Goto-line short-cut key
+(global-set-key "\C-l" 'goto-line)
