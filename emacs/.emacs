@@ -30,3 +30,5 @@
 (setq inhibit-splash-screen t)
 ;; Goto-line short-cut key
 (global-set-key "\C-l" 'goto-line)
+;; Set kill line / delete like to Shift-delete
+(global-set-key [S-delete] 'kill-line)
