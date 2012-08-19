@@ -9,14 +9,6 @@
 (require 'color-theme)
 (require 'color-theme-solarized)
 (color-theme-solarized-light)
-;(eval-after-load "color-theme"
-;  '(progn
-;     (color-theme-initialize)
-;     (color-theme-solarized-light)))
-
-;(if window-system
-;    (color-theme-subtle-hacker)
-;    (color-theme-hober))
 
 ; Visible whitespace mode (visws.el)
 (add-to-list 'load-path "~/.emacs.d/")
