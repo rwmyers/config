@@ -27,7 +27,15 @@
 
 ;; reload configuration function
 (defun reload-config ()
+  "Reload your .emacs file without restarting Emacs"
+  (interactive)
   (load-file "~/.emacs"))
+
+;; find .emacs file
+(defun open-config ()
+  "Open your .emacs file"
+  (interactive)
+  (find-file "~/.emacs"))
 
 ; General settings
 ; Allows for deletion of selected text and sets transient-mark-mode
