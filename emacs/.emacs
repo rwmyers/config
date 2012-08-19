@@ -37,6 +37,19 @@
   (interactive)
   (find-file "~/.emacs"))
 
+(defun cygwin-shell ()
+  "Run cygwin bash in shell mode."
+  (interactive)
+  (let ((explicit-shell-file-name "C:/cygwin/bin/bash"))
+    (call-interactively 'shell)))
+
+;; functions 
+(add-to-list 'load-path "~/.emacs.d/functions/")
+
+;; git
+(add-to-list 'load-path "~/.emacs.d/git/")
+(require 'git)
+
 ; General settings
 ; Allows for deletion of selected text and sets transient-mark-mode
 (delete-selection-mode t)
