@@ -10,25 +10,7 @@
 (require 'color-theme-solarized)
 (color-theme-solarized-light)
 
-; Visible whitespace mode (visws.el)
-(add-to-list 'load-path "~/.emacs.d/")
-(load "~/.emacs.d/visws.el")
-;(visible-whitespace-mode)
-
 ; helping functions
-
-;; reload configuration function
-(defun reload-config ()
-  "Reload your .emacs file without restarting Emacs"
-  (interactive)
-  (load-file "~/.emacs"))
-
-;; find .emacs file
-(defun open-config ()
-  "Open your .emacs file"
-  (interactive)
-  (find-file "~/.emacs"))
-
 (defun cygwin-shell ()
   "Run cygwin bash in shell mode."
   (interactive)
@@ -36,7 +18,8 @@
     (call-interactively 'shell)))
 
 ;; functions 
-(add-to-list 'load-path "~/.emacs.d/functions/")
+(message "LOADING FUNCTIONS..")
+(load "~/.emacs.d/functions/configs.el")
 
 ;; git
 (add-to-list 'load-path "~/.emacs.d/git/")
