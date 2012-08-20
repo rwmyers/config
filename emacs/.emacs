@@ -1,10 +1,15 @@
-; Org-mode settings
+;;; Org-mode settings
 (add-to-list 'load-path "~/.emacs.d/org/lisp")
 (add-to-list 'load-path "~/.emacs.d/org/contrib/lisp")
 (require 'org)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (setq org-todo-keywords
       '((sequence "TODO" "IMPEDED" "|" "DONE")))
+;; MobileOrg
+(setq org-directory "~/notes")
+(setq org-mobile-directory "I:/Dropbox/MobileOrg/")
+(setq org-mobile-inbox-for-pull "~/notes/index.org")
+(setq org-mobile-files (list "~/notes/mstr.org" "~/notes/emacs.org" "~/notes/codingstandards.org" "~/notes/thoughts.org"))
 
 ; Color-theme settings
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
@@ -45,3 +50,15 @@
 ;; Switch to next/prev buffer w/ CTRL(+SHIFT)+TAB
 (global-set-key (kbd "<C-tab>") 'bury-buffer)
 (global-set-key (kbd "<C-S-tab>") 'unbury-buffer)
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/notes/emacs.org"))))
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
