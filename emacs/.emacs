@@ -2,9 +2,13 @@
 (add-to-list 'load-path "~/.emacs.d/org/lisp")
 (add-to-list 'load-path "~/.emacs.d/org/contrib/lisp")
 (require 'org)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (setq org-todo-keywords
       '((sequence "TODO" "IMPEDED" "|" "DONE")))
+
+;; Extension registration
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.build\\'" . xml-mode))
+(add-to-list 'auto-mode-alist '("\\.config\\'" . xml-mode))
 
 ; Color-theme settings
 (add-to-list 'load-path "~/.emacs.d/color-theme/")
