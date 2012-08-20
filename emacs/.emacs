@@ -1,4 +1,7 @@
 ; Org-mode settings
+(add-to-list 'load-path "~/.emacs.d/org/lisp")
+(add-to-list 'load-path "~/.emacs.d/org/contrib/lisp")
+(require 'org)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (setq org-todo-keywords
       '((sequence "TODO" "IMPEDED" "|" "DONE")))
@@ -24,6 +27,8 @@
 ;; git
 (add-to-list 'load-path "~/.emacs.d/git/")
 (require 'git)
+
+(load "~/.emacs.d/git/git-commit.el")
 
 ; General settings
 ; Allows for deletion of selected text and sets transient-mark-mode
