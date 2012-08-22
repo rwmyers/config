@@ -108,6 +108,18 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 alias g='git'
+e() {
+    local TMP;
+    if [[ "$1" == "-" ]]; then
+        TMP="$(mktemp /tmp/emacsstdinXXX)";
+        cat >"$TMP";
+        if ! emacsclient --alternate-editor /usr/bin/false --eval "(let ((b (create-file-buffer \"*stdin*\"))) (switch-to-buffer b) (insert-file-contents \"${TMP}\") (delete-file \"${TMP}\"))"  > /dev/null 2>&1; then
+            emacs --eval "(let ((b (create-file-buffer \"*stdin*\"))) (switch-to-buffer b) (insert-file-contents \"${TMP}\") (delete-file \"${TMP}\"))" &
+        fi;
+    else
+        emacsclient --alternate-editor "emacs" --no-wait "$@" > /dev/null 2>&1 &
+    fi;
+}
 
 
 #################### Functions ####################################
