@@ -55,6 +55,8 @@
 ;; Switch to next/prev buffer w/ CTRL(+SHIFT)+TAB
 (global-set-key (kbd "<C-tab>") 'bury-buffer)
 (global-set-key (kbd "<C-S-tab>") 'unbury-buffer)
+;; Disable kill confirmation
+(remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function)
 
 ;; Change tab into four spaces
 (setq-default indent-tabs-mode nil)
@@ -75,9 +77,6 @@
  )
 
 (require 'ansi-color)
-(setq ansi-color-names-vector ; better contrast colors
-      ["black" "red4" "green4" "yellow4"
-       "blue3" "magenta4" "cyan4" "white"])
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-hook 'shell-mode-hook 'color-theme-solarized-dark)
 
@@ -97,10 +96,3 @@
                     (comint-next-input 1)
                   (forward-line 1))))
         ))
-
-
-;; theme-buffer-changer
-(add-to-list 'load-path "~/.emacs.d/color-theme-buffer/")
-(defun sh ()
-  (interactive)
-  (ansi-term "C:\cygwin\bin\zsh"))
