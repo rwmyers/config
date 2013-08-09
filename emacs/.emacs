@@ -21,7 +21,8 @@
 (require 'color-theme)
 (require 'color-theme-solarized)
 (color-theme-solarized-light)
-
+;(load "~/.emacs.d/color-theme/themes/color-theme-molokai.el")
+;(color-theme-molokai)
 ; helping functions
 (defun cygwin-shell ()
   "Run cygwin bash in shell mode."
@@ -69,16 +70,10 @@
   ;; If there is more than one, they won't work right.
  '(tab-always-indent (quote complete))
  '(w32shell-cygwin-bin "C:\\cygwin\\bin"))
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
 
 (require 'ansi-color)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-hook 'shell-mode-hook 'color-theme-solarized-dark)
+;(add-hook 'shell-mode-hook 'color-theme-solarized-dark)
 
 ;; shell settings
 (add-hook 'shell-mode-hook
@@ -96,3 +91,15 @@
                     (comint-next-input 1)
                   (forward-line 1))))
         ))
+
+;; android
+(load "~/.emacs.d/android.el")
+
+;; always show line numbers
+(global-linum-mode 1)
+
+;; whitespace mode
+(global-whitespace-mode 1)
+
+;; Change font to Envy Code R
+(set-default-font "Envy Code R-10")
