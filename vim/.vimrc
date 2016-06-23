@@ -39,3 +39,4 @@ let g:miniBufExplModSelTarget = 1
 " filetypes
 filetype on
 au BufNewFile,Bufread *.build set filetype=xml
+au BufNewFile,BufRead *.gradle setf groovy
