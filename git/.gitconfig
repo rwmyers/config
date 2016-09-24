@@ -15,3 +15,5 @@
     editor = 'vim'
 [push]
 	default = simple
+[http]
+	sslverify = false
