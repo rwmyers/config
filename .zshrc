@@ -29,6 +29,5 @@ plugins=()
 source $ZSH/oh-my-zsh.sh
 source $ZSH/aliases/aliases.zsh
 
-# Customize to your needs...
-PATH=$PATH:/cygdrive/c/vim/vim73
-
+# local binaries
+export PATH=~/bin:$PATH
