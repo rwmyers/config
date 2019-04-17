@@ -4,13 +4,21 @@ if [ $# -eq 0 ]
     echo "Provide full or partial name of package"
     exit 1
 fi
+wait_time=20
 device_file_path="/data/local/tmp/"
 process_id=$(adb shell ps | grep $@ | awk '{ print $2 }')
 process_name=$(adb shell ps | grep $@ | awk '{ print $9 }')
 date_file_format=$(date +"%D--%T" | sed 's/\//_/g' | sed 's/:/_/g')
 echo "Process ID for '$process_name': $process_id"
-
 file_name="$process_name-$date_file_format-$process_id.hprof"
+conv_file_name="$process_name-$date_file_format-$process_id-conv.hprof"
+echo "Dumping file to $file_name"
+
 adb shell am dumpheap $process_id $device_file_path$file_name
+echo "Waiting $wait_time for dump to complete."
+sleep $wait_time
 adb pull $device_file_path$file_name
 adb shell rm $device_file_path$file_name
+hprof-conv $file_name $conv_file_name
+echo "Dump: $file_name"
+echo "hprof-conv dump: $conv_file_name"
