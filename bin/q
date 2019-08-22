@@ -1,0 +1,10 @@
+#!/bin/sh
+ARG=$1
+
+if [ -d "${ARG}" ] ; then
+    ls -lh --color ${ARG}
+elif [ -f "${ARG}" ]; then
+    less ${ARG}
+else
+    ls -lh --color
+fi
