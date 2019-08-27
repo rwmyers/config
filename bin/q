@@ -1,10 +1,11 @@
 #!/bin/sh
 ARG=$1
+LS_CMD="ls -lha --color"
 
 if [ -d "${ARG}" ] ; then
-    ls -lh --color ${ARG}
+    $LS_CMD ${ARG}
 elif [ -f "${ARG}" ]; then
     less ${ARG}
 else
-    ls -lh --color
+    $LS_CMD
 fi
