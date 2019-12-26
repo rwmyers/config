@@ -1,0 +1,28 @@
+# Shortcuts
+
+## Create / Delete
+Create window	C-a C-c
+Name window	C-a ,
+Kill window	C-a x
+Horiz. pane	C-a - (dash)
+Vert. pane	C-a _ (vertical)
+
+## Navigation
+Previous window	C-a C-h
+Next window	C-a C-l
+
+Previous pane	C-a h
+Next pane	C-a l
+Swap panes	C-a <, C-a >
+
+## Resizing panes
+Left		C-a H
+Right		C-a L
+Up		C-a J
+Down		C-a K
+
+## Misc.
+Copy mode	C-a Enter
+List Buffer	C-a b
+Paste Buffer	C-a p
+Toggle mouse	C-a m
