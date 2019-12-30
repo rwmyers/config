@@ -23,6 +23,7 @@ Down		C-a K
 
 ## Misc.
 Copy mode	C-a Enter
+Clipboard copy  (in Copy mode) v -> (vi movement keys) -> y -> C-a y
 List Buffer	C-a b
 Paste Buffer	C-a p
 Toggle mouse	C-a m
