@@ -1,3 +1,5 @@
+#!/usr/local/bin/zsh
+
 if ! type "git" > /dev/null; 
 then
     echo "Install git!"
@@ -74,10 +76,17 @@ then
     ln -s ~/src/config/vim/.vim ~/.vim
 fi
 
+
 if [ ! -d "$HOME/.config/alacritty" ]
 then
     mkdir -p ~/.config/alacritty
     ln -s ~/src/config/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 fi
 
+if [[ "$OSTYPE" == "darwin"* ]];
+then
+    for file in ~/src/config/fonts/**/*(.); do
+        cp $file /Library/Fonts/
+    done
+fi
 
