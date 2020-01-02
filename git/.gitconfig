@@ -1,22 +1,28 @@
 [user]
-	name = Russell Myers
-	email = mezner@russellmyers.com
+    name = Russell Myers
+    email = mezner@russellmyers.com
 [color]
-	ui = true
+    ui = true
 [alias]
-	s = status
-	d = diff
-	c = commit
-	a = add
-	l = log
-	co = checkout
+    s = status
+    d = diff
+    c = commit
+    a = add
+    l = log
+    co = checkout
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    di = diff
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
     editor = 'vim'
 [push]
-	default = simple
+    default = simple
 [http]
-	sslverify = false
+    sslverify = false
 
 [include]
 path = .gitconfig.local
