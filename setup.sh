@@ -65,6 +65,11 @@ then
     ln -s ~/src/config/.tmux.conf.local ~/.tmux.conf.local
 fi
 
+if [ ! -f "$HOME/tmux-cheatsheet" ]
+then
+    ln -s ~/src/config/tmux-cheatsheet ~/tmux-cheatsheet
+fi
+
 
 if [ ! -f "$HOME/.vimrc" ]
 then
