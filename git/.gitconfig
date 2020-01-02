@@ -17,3 +17,6 @@
 	default = simple
 [http]
 	sslverify = false
+
+[include]
+path = .gitconfig.local
