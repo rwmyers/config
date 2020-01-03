@@ -1,33 +1,45 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-export ZSH_THEME="mezner"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want disable red dots displayed while waiting for completion
-# DISABLE_COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=()
-
+export ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="powerlevel10k/powerlevel10k"
+POWERLEVEL9K_MODE="awesome-patched"
+plugins=(git)
 source $ZSH/oh-my-zsh.sh
-source $ZSH/aliases/aliases.zsh
+export PATH=$PATH:/Users/rmmyers/gitscripts/
 
-# local binaries
-export PATH=~/bin:$PATH
+# Scripts
+export PATH=$PATH:~/bin
+# Custom scripts for this device
+export PATH=$PATH:~/bin.local
+
+alias zs='source ~/.zshrc'
+
+alias gr="git rev-parse --show-toplevel"
+
+setopt sh_word_split
+
+# The positiion of this is important as we'd like some GNU tools to be prepended to path.
+if [ -f "$HOME/.zshrc.local" ]
+then
+    source $HOME/.zshrc.local
+fi
+
+# aliases
+for f in ~/.aliases/*; do source $f; done
+
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+if [[ "$OSTYPE" == "darwin"* ]];
+then
+    # GNU tools
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+    # Add Visual Studio Code (code)
+    export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+alias gg="git grep -n"
+

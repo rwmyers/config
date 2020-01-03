@@ -45,6 +45,16 @@ else
     popd > /dev/null
 fi
 
+if [ ! -f "$HOME/.zshrc" ]
+then
+    ln -s ~/src/config/.zshrc ~/.zshrc
+fi
+
+if [ ! -f "$HOME/.zshrc.local" ]
+then
+    touch ~/.zshrc.local
+fi
+
 if [ ! -f "$HOME/.gitconfig" ]
 then
     ln -s ~/src/config/.gitconfig ~/.gitconfig
