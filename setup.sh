@@ -45,6 +45,10 @@ else
     popd > /dev/null
 fi
 
+if [ ! -f "$HOME/.gitconfig" ]
+then
+    ln -s ~/src/config/.gitconfig ~/.gitconfig
+fi
 
 if ! type "tmux" > /dev/null;
 then
