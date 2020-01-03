@@ -50,6 +50,11 @@ then
     ln -s ~/src/config/.gitconfig ~/.gitconfig
 fi
 
+if [ ! -f "$HOME/.gitignore_global" ]
+then
+    ln -s ~/src/config/.gitignore_global ~/.gitignore_global
+fi
+
 if ! type "tmux" > /dev/null;
 then
     if [[ "$OSTYPE" == "darwin"* ]];
