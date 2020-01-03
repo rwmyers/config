@@ -73,12 +73,12 @@ fi
 
 if [ ! -f "$HOME/.vimrc" ]
 then
-    ln -s ~/src/config/vim/.vimrc ~/.vimrc
+    ln -s ~/src/config/.vimrc ~/.vimrc
 fi
 
 if [ ! -d "$HOME/.vim" ]
 then
-    ln -s ~/src/config/vim/.vim ~/.vim
+    ln -s ~/src/config/.vim ~/.vim
 fi
 
 
