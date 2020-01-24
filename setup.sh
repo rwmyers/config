@@ -56,6 +56,17 @@ else
     popd
 fi
 
+if [ ! -d "$HOME/.oh-my-zsh/themes/powerlevel10k" ]
+then
+    pushd ~/.oh-my-zsh/themes
+    git clone https://github.com/romkatv/powerlevel10k.git
+    popd
+else
+    pushd ~/.oh-my-zsh/themes/powerlevel10k
+    git pull
+    popd
+fi
+
 if [ ! -f "$HOME/.zshrc" ]
 then
     ln -s ~/src/config/.zshrc ~/.zshrc
