@@ -55,6 +55,11 @@ then
     touch ~/.zshrc.local
 fi
 
+if [ ! -d "$HOME/.aliases" ]
+then
+    ln -s ~/src/config/.aliases ~/.aliases
+fi
+
 if [ ! -f "$HOME/.gitconfig" ]
 then
     ln -s ~/src/config/.gitconfig ~/.gitconfig
