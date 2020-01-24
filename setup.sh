@@ -45,6 +45,17 @@ else
     popd > /dev/null
 fi
 
+if [ ! -d "$HOME/.oh-my-zsh" ]
+then
+    pushd ~/ > /dev/null
+    git clone git@github.com:ohmyzsh/ohmyzsh.git .oh-my-zsh
+    popd
+else
+    pushd ~/.oh-my-zsh
+    git pull
+    popd
+fi
+
 if [ ! -f "$HOME/.zshrc" ]
 then
     ln -s ~/src/config/.zshrc ~/.zshrc
