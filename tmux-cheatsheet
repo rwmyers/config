@@ -1,7 +1,7 @@
 # Shortcuts
 
 ## Create / Delete
-Create window	C-a C-c
+Create window	C-a c
 Name window	C-a ,
 Kill window	C-a x
 Horiz. pane	C-a - (dash)
