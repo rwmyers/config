@@ -141,3 +141,7 @@ then
     done
 fi
 
+if [[ "$OSTYPE" == "darwin"* ]];
+then
+    brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
+fi
