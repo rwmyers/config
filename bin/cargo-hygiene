@@ -1,0 +1,4 @@
+#!/bin/sh
+# Runs formatting and clippy tools.
+# Naming something cargo-* and placing it in path allows it to be used as "cargo *"
+cargo fmt && cargo clippy

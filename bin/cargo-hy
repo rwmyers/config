@@ -1,0 +1,3 @@
+#!/bin/sh
+# Alias for cargo-hygiene script
+cargo hygiene
