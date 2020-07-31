@@ -34,6 +34,11 @@ then
     mkdir -p ~/src/ 
 fi
 
+if [ ! -d "HOME/bin" ]
+then
+    ln -s ~/src/config/bin ~/bin
+fi
+
 if [ ! -d "$HOME/src/config" ]
 then
     pushd ~/src > /dev/null
