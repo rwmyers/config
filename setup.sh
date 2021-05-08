@@ -23,7 +23,7 @@ then
         exit 1
     else
         echo "Installing zsh on Linux"
-        apt-get -y install zsh
+        sudo apt-get -y install zsh
         echo "Changing default shell"
         chsh --shell /usr/bin/zsh 
     fi
