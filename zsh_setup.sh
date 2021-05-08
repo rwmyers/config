@@ -84,14 +84,7 @@ then
     ln -s ~/src/config/.vim ~/.vim
 fi
 
-if [ ! -d "$HOME/.p10k.zsh" ]
-then
-    ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
-fi
-
-
-
-if [ ! -d "$HOME/.p10k.zsh" ]
+if [ ! -f "$HOME/.p10k.zsh" ]
 then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
 fi
