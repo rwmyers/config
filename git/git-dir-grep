@@ -1,0 +1,1 @@
+for d in ./*/ ; do ( echo " === Results for $d ===" && cd "$d" && git --no-pager grep "$@" ); done 

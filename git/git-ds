@@ -1,0 +1,1 @@
+for d in ./*/ ; do ( echo " === Status for $d ===" && cd "$d" && git status ); done 

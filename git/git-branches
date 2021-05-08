@@ -1,0 +1,4 @@
+alias git-describe-branches='for line in $(git branch); do 
+     description=$(git config branch.$line.description)
+     echo "$line     $description"
+done'

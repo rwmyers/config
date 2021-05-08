@@ -1,0 +1,3 @@
+BRANCH=$(git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD));
+BRANCH=$(echo $BRANCH | sed 's/remotes\///')
+git reset --hard remotes/$BRANCH && git pull
