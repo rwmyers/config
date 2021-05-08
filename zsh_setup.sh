@@ -87,21 +87,39 @@ fi
 if [ ! -d "$HOME/.p10k.zsh" ]
 then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
-    printf "${NOTE}IMPORTANT: Make sure to install the powerline font in the ~$HOME/src/config/fonts directory${NC}\n"
 fi
 
+
+
+if [ ! -d "$HOME/.p10k.zsh" ]
+then
+    ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
+fi
+
+if [ ! -d "$HOME/src/fonts/" ]
+then
+    mkdir -p ~/src/fonts/
+    pushd ~/src/fonts/
+    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+    popd
+    if [[ "$OSTYPE" == "darwin"* ]];
+    then
+        for file in ~/src/fonts//**/*(.); do
+            cp $file /Library/Fonts/
+        done
+    fi
+    printf "${NOTE}IMPORTANT: Set fonts the ~$HOME/src/fonts/${NC}\n"
+    printf "${NOTE}MesloLGS NF:${NC} For nerd fonts / terminal usage\n"
+    printf "${NOTE}Pull Cascadia Code here: https://github.com/microsoft/cascadia-code/releases${NC}\n"
+fi
 
 if [ ! -d "$HOME/.config/alacritty" ]
 then
     mkdir -p ~/.config/alacritty
     ln -s ~/src/config/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-fi
-
-if [[ "$OSTYPE" == "darwin"* ]];
-then
-    for file in ~/src/config/fonts/**/*(.); do
-        cp $file /Library/Fonts/
-    done
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]];
