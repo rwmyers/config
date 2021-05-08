@@ -1,4 +1,7 @@
 #!/bin/zsh
+NOTE='\033[1;32m'
+NC='\033[0m'
+
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
     pushd ~/ > /dev/null
@@ -84,6 +87,7 @@ fi
 if [ ! -d "$HOME/.p10k.zsh" ]
 then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
+    printf "${NOTE}IMPORTANT: Make sure to install the powerline font in the ~$HOME/src/config/fonts directory${NC}\n"
 fi
 
 
