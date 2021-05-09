@@ -41,12 +41,12 @@ fi
 
 if [ ! -f "$HOME/.gitconfig" ]
 then
-    ln -s ~/src/config/.gitconfig ~/.gitconfig
+    ln -s ~/src/config/git/.gitconfig ~/.gitconfig
 fi
 
 if [ ! -f "$HOME/.gitignore_global" ]
 then
-    ln -s ~/src/config/.gitignore_global ~/.gitignore_global
+    ln -s ~/src/config/git/.gitignore_global ~/.gitignore_global
 fi
 
 if ! type "tmux" > /dev/null;
