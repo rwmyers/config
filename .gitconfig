@@ -16,6 +16,7 @@
     ci = commit
     st = status
     di = diff
+    unstage = restore --staged .
 [core]
     excludesfile = ~/.gitignore_global
     editor = 'vim'
