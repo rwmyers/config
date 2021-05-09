@@ -1,0 +1,3 @@
+#!/bin/sh
+git config user.name "Russell Myers"
+git config user.email "mezner@russellmyers.com"
