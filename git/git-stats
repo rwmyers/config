@@ -1,5 +1,5 @@
 echo 'Commits by author:'
-git shortlog -sne
+git --no-pager shortlog -sne
 echo '---------------------------------'
 echo 'Statistics by author'
 echo '---------------------------------'
