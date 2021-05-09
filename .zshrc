@@ -19,8 +19,6 @@ export PATH=$PATH:~/bin.local
 
 alias zs='source ~/.zshrc'
 
-alias gr="cd $(git top)"
-
 setopt sh_word_split
 
 # The positiion of this is important as we'd like some GNU tools to be prepended to path.
@@ -31,6 +29,9 @@ fi
 
 # aliases
 for f in ~/.aliases/*; do source $f; done
+
+# functions
+for f in ~/.functions/*; do source $f; done
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"

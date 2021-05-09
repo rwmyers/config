@@ -39,6 +39,11 @@ then
     ln -s ~/src/config/.aliases ~/.aliases
 fi
 
+if [ ! -d "$HOME/.functions" ]
+then
+    ln -s ~/src/config/.functions ~/.functions
+fi
+
 if [ ! -f "$HOME/.gitconfig" ]
 then
     ln -s ~/src/config/git/.gitconfig ~/.gitconfig

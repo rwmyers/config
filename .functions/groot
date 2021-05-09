@@ -1,0 +1,3 @@
+function groot {
+    cd $(git top)
+}
