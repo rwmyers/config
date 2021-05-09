@@ -119,3 +119,16 @@ if [[ "$OSTYPE" == "darwin"* ]];
 then
     brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
 fi
+
+if ! type "cloc" > /dev/null;
+then
+    echo "cloc not installed."
+    if [[ "$OSTYPE" == "darwin"* ]];
+    then
+        echo "Installing cloc on OSX"
+        brew install cloc
+    else
+        echo "Installing cloc on Linux"
+        sudo apt-get -y install cloc
+    fi
+fi
