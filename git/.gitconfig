@@ -17,6 +17,7 @@
     st = status
     di = diff
     unstage = restore --staged .
+    ll = log --oneline
 [core]
     excludesfile = ~/.gitignore_global
     editor = 'vim'
