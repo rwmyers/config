@@ -11,5 +11,6 @@ Commands
 | git ac         | Adds/removes all files unstaged and commits                    |
 | git sln        | Alias for `git shortlog -n`, ordering by number of changes     |
 | git unstage    | Alias for `git restore --staged .`, unstaging all files        |
+| git undo       | Alias for `git restore .`, reverting unstaged files            |
 | git ll         | Alias for `git log --oneline .`, unstaging all files           |
 | git branches   | More useful output of branch status                            |
