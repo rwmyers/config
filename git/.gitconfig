@@ -15,7 +15,7 @@
     ci = commit
     st = status
     di = diff
-    unstage = restore --staged .
+    unstage = reset HEAD .
     undo = checkout -- .
 [core]
     excludesfile = ~/.gitignore_global
