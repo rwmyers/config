@@ -19,7 +19,7 @@ export PATH=$PATH:~/bin.local
 
 alias zs='source ~/.zshrc'
 
-alias gr="git rev-parse --show-toplevel"
+alias gr="cd $(git top)"
 
 setopt sh_word_split
 
