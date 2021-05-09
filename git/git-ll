@@ -1,0 +1,2 @@
+#!/bin/sh
+git log --graph --format="%C(#66D9EF)%h%C(reset)%C(#F92672)%d%C(reset) %C(#A6E22E)%an <%ae>%C(reset) %C(#E69F66)%cr%C(reset)%n%s"

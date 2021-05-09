@@ -10,7 +10,6 @@
     a = add
     l = log
     co = checkout
-    ll = log --graph --format='format:%C(yellow)%h%C(reset) %C(cyan)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
     co = checkout
     br = branch
     ci = commit
