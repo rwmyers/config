@@ -17,6 +17,7 @@
     di = diff
     unstage = reset HEAD .
     undo = checkout -- .
+    ff = find-file
 [core]
     excludesfile = ~/.gitignore_global
     editor = 'vim'
