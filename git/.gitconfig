@@ -26,6 +26,8 @@
     default = simple
 [http]
     sslverify = false
+[grep]
+    linenumber = true
 
 [include]
 path = .gitconfig.local
