@@ -28,6 +28,9 @@
     sslverify = false
 [grep]
     linenumber = true
+[status]
+    short = true
+    branch = true
 
 [include]
 path = .gitconfig.local
