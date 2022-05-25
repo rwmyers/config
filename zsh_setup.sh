@@ -141,3 +141,13 @@ then
         sudo apt-get -y install cloc
     fi
 fi
+
+if [ ! -d "$HOME/bin" ]
+then
+    ln -s ~/src/config/bin ~/bin
+fi
+
+if [ ! -d "$HOME/bin.local" ]
+then
+    mkdir -p ~/bin.local
+fi
