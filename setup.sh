@@ -21,6 +21,12 @@ then
         brew install zsh
         echo "Manually set your default shell to /bin/zsh"
         exit 1
+    elif [-n "$(command -v yum)"]
+    then
+        echo "Installing zsh with yum"
+        sudo yum install zsh
+        echo "Changing default shell"$
+        chsh --shell /usr/bin/zsh
     else
         echo "Installing zsh on Linux"
         sudo apt-get -y install zsh

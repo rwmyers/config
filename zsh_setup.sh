@@ -132,6 +132,10 @@ then
     then
         echo "Installing cloc on OSX"
         brew install cloc
+    elif [[ -n "$(command -v yum)" ]]
+    then
+        echo "Installing cloc using yum"
+        sudo yum install cloc
     else
         echo "Installing cloc on Linux"
         sudo apt-get -y install cloc
