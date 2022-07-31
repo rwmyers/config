@@ -36,6 +36,8 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1 
 let g:miniBufExplModSelTarget = 1 
 
+set clipboard^=unnamed,unnamedplus
+
 " filetypes
 filetype on
 au BufNewFile,Bufread *.build set filetype=xml
