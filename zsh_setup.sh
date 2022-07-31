@@ -175,3 +175,8 @@ then
         sudo apt-get install polybar
     fi
 fi
+
+if [ ! -f "$HOME/.config/polybar" ]
+then
+    ln -s $SRC_ROOT/.config/polybar/ ~/.config/polybar
+fi
