@@ -1,6 +1,7 @@
 #!/bin/zsh
 NOTE='\033[1;32m'
 NC='\033[0m'
+SRC_ROOT="$HOME/src/config"
 
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
@@ -155,4 +156,10 @@ fi
 if [ ! -d "$HOME/bin.local" ]
 then
     mkdir -p ~/bin.local
+fi
+
+if [ ! -f "$HOME/.config/i3/config" ]
+then
+    mkdir -p ~/.config/i3
+    ln -s $SRC_ROOT/.config/i3/config ~/.config/i3/config
 fi
