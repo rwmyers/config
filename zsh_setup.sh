@@ -163,3 +163,11 @@ then
     mkdir -p ~/.config/i3
     ln -s $SRC_ROOT/.config/i3/config ~/.config/i3/config
 fi
+
+if [[ "$OSTYPE" == "linux-gnu"* ]];
+then
+    if ! type "playerctl" > /dev/null;
+    then
+        sudo apt-get install playerctl
+    fi
+fi
