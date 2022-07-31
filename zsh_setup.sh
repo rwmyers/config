@@ -170,4 +170,8 @@ then
     then
         sudo apt-get install playerctl
     fi
+    if ! type "polybar" > /dev/null;
+    then
+        sudo apt-get install polybar
+    fi
 fi
