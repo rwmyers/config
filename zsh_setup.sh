@@ -108,6 +108,11 @@ then
         for file in ~/src/fonts//**/*(.); do
             cp $file /Library/Fonts/
         done
+    else
+        mkdir -p $HOME/.fonts
+        for file in ~/src/fonts//**/*(.); do
+            cp $file $HOME/.fonts/
+        done
     fi
     printf "${NOTE}IMPORTANT: Set fonts the ~$HOME/src/fonts/${NC}\n"
     printf "${NOTE}MesloLGS NF:${NC} For nerd fonts / terminal usage\n"
