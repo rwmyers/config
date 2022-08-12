@@ -34,7 +34,7 @@ for f in ~/.aliases/*; do source $f; done
 for f in ~/.functions/*; do source $f; done
 
 # Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.cargo/env:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]];
 then
