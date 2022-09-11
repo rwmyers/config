@@ -171,17 +171,22 @@ then
         sudo apt-get install playerctl
     fi
     if ! type "polybar" > /dev/null;
-    then
+    then;
         sudo apt-get install polybar
     fi
 fi
 
-if [ ! -f "$HOME/.config/polybar" ]
+if [ ! -e "$HOME/.config/polybar" ]
 then
     ln -s $SRC_ROOT/.config/polybar/ ~/.config/polybar
 fi
 
-if [ ! -f "$HOME/.config/kmonad" ]
+if [ ! -e "$HOME/.config/kmonad" ]
 then
     ln -s $SRC_ROOT/.config/kmonad/ ~/.config/kmonad
+fi
+
+if [ ! -e "$HOME/.config/systemd" ]
+then
+    ln -s $SRC_ROOT/.config/systemd/ ~/.config/systemd
 fi
