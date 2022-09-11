@@ -180,3 +180,8 @@ if [ ! -f "$HOME/.config/polybar" ]
 then
     ln -s $SRC_ROOT/.config/polybar/ ~/.config/polybar
 fi
+
+if [ ! -f "$HOME/.config/kmonad" ]
+then
+    ln -s $SRC_ROOT/.config/kmonad/ ~/.config/kmonad
+fi
