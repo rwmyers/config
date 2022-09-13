@@ -252,6 +252,8 @@
 (defalias
   num  (layer-toggle numbers) ;; Bind num to a button that switches to a layer
   L    (tap-hold-next 500 ; @num)
+  sl   (tap-hold-next 500 / rsft)
+  zed    (tap-hold-next 500 z lsft)
   kil  C-A-del                ;; Bind kil to a button that Ctrl-Alt-deletes
 )
 
@@ -310,7 +312,7 @@
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    @L    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lsft @zed x    c    v    b    n    m    ,    .    @sl  rsft
   lctl lmet lalt           spc            ralt rmet cmp  rctl
 )
 
@@ -438,9 +440,9 @@
   -------------------------------------------------------------------------- |#
 
 ;; Let's make both shift keys sticky
-(defalias
-  sl (sticky-key 300 lsft)
-  sr (sticky-key 300 rsft))
+;; (defalias
+;;   sl (sticky-key 300 lsft)
+;;   sr (sticky-key 300 rsft))
 
 
 ;; Now we define the 'tst' button as opening and closing a bunch of layers at
@@ -638,26 +640,26 @@
   ;; button which will get us to the `layer-test` layer, which itself contains
   ;; both `@qwe` and `@col`.
   qwe (layer-switch qwerty) ;; Set qwerty as the base layer
-  col (layer-switch colemak) ;; Set colemak as the base layer
+  ;; col (layer-switch colemak) ;; Set colemak as the base layer
 )
 (deflayer layer-test
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   @qwe _    _    _    _    _    _    _    _    _    _    @add _    @nah
-  @col _    _    _    _    _    _    _    _    _    _    _    _    @yah
+  _    _    _    _    _    _    _    _    _    _    _    _    _    @yah
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    @ld1 @ld2 _
   _    _    _              _              _    _    _    _
 )
 
 ;; Exactly like qwerty, but with the letters switched around
-(deflayer colemak
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
-  @xcp a    r    s    t    d    h    n    e    i    o    '    ret
-  @sl  z    x    c    v    b    k    m    ,    .    /    @sr
-  lctl @num lalt           spc            ralt rmet @sym @tst
-)
+;; (deflayer colemak
+;;   _    _    _    _    _    _    _    _    _    _    _    _    _    _
+;;   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;   tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
+;;   @xcp a    r    s    t    d    h    n    e    i    o    '    ret
+;;   @sl  z    x    c    v    b    k    m    ,    .    /    @sr
+;;   lctl @num lalt           spc            ralt rmet @sym @tst
+;; )
 
 (defalias lol #(: - D))
 
