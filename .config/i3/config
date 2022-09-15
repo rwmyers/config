@@ -180,7 +180,6 @@ workspace $ws4 output DP-5 primary
 workspace $ws5 output DP-7 primary
 workspace $ws6 output HDMI-0 primary
 
-assign [class="firefox"] $ws1
 # Somewhat needed for the context dialogs that seem to come up for IntelliJ
 assign [class="jetbrains-idea-ce"] $ws2
 assign [class="Spotify"] $ws6
