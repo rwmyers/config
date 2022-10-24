@@ -98,6 +98,7 @@ fi
 if [ ! -d "$HOME/src/fonts/" ]
 then
     mkdir -p ~/src/fonts/
+    cp ~/src/config/fonts/* ~/src/fonts
     pushd ~/src/fonts/
     wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
     wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
