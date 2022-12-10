@@ -35,6 +35,19 @@ then
     fi
 fi
 
+if ! type "git" > /dev/null; 
+then
+    echo "git not installed."
+    if [[ "$OSTYPE" == "darwin"* ]];
+    then
+        echo "Manually install git and re-run script"
+        exit 1
+    else
+        echo "Installing git on Debian-based Linux"
+        sudo apt-get -y install git
+    fi
+fi
+
 if [ ! -d "$HOME/src/" ] 
 then
     mkdir -p ~/src/
