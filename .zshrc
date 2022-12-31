@@ -17,6 +17,9 @@ export PATH=$PATH:~/bin
 # Custom scripts for this device
 export PATH=$PATH:~/bin.local
 
+# For random things like what's in Haskell stack (for kmonad)
+export PATH=$PATH:~/.local/bin
+
 alias zs='source ~/.zshrc'
 
 setopt sh_word_split
