@@ -1,0 +1,7 @@
+if [[ "$OSTYPE" == "darwin"* ]];
+then
+    alias getclip="pbpaste"
+else
+    alias getclip="xclip -selection c"
+fi
+
