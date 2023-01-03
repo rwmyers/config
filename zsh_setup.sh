@@ -175,6 +175,10 @@ then
     then;
         sudo apt-get install polybar
     fi
+    if ! type "xclip" > /dev/null;
+    then
+        sudo apt-get install xclip
+    fi
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
