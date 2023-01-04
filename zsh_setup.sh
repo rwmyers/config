@@ -179,6 +179,10 @@ then
     then
         sudo apt-get install xclip
     fi
+    if ! type "blueman-manager" > /dev/null;
+    then
+        sudo apt install blueman
+    fi
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
