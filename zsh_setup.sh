@@ -145,7 +145,7 @@ then
         sudo yum install cloc
     else
         echo "Installing cloc on Linux"
-        sudo apt-get -y install cloc
+        sudo apt -y install cloc
     fi
 fi
 
@@ -169,19 +169,19 @@ if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
     if ! type "playerctl" > /dev/null;
     then
-        sudo apt-get install playerctl
+        sudo apt -y install playerctl
     fi
     if ! type "polybar" > /dev/null;
     then;
-        sudo apt-get install polybar
+        sudo apt -y install polybar
     fi
     if ! type "xclip" > /dev/null;
     then
-        sudo apt-get install xclip
+        sudo apt -y install xclip
     fi
     if ! type "blueman-manager" > /dev/null;
     then
-        sudo apt install blueman
+        sudo apt -y install blueman
     fi
 fi
 
