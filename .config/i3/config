@@ -236,8 +236,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# waiting on PR via apt-get
-# gaps inner 5
-# gaps outer 5
+gaps inner 7
+gaps outer 3
 
 include ~/.config/i3/config.local
