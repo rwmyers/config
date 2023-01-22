@@ -183,6 +183,10 @@ then
     then
         sudo apt -y install blueman
     fi
+    if ! type "rofi" > /dev/null;
+    then
+        sudo apt -y install rofi
+    fi
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
