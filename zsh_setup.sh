@@ -199,3 +199,8 @@ if [ ! -e "$HOME/.config/systemd" ]
 then
     ln -s $SRC_ROOT/.config/systemd/ ~/.config/systemd
 fi
+
+if [ ! -e "$HOME/.config/rofi" ]
+then
+    ln -s $SRC_ROOT/.config/rofi/ ~/.config/rofi
+fi
