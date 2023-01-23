@@ -165,6 +165,12 @@ then
     ln -s $SRC_ROOT/.config/i3/config ~/.config/i3/config
 fi
 
+if [ ! -f "$HOME/.config/i3/config.local" ]
+then
+    cp $SRC_ROOT/.config/i3/config.local ~/.config/i3/config.local
+fi
+
+
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
     if ! type "playerctl" > /dev/null;
