@@ -89,6 +89,14 @@ if [ ! -d "$HOME/.vim" ]
 then
     ln -s ~/src/config/.vim ~/.vim
 fi
+if [[ "$OSTYPE" == "linux-gnu"* ]];
+then
+    if ! type "vim" > /dev/null;
+    then
+        sudo apt -y install vim
+    fi
+fi
+
 
 if [ ! -f "$HOME/.p10k.zsh" ]
 then
