@@ -222,3 +222,28 @@ if [ ! -e "$HOME/.config/rofi" ]
 then
     ln -s $SRC_ROOT/.config/rofi/ ~/.config/rofi
 fi
+
+if [ ! -d "$HOME/src/i3-projects" ]
+then
+    pushd ~/src/
+    git clone git@github.com:Mezner/i3-projects.git
+    popd
+
+    ln -s ~/src/i3-projects/project-save ~/bin/project-save
+    ln -s ~/src/i3-projects/template.txt ~/bin/template.txt
+else
+    pushd ~/src/i3-projects
+    git pull
+    popd
+fi
+
+if [ ! -e "$HOME/bin/project-save" ]
+then
+    ln -s $SRC_ROOT/i3-projects/project-save ~/bin/project-save
+fi
+
+if [ ! -e "$HOME/bin/template.txt" ]
+then
+    ln -s $SRC_ROOT/i3-projects/template.txt ~/bin/template.txt
+fi
+
