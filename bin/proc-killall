@@ -1,0 +1,3 @@
+#!/bin/sh
+# kill all processes by subname
+ps -e -o pid,cmd | grep -i $1 | awk {'print $1'} | xargs kill
