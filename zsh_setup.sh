@@ -209,6 +209,20 @@ then
     then
         sudo apt -y install blueman
     fi
+    if ! type "pip" > /dev/null;
+    then
+        sudo apt -y install pip
+    fi
+fi
+
+if [ $(pip list | grep jq | wc -c) -eq 0 ]
+then
+    pip install jq
+fi
+
+if [ $(pip list | grep -i jinja | wc -c) -eq 0 ]
+then
+    pip install jinja2
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
