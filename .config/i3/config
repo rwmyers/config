@@ -128,6 +128,11 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+# Screenshots via maim
+bindsym $mod+t exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Ctrl+$mod+t exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+bindsym $mod+Shift+t exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
