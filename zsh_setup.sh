@@ -205,6 +205,10 @@ then
     then
         sudo apt -y install maim
     fi
+    if ! type "blueman-manager" > /dev/null;
+    then
+        sudo apt -y install blueman
+    fi
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
