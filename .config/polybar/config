@@ -265,8 +265,8 @@ interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = "%{A1:gnome-control-center network:}%essid%%{A}"
-label-disconnected = "%{A1:gnome-control-center network:}   not connected%{A}"
+label-connected = "%{A1:gnome-control-center wifi:}%essid%%{A}"
+label-disconnected = "%{A1:gnome-control-center wifi:}   not connected%{A}"
 label-disconnected-foreground = #66
 
 ramp-signal-0 = 
