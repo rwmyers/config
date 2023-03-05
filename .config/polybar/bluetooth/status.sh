@@ -7,6 +7,6 @@ else
   then
     echo ""
   else
-    echo "%{F#2193ff}"
+    echo " " $(echo info | bluetoothctl | grep 'Name' | sed 's/Name: //' )
   fi
 fi
