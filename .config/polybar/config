@@ -21,7 +21,7 @@ font-4 = MesloLGS NF:style=Regular
 font-5 = CaskaydiaCove Nerd Font:style=Regular
 
 modules-left = powermenu spotify
-modules-right = audio backlight wireless-network wired-network battery date
+modules-right = audio backlight bluetooth wireless-network wired-network battery date
 
 [bar/bottom]
 monitor = eDP-1
@@ -379,5 +379,15 @@ exec = python3 $HOME/src/config/.config/polybar/spotify_status.py -f '{artist}: 
 click-left = playerctl --player=spotify play-pause
 click-right = playerctl --player=spotify next
 click-middle = playerctl --player=spotify previous
+
+[module/bluetooth]
+type = custom/script
+exec = $HOME/src/config/.config/polybar/bluetooth/status.sh
+interval = 2
+click-left = exec blueman-manager
+click-right = exec $HOME/src/config/.config/polybar/bluetooth/toggle.sh
+format-padding = 1
+format-background = #000000
+format-foreground = #ffffff
 
 ; vim:ft=dosini
