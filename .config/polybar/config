@@ -265,7 +265,21 @@ interval = 3.0
 ping-interval = 10
 
 format-connected = <ramp-signal> <label-connected>
-label-connected = "%{A1:gnome-control-center wifi:}%essid%%{A}"
+
+; All labels support the following tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %local_ip6% [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %netspeed%  [wireless+wired] (%upspeed% + %downspeed%) (New in version 3.6.0)
+;   %linkspeed% [wired]
+;   %mac%       [wireless+wired] (New in version 3.6.0)
+
+; Default: %ifname% %local_ip%
+label-connected = "%{A1:gnome-control-center wifi:}%local_ip% - %essid%%{A}"
 label-disconnected = "%{A1:gnome-control-center wifi:}   not connected%{A}"
 label-disconnected-foreground = #66
 
