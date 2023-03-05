@@ -300,7 +300,7 @@ type = internal/network
 interface = enp47s0
 interval = 3.0
 
-label-connected =    %{T3}%local_ip%%{T-}
+label-connected = "%{A1:gnome-control-center network:}   %{F#999}%downspeed% - %local_ip%%{F-}%{A}"
 label-disconnected-foreground = #66
 
 [module/powermenu]
