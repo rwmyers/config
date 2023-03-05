@@ -387,7 +387,5 @@ interval = 2
 click-left = exec blueman-manager
 click-right = exec $HOME/src/config/.config/polybar/bluetooth/toggle.sh
 format-padding = 1
-format-background = #000000
-format-foreground = #ffffff
 
 ; vim:ft=dosini
