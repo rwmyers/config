@@ -201,6 +201,10 @@ then
     then
         sudo apt -y install rofi
     fi
+    if ! type "maim" > /dev/null;
+    then
+        sudo apt -y install maim
+    fi
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
