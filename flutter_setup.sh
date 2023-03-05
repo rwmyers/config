@@ -34,3 +34,6 @@ fi
 # You need to accept licenses from command line.
 flutter doctor --android-licenses
 flutter doctor
+
+sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
