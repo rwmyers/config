@@ -3,3 +3,4 @@
 bin/project-*
 bin/template.txt
 .config/systemd/user/default.target.wants/
+.DS_Store
