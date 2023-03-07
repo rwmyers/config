@@ -116,3 +116,7 @@ function adb-which {
 function adb-screenshot {
     adb exec-out screencap -p > "screenshot-$(date +%d.%m.%y-%H:%M:%S).png"
 }
+
+function adb-focused-window {
+    adb shell dumpsys window | grep -i mFocusedApp | sed 's/.*{[^ ]* [^ ]* \([^}]*\)}.*$/\1/'
+}
