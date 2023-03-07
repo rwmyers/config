@@ -112,3 +112,7 @@ function adb-which {
 
     echo $answer
 }
+
+function adb-screenshot {
+    adb exec-out screencap -p > "screenshot-$(date +%d.%m.%y-%H:%M:%S).png"
+}
