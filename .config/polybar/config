@@ -1,5 +1,9 @@
 [bar/top]
-monitor = eDP-1
+; Use either of the following command to list available outputs:
+; $ polybar -M | cut -d ':' -f 1
+; $ xrandr -q | grep " connected" | cut -d ' ' -f1
+; If no monitor is given, the primary monitor is used if it exists
+; monitor =
 width = 100%
 height = 34
 
@@ -24,7 +28,11 @@ modules-left = powermenu spotify
 modules-right = audio backlight bluetooth wireless-network wired-network battery date
 
 [bar/bottom]
-monitor = eDP-1
+; Use either of the following command to list available outputs:
+; $ polybar -M | cut -d ':' -f 1
+; $ xrandr -q | grep " connected" | cut -d ' ' -f1
+; If no monitor is given, the primary monitor is used if it exists
+; monitor =
 bottom = true
 width = 100%
 height = 32
