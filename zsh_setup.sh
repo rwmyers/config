@@ -269,3 +269,8 @@ then
     ln -s $SRC_ROOT/i3-projects/template.txt ~/bin/template.txt
 fi
 
+## KDE Config
+if [ ! -e "$HOME/.config/kglobalshortcutsrc" ]
+then
+    ln -s $SRC_ROOT/.config/kglobalshortcutsrc ~/.config/kglobalshortcutsrc
+fi
