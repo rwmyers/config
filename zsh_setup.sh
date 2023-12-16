@@ -99,6 +99,11 @@ then
     then
         sudo apt -y install sway
     fi
+
+    if ! type "wdisplays" > /dev/null;
+    then
+        sudo apt -y install wdisplays
+    fi
 fi
 
 
