@@ -95,6 +95,10 @@ then
     then
         sudo apt -y install vim
     fi
+    if ! type "sway" > /dev/null;
+    then
+        sudo apt -y install sway
+    fi
 fi
 
 
@@ -171,6 +175,12 @@ if [ ! -f "$HOME/.config/i3/config" ]
 then
     mkdir -p ~/.config/i3
     ln -s $SRC_ROOT/.config/i3/config ~/.config/i3/config
+fi
+
+if [ ! -f "$HOME/.config/sway/config" ]
+then
+    mkdir -p ~/.config/sway
+    ln -s $SRC_ROOT/.config/sway/config ~/.config/sway/config
 fi
 
 if [ ! -f "$HOME/.config/i3/config.local" ]
