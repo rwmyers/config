@@ -336,7 +336,7 @@
 (deflayer numbers
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    home end  _    _    _    _    _    _
+  _    _    _    _    _    _    home end  pgup pgdn _    _    _    _
   _    _    _    _    _    _    left down up   right _   _    _
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _    _
