@@ -104,6 +104,11 @@ then
     then
         sudo apt -y install wdisplays
     fi
+
+    if ! type "waybar" > /dev/null;
+    then
+        sudo apt -y install waybar 
+    fi
 fi
 
 
