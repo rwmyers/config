@@ -198,6 +198,13 @@ then
     cp $SRC_ROOT/.config/i3/config.local ~/.config/i3/config.local
 fi
 
+if [ ! -f "$HOME/.config/waybar/config" ]
+then
+    mkdir -p ~/.config/swaybar
+    cp $SRC_ROOT/.config/waybar/config ~/.config/waybar/config
+    cp $SRC_ROOT/.config/waybar/style.css ~/.config/waybar/style.css
+
+fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
