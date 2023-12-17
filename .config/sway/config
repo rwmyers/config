@@ -74,6 +74,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Shift+Return exec google-chrome --new-window "google.com"
 
 # kill focused window
 bindsym $mod+q kill
@@ -243,5 +244,5 @@ bindsym $mod+r mode "resize"
 gaps inner 5
 gaps outer 5
 
-include ~/.config/i3/config.local
 include /etc/sway/config.d/*
+include ~/.config/sway/config.local

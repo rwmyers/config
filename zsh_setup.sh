@@ -193,6 +193,11 @@ then
     ln -s $SRC_ROOT/.config/sway/config ~/.config/sway/config
 fi
 
+if [ ! -f "$HOME/.config/sway/config.local" ]
+then
+    cp $SRC_ROOT/.config/sway/config.local ~/.config/sway/config.local
+fi
+
 if [ ! -f "$HOME/.config/i3/config.local" ]
 then
     cp $SRC_ROOT/.config/i3/config.local ~/.config/i3/config.local
