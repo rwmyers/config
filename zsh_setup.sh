@@ -214,8 +214,8 @@ if [ ! -f "$HOME/.config/waybar/config" ]
 then
     echo "Creating waybar config links..."
     mkdir -p ~/.config/waybar
-    cp $SRC_ROOT/.config/waybar/config ~/.config/waybar/config
-    cp $SRC_ROOT/.config/waybar/style.css ~/.config/waybar/style.css
+    ln -s $SRC_ROOT/.config/waybar/config ~/.config/waybar/config
+    ln -s $SRC_ROOT/.config/waybar/style.css ~/.config/waybar/style.css
 
 fi
 
