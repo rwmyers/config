@@ -143,7 +143,7 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+Home move workspace to output left
 bindsym $mod+Shift+End move workspace to output right
 
-bindsym $mod+Tab exec --no-startup-id rofi -show window -show-icons -kb-accept-entry '!Super-Tab' -kb-row-down Super-Tab
+bindsym $mod+Tab exec --no-startup-id rofi -show window -show-icons
 
 # focus the child container
 #bindsym $mod+d focus child
