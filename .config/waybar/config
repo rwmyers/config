@@ -20,7 +20,7 @@
         },
         "clock": {
             "interval": 1,
-            "format": "<b>{:%H:%M:%S}</b>",
+            "format": "<b>{:%I:%M:%S %p}</b>",
             "format-alt": "{:%Y-%m-%d}",
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
         },
