@@ -82,6 +82,9 @@ then
         sudo apt -y install sway
     fi
 
+    install_linux_package swayidle swayidle
+    install_linux_package swaylock swaylock
+
     if ! type "wdisplays" > /dev/null;
     then
         sudo apt -y install wdisplays
