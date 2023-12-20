@@ -57,10 +57,16 @@ fi
 
 if ! type "tmux" > /dev/null;
 then
+    echo "Installing tmux..."
     if [[ "$OSTYPE" == "darwin"* ]];
     then
         brew update
         brew install tmux
+    fi
+
+    if [[ "$OSTYPE" == "linux-gnu"* ]];
+    then
+        sudo apt install tmux
     fi
 fi
 
