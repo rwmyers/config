@@ -89,7 +89,7 @@ then
 
     if [[ "$OSTYPE" == "linux-gnu"* ]];
     then
-        sudo apt install tmux
+        sudo apt -y install tmux
     fi
 fi
 
