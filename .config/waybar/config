@@ -155,9 +155,9 @@
         "layer": "top",
         "position": "bottom",
         "height": 30,
-        "modules-left": ["tray"],
+        "modules-left": ["sway/workspaces", "sway/mode"],
         "modules-center": ["wlr/taskbar"],
-        "modules-right": ["sway/workspaces", "sway/mode"],
+        "modules-right": ["tray"],
         "tray": {
             "icon-size": 13,
             "spacing": 10
