@@ -3,6 +3,21 @@ NOTE='\033[1;32m'
 NC='\033[0m'
 SRC_ROOT="$HOME/src/config"
 
+install_linux_package()
+{
+    local check="$1"
+    local pkg="$2"
+
+    if [[ "$OSTYPE" == "linux-gnu"* ]];
+    then
+        if ! type "${check}" > /dev/null;
+        then
+            echo "Installing ${pkg}"
+            sudo apt -y install ${pkg}
+        fi
+    fi
+}
+
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
     pushd ~/ > /dev/null
