@@ -55,6 +55,29 @@ then
     ln -s ~/src/config/git/.gitignore_global ~/.gitignore_global
 fi
 
+if [[ "$OSTYPE" == "linux-gnu"* ]];
+then
+    sudo apt update && sudo apt upgrade
+    if ! type "vim" > /dev/null;
+    then
+        sudo apt -y install vim
+    fi
+    if ! type "sway" > /dev/null;
+    then
+        sudo apt -y install sway
+    fi
+
+    if ! type "wdisplays" > /dev/null;
+    then
+        sudo apt -y install wdisplays
+    fi
+
+    if ! type "waybar" > /dev/null;
+    then
+        sudo apt -y install waybar
+    fi
+fi
+
 if ! type "tmux" > /dev/null;
 then
     echo "Installing tmux..."
@@ -95,28 +118,6 @@ if [ ! -d "$HOME/.vim" ]
 then
     ln -s ~/src/config/.vim ~/.vim
 fi
-if [[ "$OSTYPE" == "linux-gnu"* ]];
-then
-    if ! type "vim" > /dev/null;
-    then
-        sudo apt -y install vim
-    fi
-    if ! type "sway" > /dev/null;
-    then
-        sudo apt -y install sway
-    fi
-
-    if ! type "wdisplays" > /dev/null;
-    then
-        sudo apt -y install wdisplays
-    fi
-
-    if ! type "waybar" > /dev/null;
-    then
-        sudo apt -y install waybar 
-    fi
-fi
-
 
 if [ ! -f "$HOME/.p10k.zsh" ]
 then
