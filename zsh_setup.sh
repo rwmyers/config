@@ -87,6 +87,7 @@ then
     install_linux_package wl-copy wl-clipboard
     install_linux_package slurp slurp
     install_linux_package grim grim
+    install_linux_package curl curl 
 
     if ! type "wdisplays" > /dev/null;
     then
