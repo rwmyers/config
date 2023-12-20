@@ -84,6 +84,9 @@ then
 
     install_linux_package swayidle swayidle
     install_linux_package swaylock swaylock
+    install_linux_package wl-copy wl-clipboard
+    install_linux_package slurp slurp
+    install_linux_package grim grim
 
     if ! type "wdisplays" > /dev/null;
     then
