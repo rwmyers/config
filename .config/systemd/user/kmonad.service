@@ -1,6 +1,5 @@
-```
 [Unit]
-Description="Kmonad keyboard setup service"
+Description=Kmonad keyboard setup service
 After=network.target
 StartLimitIntervalSec=0
 
@@ -12,4 +11,3 @@ ExecStart=/home/mezner/.local/bin/kmonad /home/mezner/.config/kmonad/mezner.kbd
 
 [Install]
 WantedBy=default.target
-```
