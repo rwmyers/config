@@ -89,7 +89,10 @@ fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
+    print_note "apt update"
     sudo apt update && sudo apt upgrade
+    print_note "snap update"
+    sudo snap refresh
     if ! type "vim" > /dev/null;
     then
         sudo apt -y install vim
