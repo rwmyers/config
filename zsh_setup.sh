@@ -103,6 +103,38 @@ then
     then
         sudo apt -y install waybar
     fi
+
+
+    if ! type "kmonad" > /dev/null;
+    then
+        # install stack, which is a dependency to build kmonad
+        curl -sSL https://get.haskellstack.org/ | sh
+
+        # pull kmonad and build it
+        pushd $HOME/src/
+        git clone https://github.com/kmonad/kmonad.git
+        pushd kmonad
+        stack install
+        popd
+        popd
+
+        # add the uinput mod and give permissions to your user
+        sudo modprobe uinput
+        sudo groupadd uinput
+        sudo usermod -aG input $USER
+        sudo usermod -aG uinput $USER
+
+        echo "Adding udev kmonad rules"
+        echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee -a /etc/udev/rules.d/40-kmonad.rules > /dev/null
+    fi
+
+    KMONAD_SERVICE="kmonad.service"
+    systemctl --user status $KMONAD_SERVICE &> /dev/null
+    if [ $? != 0 ]; then
+        print_note "Creating $KMONAD_SERVICE"
+        systemctl --user start $KMONAD_SERVICE
+        systemctl --user enable $KMONAD_SERVICE
+    fi
 fi
 
 if ! type "tmux" > /dev/null;
