@@ -17,7 +17,7 @@ install_linux_package()
     then
         if ! type "${check}" > /dev/null;
         then
-            echo "Installing ${pkg}"
+            print_note "Installing ${pkg}"
             sudo apt -y install ${pkg}
         fi
     fi
