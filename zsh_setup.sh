@@ -3,6 +3,11 @@ NOTE='\033[1;32m'
 NC='\033[0m'
 SRC_ROOT="$HOME/src/config"
 
+print_note()
+{
+    printf "${NOTE}$1${NC}\n"
+}
+
 install_linux_package()
 {
     local check="$1"
