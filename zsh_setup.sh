@@ -106,6 +106,7 @@ then
     install_linux_package grim grim
     install_linux_package curl curl
     install_snap todoist
+    install_snap slack
 
     if ! type "wdisplays" > /dev/null;
     then
