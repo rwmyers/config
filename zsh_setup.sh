@@ -23,6 +23,18 @@ install_linux_package()
     fi
 }
 
+install_snap()
+{
+    if [[ "$OSTYPE" == "linux-gnu"* ]];
+    then
+        if ! type "$1" > /dev/null;
+        then
+            print_note "Installing $1"
+            sudo snap install $1
+        fi
+    fi
+}
+
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
     pushd ~/ > /dev/null
@@ -92,7 +104,8 @@ then
     install_linux_package wl-copy wl-clipboard
     install_linux_package slurp slurp
     install_linux_package grim grim
-    install_linux_package curl curl 
+    install_linux_package curl curl
+    install_snap todoist
 
     if ! type "wdisplays" > /dev/null;
     then
