@@ -44,11 +44,15 @@ exec_always killall -w waybar; waybar
 exec dex --autostart --environment i3
 
 # Swayidle controls timeout and locks of the system.
+set $lock swaylock -f -c 000000
 exec swayidle -w \
-        timeout 900 'swaylock -f -c 000000' \
+        timeout 900 $lock \
         timeout 1800 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -c 000000'
+        before-sleep $lock
+
+bindsym $mod+p exec $lock
+
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
