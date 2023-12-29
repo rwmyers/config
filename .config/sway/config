@@ -46,10 +46,10 @@ exec dex --autostart --environment i3
 # Swayidle controls timeout and locks of the system.
 set $lock swaylock -f -c 000000
 exec swayidle -w \
-        timeout 900 $lock \
+        timeout 900 'swaylock -f -c 000000' \
         timeout 1800 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
-        before-sleep $lock
+        before-sleep 'swaylock -f -c 000000'
 
 bindsym $mod+p exec $lock
 
