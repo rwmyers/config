@@ -45,7 +45,8 @@ exec dex --autostart --environment i3
 
 # Swayidle controls timeout and locks of the system.
 set $lock swaylock -f -c 000000
-exec swayidle -w \
+
+exec_always swayidle -w \
         timeout 900 'swaylock -f -c 000000' \
         timeout 1800 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
@@ -174,7 +175,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 scratchpad show
 # Allows for stacking windows easily
 bindsym $mod+Shift+y split vertical, layout stacking
 
@@ -188,7 +189,7 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+0 move container to scratchpad
 
 # Somewhat needed for the context dialogs that seem to come up for IntelliJ
 assign [class="jetbrains-idea-ce"] $ws2
