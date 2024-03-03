@@ -1,1 +1,1 @@
-git ls-files | grep $@
+git ls-files | grep -i $@
