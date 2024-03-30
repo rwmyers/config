@@ -14,6 +14,7 @@ Next window	C-a C-l
 Previous pane	C-a h
 Next pane	C-a l
 Swap panes	C-a <, C-a >
+Window by number    C-a <#>
 
 ## Resizing panes
 Left		C-a H
