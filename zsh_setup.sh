@@ -362,6 +362,11 @@ then
     ln -s $SRC_ROOT/.config/rofi/ ~/.config/rofi
 fi
 
+if [ ! -e "$HOME/.config/wofi" ]
+then
+    ln -s $SRC_ROOT/.config/wofi/ ~/.config/wofi
+fi
+
 if [ ! -d "$HOME/src/i3-projects" ]
 then
     pushd ~/src/
