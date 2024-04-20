@@ -30,9 +30,9 @@ client.unfocused         $inactive-bg-color   $inactive-bg-color   $inactive-tex
 client.focused_inactive  $inactive-bg-color   $inactive-bg-color   $inactive-text-color   $indicator
 client.urgent            $urgent-bg-color     $urgent-bg-color     $text-color            $indicator
 
-# Waybar 
+# Waybar
 # Terminate all then re-create. Kill all must be chained to not block
-exec_always killall -w waybar; waybar 
+exec_always killall -w waybar; waybar
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -77,14 +77,17 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
+# start a web browser
 bindsym $mod+Shift+Return exec google-chrome --new-window "google.com"
+# start a file browser
+bindsym Ctrl+$mod+Return exec thunar
 
 # kill focused window
 bindsym $mod+q kill
 bindsym $mod+Shift+q focus parent,kill
 
 # run wofi, a slightly sadder rofi. But hey, it actually works with wayland
-bindsym $mod+d exec wofi --show drun,run --allow-images
+bindsym $mod+d exec wofi --show drun,run
 # bindsym $mod+d exec "rofi -dpi 1 -show combi -combi-modi window,run,drun -modi combi,window,run,drun,filebrowser -show-icons"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
