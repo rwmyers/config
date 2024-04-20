@@ -109,6 +109,7 @@ then
     install_linux_package slurp slurp
     install_linux_package grim grim
     install_linux_package curl curl
+    install_linux_package thunar thunar
     install_snap todoist
     install_snap slack
     install_snap discord
