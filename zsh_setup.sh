@@ -109,6 +109,13 @@ then
     install_linux_package alacritty
     install_linux_package zoxide
     install_linux_package fdfind fd-find
+
+    ## fd-find link
+    if ! type "fd" > /dev/null;
+    then
+        ln -s $(which fdfind) ~/.local/bin/fd
+    fi
+
     install_snap todoist
     install_snap slack
     install_snap discord
