@@ -11,7 +11,8 @@ print_note()
 install_linux_package()
 {
     local check="$1"
-    local pkg="$2"
+    # Use the check as package if not provided.
+    local pkg="${2:-$check}"
 
     if [[ "$OSTYPE" == "linux-gnu"* ]];
     then
@@ -102,15 +103,15 @@ then
         sudo apt -y install sway
     fi
 
-    install_linux_package swayidle swayidle
-    install_linux_package wofi wofi
-    install_linux_package swaylock swaylock
+    install_linux_package swayidle
+    install_linux_package wofi
+    install_linux_package swaylock
     install_linux_package wl-copy wl-clipboard
-    install_linux_package slurp slurp
-    install_linux_package grim grim
-    install_linux_package curl curl
-    install_linux_package thunar thunar
-    install_linux_package alacritty alacritty
+    install_linux_package slurp
+    install_linux_package grim
+    install_linux_package curl
+    install_linux_package thunar
+    install_linux_package alacritty
     install_snap todoist
     install_snap slack
     install_snap discord
