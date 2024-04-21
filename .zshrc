@@ -67,3 +67,5 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
+
+alias cd="z"
