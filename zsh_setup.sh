@@ -107,6 +107,7 @@ then
     install_linux_package curl
     install_linux_package thunar
     install_linux_package alacritty
+    install_linux_package zoxide
     install_snap todoist
     install_snap slack
     install_snap discord
