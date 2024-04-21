@@ -277,6 +277,19 @@ then
     ~/.fzf/install
 fi
 
+if [ ! -d "$HOME/src/fzf-git.sh" ]
+then
+    print_note "Installing fzf-git"
+    pushd ~/src/
+    git clone https://github.com/junegunn/fzf-git.sh.git
+    popd
+else
+    pushd ~/src/fzf-git.sh
+    git pull
+    popd
+fi
+
+
 if [ ! -d "$HOME/bin" ]
 then
     ln -s ~/src/config/bin ~/bin
