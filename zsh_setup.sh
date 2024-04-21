@@ -194,6 +194,13 @@ then
     ln -s ~/src/config/.vim ~/.vim
 fi
 
+# neovim dot files
+# re-use from vim
+if [ ! -d "$HOME/.config/nvim" ]
+then
+    ln -s ~/src/config/.vim ~/.config/nvim
+fi
+
 if [ ! -f "$HOME/.p10k.zsh" ]
 then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
