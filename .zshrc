@@ -62,7 +62,7 @@ export NVM_DIR="$HOME/.nvm"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# fzf auto-completion
+# ---- fzf (command-line fuzzy find) ----
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # -- Use fd instead of fzf --
@@ -82,6 +82,9 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
+
+# -- fzf-git (https://github.com/junegunn/fzf-git.sh) --
+source ~/src/fzf-git.sh/fzf-git.sh
 
 # ---- Zoxide (better cd) ----
 eval "$(zoxide init zsh)"
