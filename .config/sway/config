@@ -87,7 +87,7 @@ bindsym $mod+q kill
 bindsym $mod+Shift+q focus parent,kill
 
 # run wofi, a slightly sadder rofi. But hey, it actually works with wayland
-bindsym $mod+d exec wofi --show drun,run
+bindsym $mod+d exec ~/.config/sway/scripts/wofi_run.sh
 # bindsym $mod+d exec "rofi -dpi 1 -show combi -combi-modi window,run,drun -modi combi,window,run,drun,filebrowser -show-icons"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
