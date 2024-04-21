@@ -124,6 +124,18 @@ then
         ln -s $(which batcat) ~/.local/bin/bat
     fi
 
+    ## eza, a better ls (github.com/eza-community/eza)
+    # this can't yet be installed from apt directly
+    if ! type "eza" > /dev/null;
+    then
+        sudo mkdir -p /etc/apt/keyrings
+        wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+        echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+        sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+        sudo apt update
+        sudo apt install -y eza
+    fi
+
     install_snap todoist
     install_snap slack
     install_snap discord
