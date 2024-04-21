@@ -64,3 +64,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # fzf auto-completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# ---- Zoxide (better cd) ----
+eval "$(zoxide init zsh)"
