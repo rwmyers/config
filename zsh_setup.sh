@@ -94,15 +94,9 @@ then
     sudo apt update && sudo apt upgrade
     print_note "snap update"
     sudo snap refresh
-    if ! type "vim" > /dev/null;
-    then
-        sudo apt -y install vim
-    fi
-    if ! type "sway" > /dev/null;
-    then
-        sudo apt -y install sway
-    fi
 
+    install_linux_package vim
+    install_linux_package sway
     install_linux_package swayidle
     install_linux_package wofi
     install_linux_package swaylock
