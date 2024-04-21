@@ -110,11 +110,18 @@ then
     install_linux_package zoxide
     install_linux_package fdfind fd-find
     install_linux_package delta git-delta
+    install_linux_package batcat bat
 
     ## fd-find link
     if ! type "fd" > /dev/null;
     then
         ln -s $(which fdfind) ~/.local/bin/fd
+    fi
+
+    ## bat link from batcat
+    if ! type "bat" > /dev/null;
+    then
+        ln -s $(which batcat) ~/.local/bin/bat
     fi
 
     install_snap todoist
