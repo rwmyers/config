@@ -7,6 +7,9 @@ set backspace=indent,eol,start
 set list
 set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
+" show line numbers
+set number
+
 " tabs and auto-indent
 set smartindent
 set tabstop=4
