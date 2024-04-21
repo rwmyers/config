@@ -76,7 +76,7 @@ bindsym XF86AudioPrev exec playerctl previous
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec alacritty
 # start a web browser
 bindsym $mod+Shift+Return exec google-chrome --new-window "google.com"
 # start a file browser
