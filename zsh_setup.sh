@@ -260,6 +260,13 @@ then
     fi
 fi
 
+if ! type "fzf" > /dev/null;
+then
+    print_note "Installing fzf"
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
+
 if [ ! -d "$HOME/bin" ]
 then
     ln -s ~/src/config/bin ~/bin
