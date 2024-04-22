@@ -107,10 +107,13 @@ then
     install_linux_package curl
     install_linux_package thunar
     install_linux_package alacritty
-    install_linux_package zoxide
     install_linux_package fdfind fd-find
     install_linux_package delta git-delta
     install_linux_package batcat bat
+    if ! type "z" > /dev/null;
+    then
+        curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+    fi
 
     ## fd-find link
     if ! type "fd" > /dev/null;
