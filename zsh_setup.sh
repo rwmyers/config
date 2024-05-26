@@ -47,17 +47,6 @@ else
     popd
 fi
 
-if [ ! -d "$HOME/.oh-my-zsh/themes/powerlevel10k" ]
-then
-    pushd ~/.oh-my-zsh/themes
-    git clone https://github.com/romkatv/powerlevel10k.git
-    popd
-else
-    pushd ~/.oh-my-zsh/themes/powerlevel10k
-    git pull
-    popd
-fi
-
 if [ ! -f "$HOME/.zshrc" ]
 then
     ln -s ~/src/config/.zshrc ~/.zshrc
@@ -466,4 +455,26 @@ then
     mkdir -p .config/Code/User
     ln -s $SRC_ROOT/.config/Code/User/keybindings.json ~/.config/Code/User/keybindings.json
     ln -s $SRC_ROOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
+fi
+
+# Starship install
+if ! type "starship" > /dev/null;
+then
+    print_note "Installing starship"
+    if [[ "$OSTYPE" == "linux-gnu"* ]];
+    then
+        curl -sS https://starship.rs/install.sh | sh
+    fi
+    if [[ "$OSTYPE" == "darwin"* ]];
+    then
+        brew update
+        brew install starship
+    fi
+fi
+
+# Starship configuration
+if [ ! -d "$HOME/.config/starship/" ]
+then
+    print_note "Adding starship configuration"
+    ln -s $SRC_ROOT/.config/starship/ ~/.config/starship
 fi
