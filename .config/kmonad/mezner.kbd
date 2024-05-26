@@ -253,7 +253,7 @@
   num  (layer-toggle numbers) ;; Bind num to a button that switches to a layer
   L    (tap-hold-next 500 ; @num)
   sl   (tap-hold-next 500 / rsft)
-  zed    (tap-hold-next 500 z lsft)
+  zed    (tap-hold-next 800 z lsft)
   kil  C-A-del                ;; Bind kil to a button that Ctrl-Alt-deletes
 )
 
