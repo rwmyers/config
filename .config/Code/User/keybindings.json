@@ -25,5 +25,9 @@
         "key": "ctrl+p",
         "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
         "when": "inFilesPicker && inQuickOpen"
+    },
+    {
+        "key": "shift+f6",
+        "command": "github.copilot.toggleCopilot"
     }
 ]
