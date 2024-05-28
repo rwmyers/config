@@ -12,17 +12,10 @@
  * =========================================================================== */
 
 /* -----------------------------------------------------------------------------
- * Keyframes
- * -------------------------------------------------------------------------- */
-
-/* @import "machiatto.css"; */
-
-/* -----------------------------------------------------------------------------
   * Base styles
   * -------------------------------------------------------------------------- */
 
 /* Reset all styles */
-
 * {
     color: @fg;
     border: 0;
@@ -80,7 +73,6 @@ window#waybar {
 #workspaces button.focused {
     color: @active;
     border-radius: 10px;
-    /* background-color: @flamingo; */
 }
 
 #workspaces button.focused * {
@@ -145,7 +137,6 @@ window#waybar {
 }
 
 #clock {
-    /* background-color:#a3be8c; */
     color: @fg;
     border-radius: 10px;
     padding: 8px;
@@ -224,9 +215,6 @@ window#waybar {
     padding: 8px;
     border-radius: 10px;
 }
-
-#custom-launcher,
-#custom-power {}
 
 #window {
     border-style: hidden;
