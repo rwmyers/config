@@ -1,90 +1,178 @@
+@define-color base      #1f1f1f;
+@define-color fg        #dddddd;
+@define-color active    #A6E22E;
+@define-color secondary #dddddd;
+@define-color crit      #F92672;
+/* =============================================================================
+ *
+ * Waybar configuration
+ *
+ * Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
+ *
+ * =========================================================================== */
+
+/* -----------------------------------------------------------------------------
+ * Keyframes
+ * -------------------------------------------------------------------------- */
+
+/* @import "machiatto.css"; */
+
+/* -----------------------------------------------------------------------------
+  * Base styles
+  * -------------------------------------------------------------------------- */
+
+/* Reset all styles */
+
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "Clear Sans", "Font Awesome 6 Free Solid";
+    color: @fg;
+    border: 0;
+    padding: 0 0;
+    font-family: UbuntuMono;
     font-size: 13px;
-    min-height: 0;
+    font-weight: bold;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 1);
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
-}
-
-window#waybar.empty {
-    color: rgba(0,0,0,0);
-}
-
-.topbar {
-    border-bottom: 3px solid rgba(100, 114, 125, 1);
-}
-
-.bottombar {
-    border-top: 3px solid rgba(100, 114, 125, 1);
+    border: 0px solid rgba(0, 0, 0, 0);
+    /* border-radius: 10px; */
+    /* background:#2d2a2e; */
+    /* background-color: rgba(36, 39, 58, 0.85); */
+    background-color: rgba(0, 0, 0, 0);
+    /* background-color: shade(#1e1e2e, 0.95); */
 }
 
 #workspaces button {
-    padding: 0 10px;
-    background-color: transparent;
-    color: #ffffff;
+    color: @base;
+    border-radius: 50%;
+    /* background-color: @base; */
+    margin: 0px 0px;
+    padding: 8 8 8 8;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 3px #ffffff;
+    color: @active;
+    box-shadow: none;
+    /* Remove predefined box-shadow */
+    text-shadow: none;
+    /* Remove predefined text-shadow */
+    border: 0px;
+    background: none;
+}
+
+#workspaces button:hover * {
+    color: @active;
+    background-color: @base;
+}
+
+#workspaces * {
+    color: whitesmoke;
+}
+
+#workspaces {
+    border-style: solid;
+    background-color: @base;
+    opacity: 1;
+    border-radius: 8px;
+    padding: 0px 4px 0px 4px;
+    margin: 0px 8px 8px 8px;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 3px #ffffff;
+    color: @active;
+    border-radius: 10px;
+    /* background-color: @flamingo; */
 }
 
-#workspaces button.urgent {
-    background-color: #eb4d4b;
+#workspaces button.focused * {
+    color: @active;
 }
 
 #mode {
-    background-color: #64727D;
-    border-top: 3px solid #ffffff;
+    color: #ebcb8b;
+    padding: 8px;
+    margin: 8px 10px;
 }
 
-#backlight,
-#battery.bat1,
-#battery.bat2,
 #clock,
+#battery,
 #cpu,
-#custom-mail,
-#custom-poweroff,
-#custom-weather,
 #disk,
-#idle_inhibitor,
 #memory,
-#mode,
-#network.vpn,
-#network.wifi,
-#network.ethernet,
-#network.disconnected,
-#pulseaudio,
-#taskbar,
+#idle_inhibitor,
 #temperature,
-#tray {
-    padding: 0 6px;
-    margin: 0 0px;
-    color: #ffffff;
+#custom-keyboard-layout,
+#backlight,
+#network,
+#pulseaudio,
+#mode,
+#taskbar,
+#tray,
+#custom-power,
+#custom-launcher,
+#mpd {
+    padding: 5px 5px;
+    border-style: solid;
+    background-color: shade(@base, 1);
+    opacity: 1;
+    padding: 8px;
+    margin: 8px 0px 0px 0px;
+}
+
+/* -----------------------------------------------------------------------------
+  * Module styles
+  * -------------------------------------------------------------------------- */
+#mode {
+    border-radius: 10px;
+    color: @crit;
+    margin-right: 5px;
+    padding: 8px;
+    margin: 8px 10px;
+}
+
+#taskbar {
+    border-radius: 10px;
+    margin-right: 5px;
+    padding: 8px;
+    margin: 8px 10px;
+}
+
+#taskbar button.focused {
+    color: @active;
+}
+
+#taskbar button {
+    padding: 4px;
+}
+
+#clock {
+    /* background-color:#a3be8c; */
+    color: @fg;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 8px 10px;
+}
+
+#backlight {
+    color: @fg;
+}
+
+#battery {
+    border-radius: 8px 0 0 8px;
+    margin-left: 8px;
+}
+
+#battery.charging {
+    color: #81a1c1;
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        color: @crit;
     }
 }
 
-#battery.bat2.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+#battery.critical:not(.charging) {
+    color: #bf616a;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -92,16 +180,57 @@ window#waybar.empty {
     animation-direction: alternate;
 }
 
+#cpu {
+    color: @secondary;
+}
+
+#cpu #cpu-icon {
+    color: @secondary;
+}
+
+#memory {
+    color: @secondary;
+}
+
+#network.disabled {
+    color: #bf616a;
+}
+
+#network {
+    border-radius: 10px;
+    margin-right: 5px;
+    padding: 8px;
+    margin: 8px 0px 8px 0px;
+}
+
+#network.disconnected {
+    color: #bf616a;
+}
+
+#pulseaudio.muted {
+    color: @crit;
+}
+
 #temperature.critical {
-    background-color: #eb4d4b;
+    color: @crit;
 }
 
-#taskbar button:hover {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 3px #ffffff;
+#idle_inhibitor {
+    border-radius: 0 10px 10px 0;
 }
 
-#taskbar button.active {
-    background-color: #64727D;
-    box-shadow: inset 0 3px #ffffff;
+#tray {
+    margin: 8px 10px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+#custom-launcher,
+#custom-power {}
+
+#window {
+    border-style: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #eceff4;
 }
