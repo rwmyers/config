@@ -1,9 +1,11 @@
 [
     {
+        "margin-top": 5,
         "name": "topbar",
         "layer": "top",
         "position": "top",
         "height": 20,
+        "margin-top": 5,
         "modules-left": ["battery#bat1", "battery#bat2", "disk", "memory", "cpu", "temperature", "pulseaudio", "backlight", "idle_inhibitor"],
         "modules-right": ["network#vpn", "network#wifi", "network#ethernet", "network#disconnected", "clock", "custom/poweroff"],
         "sway/window": {
@@ -142,6 +144,7 @@
         "layer": "top",
         "position": "bottom",
         "height": 20,
+        "margin-bottom": 5,
         "modules-left": ["sway/workspaces", "sway/mode"],
         "modules-center": ["wlr/taskbar"],
         "modules-right": ["tray"],
