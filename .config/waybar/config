@@ -152,9 +152,9 @@
         "wlr/taskbar": {
             "format": "{icon} {name}",
             "icon-size": 13,
-            "tooltip": false,
+            "tooltip-format": "{title}",
             "on-click": "activate",
-            "on-click-right": "close"
+            "on-click-middle": "close"
         },
         "sway/mode": {
             "format": "<span style=\"italic\">{}</span>"

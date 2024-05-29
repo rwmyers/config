@@ -20,6 +20,7 @@
     color: @fg;
     border: 0;
     padding: 0 0;
+    margin: 0;
     font-family: UbuntuMono;
     font-size: 13px;
     font-weight: bold;
@@ -67,7 +68,8 @@ window#waybar {
     opacity: 1;
     border-radius: 8px;
     padding: 0px 4px 0px 4px;
-    margin: 0px 8px 8px 8px;
+    /*margin: 0px 8px 8px 8px;*/
+    margin: 8px 10px;
 }
 
 #workspaces button.focused {
@@ -101,13 +103,13 @@ window#waybar {
 #tray,
 #custom-power,
 #custom-launcher,
+#custom-poweroff,
 #mpd {
-    padding: 5px 5px;
     border-style: solid;
     background-color: shade(@base, 1);
     opacity: 1;
     padding: 8px;
-    margin: 8px 0px 0px 0px;
+    margin: 8px 0px 8px 0px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -125,7 +127,7 @@ window#waybar {
     border-radius: 10px;
     margin-right: 5px;
     padding: 8px;
-    margin: 8px 10px;
+    margin: 8px 0px 8px 0px;
 }
 
 #taskbar button.focused {
@@ -133,18 +135,18 @@ window#waybar {
 }
 
 #taskbar button {
-    padding: 4px;
+    margin-left: 8px;
 }
 
 #clock {
-    color: @fg;
-    border-radius: 10px;
-    padding: 8px;
-    margin: 8px 10px;
+    border-radius: 10px 0 0 10px;
+    margin-left: 8px;
 }
 
-#backlight {
-    color: @fg;
+#custom-poweroff {
+    border-radius: 0 10px 10px 0;
+    padding-right: 8px;
+    margin-right: 8px;
 }
 
 #battery {
@@ -221,4 +223,8 @@ window#waybar {
     margin-left: 10px;
     margin-right: 10px;
     color: #eceff4;
+}
+
+#window button {
+    margin-left: 8px;
 }
