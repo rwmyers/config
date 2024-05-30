@@ -242,6 +242,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+bindsym $mod+Shift+semicolon exec swaymsg output eDP-1 toggle
 
 gaps inner 5
 gaps outer 5
