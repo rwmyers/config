@@ -253,10 +253,10 @@ then
     printf "${NOTE}Pull Cascadia Code here: https://github.com/microsoft/cascadia-code/releases${NC}\n"
 fi
 
-if [ ! -d "$HOME/.config/alacritty" ]
+if [ ! -f "$HOME/.config/alacritty/alacritty.toml" ]
 then
     mkdir -p ~/.config/alacritty
-    ln -s ~/src/config/.config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+    ln -s ~/src/config/.config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]];
