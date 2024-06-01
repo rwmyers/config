@@ -99,6 +99,9 @@ then
     install_linux_package fdfind fd-find
     install_linux_package delta git-delta
     install_linux_package batcat bat
+    install_linux_package pavucontrol
+    install_linux_package pulseaudio
+
     if ! type "z" > /dev/null;
     then
         curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
