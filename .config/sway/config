@@ -53,7 +53,7 @@ exec_always swayidle -w \
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f -c 000000'
 
-bindsym $mod+p exec $lock
+bindsym $mod+p exec ~/.config/sway/scripts/power.sh
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
