@@ -334,6 +334,12 @@ then
     ln -s $SRC_ROOT/.config/sway/display_mode ~/.config/sway/display_mode
 fi
 
+if [ ! -f "$HOME/.config/sway/display_mode" ]
+then
+    print_note "Copying a default.mode over for use."
+    cp $SRC_ROOT/.config/sway/default.mode ~/.config/sway/default.mode
+fi
+
 if [ ! -f "$HOME/.config/waybar/config" ]
 then
     echo "Creating waybar config links..."
