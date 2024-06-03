@@ -23,7 +23,9 @@ def read_current_file():
                 if mode:
                     print(mode)
     except FileNotFoundError:
-        print("Error: File 'current' not found.")
+        with open("current", "w") as file:
+            file.write("default")
+        read_current_file()
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
