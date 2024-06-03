@@ -328,6 +328,12 @@ then
     ln -s $SRC_ROOT/.config/sway/scripts ~/.config/sway/scripts
 fi
 
+if [ ! -f "$HOME/.config/sway/display_mode" ]
+then
+    print_note "Adding display_mode sway link"
+    ln -s $SRC_ROOT/.config/sway/display_mode ~/.config/sway/display_mode
+fi
+
 if [ ! -f "$HOME/.config/waybar/config" ]
 then
     echo "Creating waybar config links..."
