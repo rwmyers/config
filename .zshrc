@@ -1,3 +1,13 @@
+
+export HISTSIZE=10000
+export SAVEHIST=12000
+export HISTFILE="$HOME/.cache/zsh/history"
+
+if [ ! -d $(dirname $HISTFILE) ]; then
+    echo "$(dirname $HISTFILE)/ directory does not exist. Creating it now."
+    mkdir -p $(dirname $HISTFILE)
+fi
+
 export PATH=$PATH:/Users/rmmyers/gitscripts/
 
 # Scripts
