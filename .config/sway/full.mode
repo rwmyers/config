@@ -1,0 +1,4 @@
+output DP-8 mode 3440x1440 position 2560 0
+output DP-4 mode 2560x1440 position 0 0
+output eDP-1 mode 2256x1504 position 0 0
+output eDP-1 scale 1.4
