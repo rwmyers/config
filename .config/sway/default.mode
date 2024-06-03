@@ -1,0 +1,7 @@
+output DP-9 enable
+output DP-9 mode 2560x1440 position 0 0
+output DP-14 enable
+output DP-14 mode 3440x1440 position 2560 0
+output eDP-2 enable
+output eDP-2 mode 2256x1504 position 6000 0
+output eDP-2 scale 1.4

@@ -7,7 +7,7 @@
         "height": 20,
         "margin-top": 5,
         "modules-left": ["battery#bat1", "battery#bat2", "disk", "memory", "cpu", "temperature", "pulseaudio", "backlight", "idle_inhibitor"],
-        "modules-right": ["network#vpn", "network#wifi", "network#ethernet", "network#disconnected", "clock", "custom/poweroff"],
+        "modules-right": ["network#vpn", "network#wifi", "network#ethernet", "network#disconnected", "clock", "custom/displaymode", "custom/poweroff"],
         "sway/window": {
             "format": "{} ",
             "on-click": "swaymsg kill"
@@ -132,6 +132,11 @@
                 "default": ["", "", ""]
             },
             "on-click": "pavucontrol"
+        },
+        "custom/displaymode": {
+            "tooltip": false,
+            "format": "󰍹",
+            "on-click": "bash $HOME/.config/sway/scripts/display.sh"
         },
         "custom/poweroff": {
             "tooltip": false,

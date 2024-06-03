@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+import os
 import sys
 import subprocess
 
-def execute_commands_from_file(mode):
+def execute_commands_from_file(directory, mode):
     file_name = f"{mode}.mode"
     try:
-        with open(file_name, "r") as file:
+        with open(os.path.join(directory, file_name), "r") as file:
             for line in file:
                 command = line.strip()
                 command = f'swaymsg "{command}"'
@@ -15,25 +16,26 @@ def execute_commands_from_file(mode):
     except FileNotFoundError:
         print(f"Error: File '{file_name}' not found.")
 
-def read_current_file():
-    try:
-        with open("current", "r") as file:
-            for line in file:
-                mode = line.strip()
-                if mode:
-                    print(mode)
-    except FileNotFoundError:
-        with open("current", "w") as file:
-            file.write("default")
-        read_current_file()
+def list_mode_files(directory):  # Default to current directory
+    mode_files = []
+    for filename in os.listdir(directory):
+        if filename.endswith(".mode"):
+            # Remove the last 5 characters (".mode")
+            mode_files.append(filename[:-5])
+    return mode_files
+
+def read_modes(directory):
+    for mode in list_mode_files(directory):
+        print(mode)
 
 if __name__ == "__main__":
+    directory = os.path.abspath(os.path.dirname(__file__))
     if len(sys.argv) < 2:
-        read_current_file()
+        read_modes(directory)
     else:
         mode = sys.argv[1]
         with open("current", "w") as file:
             file.write(mode)
 
-        execute_commands_from_file(mode)
+        execute_commands_from_file(directory, mode)
 

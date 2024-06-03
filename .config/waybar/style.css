@@ -97,6 +97,7 @@ window#waybar {
 #custom-power,
 #custom-launcher,
 #custom-poweroff,
+#custom-displaymode,
 #mpd {
     border-style: solid;
     background-color: shade(@base, 1);
