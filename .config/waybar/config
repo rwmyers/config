@@ -150,7 +150,7 @@
         "position": "bottom",
         "height": 20,
         "margin-bottom": 5,
-        "modules-left": ["sway/workspaces", "sway/mode"],
+        "modules-left": ["hyprland/workspaces", "sway/workspaces", "sway/mode"],
         "modules-center": ["wlr/taskbar"],
         "modules-right": ["tray"],
         "tray": {
