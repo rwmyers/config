@@ -13,13 +13,20 @@ install_linux_package()
     local check="$1"
     # Use the check as package if not provided.
     local pkg="${2:-$check}"
+    # Use the package if there is not an arch package.
+    local arch_pkg="${3:-$pkg}"
 
     if [[ "$OSTYPE" == "linux-gnu"* ]];
     then
         if ! type "${check}" > /dev/null;
         then
             print_note "Installing ${pkg}"
-            sudo apt -y install ${pkg}
+	        if [ -f "/etc/arch-release" ]
+            then
+		        sudo pamac install ${arch_pkg}
+	        else
+                sudo apt -y install ${pkg}
+	        fi
         fi
     fi
 }
@@ -79,8 +86,16 @@ fi
 
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
-    print_note "apt update"
-    sudo apt update && sudo apt upgrade
+
+    if [ -f "/etc/arch-release" ]
+    then
+	    print_note "pamac update"
+	    sudo pamac update && sudo apt upgrade
+	    sudo pamac install ${arch_pkg}
+    else
+	    print_note "apt update"
+	    sudo apt -y install ${pkg}
+    fi
     print_note "snap update"
     sudo snap refresh
 
