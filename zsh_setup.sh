@@ -344,6 +344,12 @@ then
     ln -s $SRC_ROOT/.config/sway/scripts $HOME/.config/sway/scripts
 fi
 
+if [ ! -d "$HOME/.config/sway/modes" ]
+then
+    print_note "Creating sway modes link..."
+    ln -s $SRC_ROOT/.config/sway/modes $HOME/.config/sway/modes
+fi
+
 if [ ! -f "$HOME/.config/sway/display_mode" ]
 then
     print_note "Adding display_mode sway link"

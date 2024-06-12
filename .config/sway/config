@@ -191,8 +191,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # reset button for display
 bindsym $mod+Shift+d exec "~/.screenlayout/default.sh"
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your session.' -B 'Yes, exit sway' 'swaymsg exit'"
 
 bindsym $mod+Shift+semicolon exec swaymsg output eDP-1 toggle
 
