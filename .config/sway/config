@@ -9,7 +9,7 @@ include $theme/theme.conf
 
 # Waybar
 # Terminate all then re-create. Kill all must be chained to not block
-exec_always killall -w waybar; waybar
+exec_always pkill -x waybar; waybar
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -180,6 +180,8 @@ exec --no-startup-id xsetroot -solid "#000000"
 
 exec spotify
 
+include $HOME/.config/sway/modes/*
+
 # Spotify doesn't want to play nicely with window assignment
 for_window [class="^Spotify"] move to workspace $ws6
 
@@ -192,32 +194,6 @@ bindsym $mod+Shift+d exec "~/.screenlayout/default.sh"
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your session.' -B 'Yes, exit sway' 'swaymsg exit'"
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-bindsym $mod+r mode "resize"
 bindsym $mod+Shift+semicolon exec swaymsg output eDP-1 toggle
 
 gaps inner 5
