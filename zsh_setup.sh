@@ -445,7 +445,7 @@ fi
 if [ ! -e "$HOME/.config/Code/User/keybindings.json" ]
 then
     print_note "Adding VSCode user settings"
-    mkdir -p .config/Code/User
+    mkdir -p $HOME/.config/Code/User
     ln -s $SRC_ROOT/.config/Code/User/keybindings.json ~/.config/Code/User/keybindings.json
     ln -s $SRC_ROOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
 fi
