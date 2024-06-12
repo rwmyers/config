@@ -338,9 +338,10 @@ then
     cp $SRC_ROOT/.config/sway/config.local ~/.config/sway/config.local
 fi
 
-if [ ! -f "$HOME/.config/sway/scripts" ]
+if [ ! -d "$HOME/.config/sway/scripts" ]
 then
-    ln -s $SRC_ROOT/.config/sway/scripts ~/.config/sway/scripts
+    print_note "Creating sway scripts link..."
+    ln -s $SRC_ROOT/.config/sway/scripts $HOME/.config/sway/scripts
 fi
 
 if [ ! -f "$HOME/.config/sway/display_mode" ]
