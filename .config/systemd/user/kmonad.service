@@ -7,7 +7,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=/home/mezner/.local/bin/kmonad /home/mezner/.config/kmonad/mezner.kbd
+ExecStart=%h/.local/bin/kmonad %h/.config/kmonad/mezner.kbd
 
 [Install]
 WantedBy=default.target
