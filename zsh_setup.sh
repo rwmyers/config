@@ -116,6 +116,7 @@ then
     install_linux_package batcat bat
     install_linux_package pavucontrol
     install_linux_package pulseaudio
+    install_linux_package rg ripgrep
 
     if ! type "z" > /dev/null;
     then
