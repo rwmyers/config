@@ -21,12 +21,12 @@ install_linux_package()
         if ! type "${check}" > /dev/null;
         then
             print_note "Installing ${pkg}"
-	        if [ -f "/etc/arch-release" ]
+            if [ -f "/etc/arch-release" ]
             then
-		        sudo pamac install ${arch_pkg}
-	        else
+                sudo pamac install ${arch_pkg}
+            else
                 sudo apt -y install ${pkg}
-	        fi
+            fi
         fi
     fi
 }
@@ -89,12 +89,12 @@ then
 
     if [ -f "/etc/arch-release" ]
     then
-	    print_note "pamac update"
-	    sudo pamac update && sudo apt upgrade
-	    sudo pamac install ${arch_pkg}
+            print_note "pamac update"
+            sudo pamac update && sudo apt upgrade
+            sudo pamac install ${arch_pkg}
     else
-	    print_note "apt update"
-	    sudo apt -y install ${pkg}
+            print_note "apt update"
+            sudo apt -y install ${pkg}
     fi
     print_note "snap update"
     sudo snap refresh
