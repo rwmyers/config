@@ -7,6 +7,9 @@ set $theme $HOME/src/config/.config/sway/themes/mezner
 # theme variables
 include $theme/theme.conf
 
+# command variables
+include $HOME/src/config/.config/sway/commands.conf
+
 # Waybar
 # Terminate all then re-create. Kill all must be chained to not block
 exec_always pkill -x waybar; waybar
@@ -190,9 +193,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # reset button for display
-bindsym $mod+Shift+d exec "~/.screenlayout/default.sh"
-
-bindsym $mod+Shift+semicolon exec swaymsg output eDP-1 toggle
+bindsym $mod+Shift+d exec $display_reset
 
 gaps inner 5
 gaps outer 5
