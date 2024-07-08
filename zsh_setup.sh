@@ -66,12 +66,26 @@ fi
 
 if [ ! -d "$HOME/.aliases" ]
 then
+    print_note "Creating .aliases"
     ln -s ~/src/config/.aliases ~/.aliases
+fi
+
+if [ ! -d "$HOME/.aliases.local" ]
+then
+    print_note "Creating .aliases.local"
+    mkdir -p $HOME/.aliases.local
 fi
 
 if [ ! -d "$HOME/.functions" ]
 then
+    print_note "Creating .functions"
     ln -s ~/src/config/.functions ~/.functions
+fi
+
+if [ ! -d "$HOME/.functions.local" ]
+then
+    print_note "Creating .functions.local"
+    mkdir -p $HOME/.functions.local
 fi
 
 if [ ! -f "$HOME/.gitconfig" ]

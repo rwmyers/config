@@ -28,11 +28,21 @@ then
     source $HOME/.zshrc.local
 fi
 
-# aliases
+# ---- Aliases ----
+# General
 for f in ~/.aliases/*; do source $f; done
+# Local
+for f in ~/.aliases.local/*(N); do
+    source $f
+done
 
-# functions
+# ---- Functions----
+# General
 for f in ~/.functions/*; do source $f; done
+# Local
+for f in ~/.functions.local/*(N); do
+    source $f
+done
 
 # Rust
 export PATH="$HOME/.cargo/bin:$HOME/.cargo/env:$PATH"
