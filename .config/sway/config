@@ -12,7 +12,7 @@ include $HOME/src/config/.config/sway/commands.conf
 
 # Waybar
 # Terminate all then re-create. Kill all must be chained to not block
-exec_always pkill -x waybar; waybar
+exec_always ~/.config/sway/scripts/restart_waybar.sh
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
