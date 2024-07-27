@@ -195,14 +195,6 @@ then
         echo "Adding udev kmonad rules"
         echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee -a /etc/udev/rules.d/40-kmonad.rules > /dev/null
     fi
-
-    KMONAD_SERVICE="kmonad.service"
-    systemctl --user status $KMONAD_SERVICE &> /dev/null
-    if [ $? != 0 ]; then
-        print_note "Creating $KMONAD_SERVICE"
-        systemctl --user start $KMONAD_SERVICE
-        systemctl --user enable $KMONAD_SERVICE
-    fi
 fi
 
 if ! type "tmux" > /dev/null;
