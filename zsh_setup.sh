@@ -215,12 +215,8 @@ fi
 
 if [ ! -f "$HOME/.tmux.conf" ]
 then
-    ln -s ~/src/config/.tmux.conf ~/.tmux.conf
-fi
-
-if [ ! -f "$HOME/.tmux.conf.local" ]
-then
-    ln -s ~/src/config/.tmux.conf.local ~/.tmux.conf.local
+    print_note "Installing tmux config"
+    ln -s $SRC_ROOT/.tmux.conf ~/.tmux.conf
 fi
 
 if [ ! -f "$HOME/tmux-cheatsheet" ]
