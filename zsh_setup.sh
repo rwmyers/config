@@ -224,6 +224,16 @@ then
     ln -s ~/src/config/tmux-cheatsheet ~/tmux-cheatsheet
 fi
 
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]
+then
+    print_note "Installing tmux tpm plugin"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else
+    pushd ~/.tmux/plugins/tpm
+    git pull
+    popd
+fi
+
 
 if [ ! -f "$HOME/.vimrc" ]
 then
