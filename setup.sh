@@ -56,7 +56,7 @@ fi
 if ! cat ~/.ssh/id_rsa.pub > /dev/null; 
 then
     echo "No keyfile detected. Running SSH-keygen"
-    ssh-keygen
+    ssh-keygen -f ~/.ssh/id_rsa
     echo ""
     cat ~/.ssh/id_rsa.pub
     echo ""
