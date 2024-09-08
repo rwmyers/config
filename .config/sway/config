@@ -24,13 +24,13 @@ exec_always ~/.config/sway/scripts/restart_waybar.sh
 exec dex --autostart --environment i3
 
 # Swayidle controls timeout and locks of the system.
-set $lock swaylock -f -c 000000
+set $lock swaylock -f -c 111111
 
 exec_always swayidle -w \
-        timeout 900 'swaylock -f -c 000000' \
+        timeout 900 '$lock' \
         timeout 1800 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -c 000000'
+        before-sleep '$lock'
 
 bindsym $mod+p exec ~/.config/sway/scripts/power.sh
 
