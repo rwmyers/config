@@ -118,9 +118,6 @@ bindsym $mod+Shift+t exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date '+%
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
 # focus the parent container
 bindsym $mod+a focus parent
 
@@ -157,7 +154,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 scratchpad show
+bindsym $mod+space scratchpad show
 # Allows for stacking windows easily
 bindsym $mod+Shift+y split vertical, layout stacking
 
