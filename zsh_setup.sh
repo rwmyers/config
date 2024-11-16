@@ -387,6 +387,13 @@ then
 
 fi
 
+if [ ! -d "$HOME/.config/hypr/" ]
+then
+    print_note "Creating hyprland config links"
+    mkdir -p ~/.config/hypr
+    ln -s $SRC_ROOT/.config/hypr/hyprland.conf ~/.config/hypr/hyprland.conf
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
     if ! type "playerctl" > /dev/null;
