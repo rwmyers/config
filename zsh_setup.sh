@@ -117,6 +117,7 @@ then
     install_linux_package nvim neovim
     install_linux_package sway
     install_linux_package swayidle
+    install_linux_package hyprland
     install_linux_package wofi
     install_linux_package swaylock
     install_linux_package wl-copy wl-clipboard
@@ -125,6 +126,7 @@ then
     install_linux_package curl
     install_linux_package thunar
     install_linux_package alacritty
+    install_linux_package kitty
     install_linux_package fdfind fd-find
     install_linux_package delta git-delta
     install_linux_package batcat bat
