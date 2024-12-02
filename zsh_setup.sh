@@ -394,6 +394,13 @@ then
     ln -s $SRC_ROOT/.config/hypr/hyprland.conf ~/.config/hypr/hyprland.conf
 fi
 
+if [ ! -d "$HOME/.config/hypr/local" ]
+then
+    print_note "Creating local configs for hyprland"
+    mkdir -p ~/.config/hypr/local
+    cp $SRC_ROOT/.config/hypr/local/* ~/.config/hypr/local
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
     if ! type "playerctl" > /dev/null;
