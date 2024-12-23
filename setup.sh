@@ -66,7 +66,7 @@ fi
 if [ ! -d "$HOME/src/config" ]
 then
     pushd ~/src > /dev/null
-    git clone git@github.com:Mezner/config.git
+    git clone git@github.com:rwmyers/config.git
     popd > /dev/null
 else
     pushd ~/src/config > /dev/null
