@@ -439,12 +439,12 @@ fi
 
 if [ $(pip list | grep jq | wc -c) -eq 0 ]
 then
-    pip install jq
+    pip install --user --break-system-packages jq
 fi
 
 if [ $(pip list | grep -i jinja | wc -c) -eq 0 ]
 then
-    pip install jinja2
+    pip install --user --break-system-packages jinja2
 fi
 
 if [ ! -e "$HOME/.config/polybar" ]
