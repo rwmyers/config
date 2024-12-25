@@ -508,3 +508,10 @@ then
     print_note "Adding starship configuration"
     ln -s $SRC_ROOT/.config/starship/ ~/.config/starship
 fi
+
+# kitty configuration
+if [ ! -d "$HOME/.config/kitty/" ]
+then
+    print_note "Adding kitty configuration"
+    ln -s $SRC_ROOT/.config/kitty/ ~/.config/kitty
+fi
