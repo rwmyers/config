@@ -5,7 +5,7 @@ LS_CMD="ls -lha --color"
 if [ -d "${ARG}" ] ; then
     $LS_CMD ${ARG}
 elif [ -f "${ARG}" ]; then
-    less ${ARG}
+    bat ${ARG}
 else
     $LS_CMD
 fi
