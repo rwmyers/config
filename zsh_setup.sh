@@ -134,6 +134,7 @@ then
     install_linux_package pulseaudio
     install_linux_package rg ripgrep
     install_linux_package neofetch
+    install_linux_package dunst
 
     if ! type "z" > /dev/null;
     then
