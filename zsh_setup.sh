@@ -516,3 +516,9 @@ then
     print_note "Adding kitty configuration"
     ln -s $SRC_ROOT/.config/kitty/ ~/.config/kitty
 fi
+
+if [ ! -d "$HOME/.config/dunst/" ]
+then
+    print_note "Adding dunst configuration"
+    ln -s $SRC_ROOT/.config/dunst/ ~/.config/dunst
+fi
