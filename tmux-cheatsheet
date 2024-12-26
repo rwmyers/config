@@ -22,6 +22,10 @@ Right		C-a L
 Up		C-a J
 Down		C-a K
 
+## Sessions
+Create          C-a C-c
+Select          C-a C-s
+
 ## Misc.
 Copy mode	C-a Enter
 Copy w/ mouse   Hold shift, highlight and copy
