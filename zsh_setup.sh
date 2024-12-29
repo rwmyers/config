@@ -528,3 +528,19 @@ then
     print_note "Installing rust / cargo"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
+
+if [ ! -d "$HOME/src/todoist" ]
+then
+    pushd ~/src > /dev/null
+    git clone git@github.com:rwmyers/todoist.git todoist
+    popd
+else
+    pushd ~/src/todoist
+    git pull
+    popd
+fi
+
+print_note "Updating todoist CLI"
+pushd $HOME/src/todoist
+cargo install --path .
+popd
