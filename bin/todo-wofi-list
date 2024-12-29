@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+todoist task list -p "{{id}} {{#if due.string}}- {{due.string}} {{/if}}- {{{content}}}" | wofi -i --dmenu | sed 's/ -.*//' | xargs todoist task done
