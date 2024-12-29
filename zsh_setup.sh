@@ -136,6 +136,18 @@ then
     install_linux_package neofetch
     install_linux_package dunst
 
+    dpkg -l pkg-config &> /dev/null
+    if [ ! $? -eq 0 ]
+    then
+        sudo apt install pkg-config
+    fi
+
+    dpkg -l libssl-dev &> /dev/null
+    if [ ! $? -eq 0 ]
+    then
+        sudo apt install libssl-dev
+    fi
+
     if ! type "z" > /dev/null;
     then
         curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
