@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 task_id=$( todoist task list -p "{{id}} - {{{content}}}" -f "view all" | wofi -i --dmenu | sed 's/ -.*//' )
 
+if [[ -z $task_id ]]
+then
+    exit 1
+fi
+
 op=$( echo -e "Complete\nComment" | wofi -i --dmenu | awk '{print tolower($1)}' )
+
+if [[ -z $op ]]
+then
+    exit 2
+fi
 
 case $op in
     complete)
