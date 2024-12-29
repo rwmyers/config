@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+todoist task list -p "{{id}} - {{{content}}}" -f "view all" | wofi -i --dmenu | sed 's/ -.*//' | xargs todoist tasks done
