@@ -556,3 +556,9 @@ print_note "Updating todoist CLI"
 pushd $HOME/src/todoist
 cargo install --path .
 popd
+
+if [ ! -e "/usr/local/bin/todoist" ]
+then
+    print_note "Linking todo to /usr/local/bin"
+    sudo ln -s $HOME/.cargo/bin/todoist /usr/local/bin
+fi
