@@ -1,2 +1,12 @@
 #!/usr/bin/env bash
-todoist task list -p "{{id}} - {{{content}}}" -f "view all" | wofi -i --dmenu | sed 's/ -.*//' | xargs todoist tasks done
+task_id=$( todoist task list -p "{{id}} - {{{content}}}" -f "view all" | wofi -i --dmenu | sed 's/ -.*//' )
+
+op=$( echo -e "Complete\nComment" | wofi -i --dmenu | awk '{print tolower($1)}' )
+
+case $op in
+    complete)
+        todoist tasks done $task_id
+        ;;
+    comment)
+        ;;
+esac
