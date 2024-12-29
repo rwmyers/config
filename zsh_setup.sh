@@ -522,3 +522,9 @@ then
     print_note "Adding dunst configuration"
     ln -s $SRC_ROOT/.config/dunst/ ~/.config/dunst
 fi
+
+if ! type "cargo" > /dev/null;
+then
+    print_note "Installing rust / cargo"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
