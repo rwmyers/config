@@ -8,7 +8,7 @@
         "margin-top": 5,
         "modules-left": ["battery#bat1", "battery#bat2", "disk", "memory", "cpu", "temperature", "pulseaudio", "backlight", "idle_inhibitor"],
         "modules-center": ["sway/mode"],
-        "modules-right": ["network#vpn", "network#wifi", "network#ethernet", "network#disconnected", "clock", "custom/displaymode", "custom/poweroff"],
+        "modules-right": ["network#vpn", "network#wifi", "network#ethernet", "network#disconnected", "custom/displaymode", "custom/poweroff"],
         "sway/window": {
             "format": "{} ",
             "on-click": "swaymsg kill"
@@ -22,7 +22,7 @@
         },
         "clock": {
             "interval": 1,
-            "format": "<b>{:%I:%M:%S %p}</b>",
+            "format": "<b>{:%H:%M:%S %p}</b>",
             "format-alt": "{:%Y-%m-%d}",
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
         },
@@ -153,7 +153,7 @@
         "margin-bottom": 5,
         "modules-left": ["hyprland/workspaces", "sway/workspaces"],
         "modules-center": ["wlr/taskbar"],
-        "modules-right": ["tray"],
+        "modules-right": ["tray", "clock" ],
         "tray": {
             "icon-size": 13,
             "spacing": 10
