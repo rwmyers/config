@@ -128,8 +128,7 @@ window#waybar {
 }
 
 #clock {
-    border-radius: 10px 10px 10px 10px;
-    margin-left: 8px;
+    border-radius: 0 10px 10px 0;
 }
 
 #custom-poweroff {
@@ -179,8 +178,7 @@ window#waybar {
 }
 
 #network {
-    border-radius: 10px;
-    margin-right: 5px;
+    border-radius: 10px 0 0 10px;
 }
 
 #network.disconnected {
@@ -200,8 +198,7 @@ window#waybar {
 }
 
 #tray {
-    border-radius: 10px;
-    margin-right: 8px;
+    border-radius: 10px 0 0 10px;
 }
 
 #window {
