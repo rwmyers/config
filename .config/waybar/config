@@ -153,7 +153,7 @@
         "margin-bottom": 5,
         "modules-left": ["hyprland/workspaces", "sway/workspaces"],
         "modules-center": ["wlr/taskbar"],
-        "modules-right": ["tray", "clock" ],
+        "modules-right": ["tray", "custom/dunst", "clock" ],
         "tray": {
             "icon-size": 13,
             "spacing": 10
@@ -167,6 +167,13 @@
         },
         "sway/mode": {
             "format": "<span style=\"italic\">{}</span>"
+        },
+        "custom/dunst" : {
+            "format": "{}",
+            "interval": 1,
+            "return-type": "json",
+            "exec": "bash $HOME/.config/waybar/scripts/dunst_status.sh",
+            "on-click": "dunstctl set-paused toggle"
         }
     }
 ]

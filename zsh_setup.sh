@@ -397,7 +397,12 @@ then
     mkdir -p ~/.config/waybar
     ln -s $SRC_ROOT/.config/waybar/config ~/.config/waybar/config
     ln -s $SRC_ROOT/.config/waybar/style.css ~/.config/waybar/style.css
+fi
 
+if [ ! -d "$HOME/.config/waybar/scripts" ]
+then
+    print_note "Creating waybar scripts link"
+    ln -s $SRC_ROOT/.config/waybar/scripts ~/.config/waybar/scripts
 fi
 
 if [ ! -d "$HOME/.config/hypr/" ]

@@ -97,6 +97,7 @@ window#waybar {
 #custom-power,
 #custom-launcher,
 #custom-poweroff,
+#custom-dunst,
 #custom-displaymode,
 #mpd {
     border-style: solid;
@@ -210,4 +211,9 @@ window#waybar {
 
 #window button {
     margin-left: 8px;
+}
+
+#custom-dunst.disabled {
+    font-size: 14px;
+    color: @crit;
 }
