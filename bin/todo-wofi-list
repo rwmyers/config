@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-task_id=$( todo-list | wofi -i --dmenu | sed 's/ -.*//' )
+task_id=$( exec $HOME/bin/todo-list | wofi -i --dmenu | sed 's/.* - \([0-9]\+\)$/\1/' )
 
 if [[ -z $task_id ]]
 then
