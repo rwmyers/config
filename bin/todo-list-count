@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+task_count=$( exec $HOME/bin/todo-list | wc -l )
+echo "Task count: $task_count"
