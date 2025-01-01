@@ -1,3 +1,6 @@
+# === Beeping
+setopt no_beep               # Turn off the bell
+
 # === History
 setopt share_history         # Share command history data
 setopt append_history        # Allow multiple sessions to append to one command history
