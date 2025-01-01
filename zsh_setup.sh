@@ -64,6 +64,12 @@ then
     touch ~/.zshrc.local
 fi
 
+if [ ! -d "$HOME/.config/zsh" ]
+then
+    print_note "Creating .config/zsh link"
+    ln -s ~/src/config/.config/zsh ~/.config/zsh
+fi
+
 if [ ! -d "$HOME/.aliases" ]
 then
     print_note "Creating .aliases"

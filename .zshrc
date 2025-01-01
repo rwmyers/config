@@ -8,6 +8,9 @@ if [ ! -d $(dirname $HISTFILE) ]; then
     mkdir -p $(dirname $HISTFILE)
 fi
 
+# Source zsh config files
+for f in ~/.config/zsh/*; do source $f; done
+
 export PATH=$PATH:/Users/rmmyers/gitscripts/
 
 # Scripts
