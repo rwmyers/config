@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-task_id=$( todoist task list -p "{{id}} - {{{content}}}" -f "view all" | wofi -i --dmenu | sed 's/ -.*//' )
+task_id=$( todo-list | wofi -i --dmenu | sed 's/ -.*//' )
 
 if [[ -z $task_id ]]
 then

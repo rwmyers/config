@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+todoist task list -p '{{id}} -{{#if due.string}} Due {{due.string}} -{{/if}} "{{{content}}}"' -f "view all"
