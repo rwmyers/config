@@ -6,7 +6,7 @@ then
     exit 1
 fi
 
-op=$( echo -e "Complete\nComment" | wofi -i --dmenu | awk '{print tolower($1)}' )
+op=$( echo -e "Complete\nComment\nMove" | wofi -i --dmenu | awk '{print tolower($1)}' )
 
 if [[ -z $op ]]
 then
@@ -18,5 +18,13 @@ case $op in
         todoist tasks done $task_id
         ;;
     comment)
+        ;;
+    move)
+        project_id=$(exec $HOME/bin/todo-project-list | wofi -i --dmenu| sed 's/.* - \([0-9]\+\)$/\1/')
+        if [[ -z $project_id ]]
+        then
+            exit 3
+        fi
+        todoist tasks move --project $project_id $task_id
         ;;
 esac
