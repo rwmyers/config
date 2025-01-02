@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+todoist projects list -p "{{name}} - {{id}}"
