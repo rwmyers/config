@@ -18,6 +18,7 @@ case $op in
         todoist tasks done $task_id
         ;;
     comment)
+        wofi --dmenu | xargs -I {} todoist comments create "{}" --task-id $task_id
         ;;
     move)
         project_id=$(exec $HOME/bin/todo-project-list | wofi -i --dmenu| sed 's/.* - \([0-9]\+\)$/\1/')
