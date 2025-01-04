@@ -19,8 +19,6 @@ vim.opt.expandtab = true
 -- show status bar
 vim.opt.laststatus = 2
 
-vim.cmd('colorscheme molokai')
-
 -- syntax
 vim.opt.syntax = 'on'
 
