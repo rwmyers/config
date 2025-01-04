@@ -266,6 +266,10 @@ then
     ln -s ~/src/config/.vim ~/.vim
 fi
 
+# Temporary until old cfgs no longer use this.
+rm ~/.config/nvim
+print_note "Removing nvim link in case it points to the wrong location."
+
 if [ ! -d "$HOME/.config/nvim" ]
 then
     print_note "Linking neovim dot files"
