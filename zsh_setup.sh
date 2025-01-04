@@ -269,7 +269,7 @@ fi
 if [ ! -d "$HOME/.config/nvim" ]
 then
     print_note "Linking neovim dot files"
-    ln -s ~/src/config/.vim ~/.config/nvim
+    ln -s ~/src/config/.config/nvim ~/.config/nvim
 fi
 
 if [ ! -f "$HOME/.p10k.zsh" ]
