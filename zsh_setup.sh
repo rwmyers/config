@@ -127,6 +127,7 @@ then
     install_linux_package wofi
     install_linux_package swaylock
     install_linux_package wl-copy wl-clipboard
+    install_linux_package cliphist
     install_linux_package slurp
     install_linux_package grim
     install_linux_package curl
