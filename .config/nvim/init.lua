@@ -29,3 +29,5 @@ vim.keymap.set('n', '<M-Left>', ':bp!<CR>')
 
 -- filetypes
 vim.opt.filetype = 'on'
+
+require("config.lazy")
