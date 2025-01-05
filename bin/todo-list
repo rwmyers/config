@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-todoist task list -p "{{#if due.string}}Due {{due.string}} - {{/if}}{{{content}}} - {{id}}" -f "view all"
+todoist task list -p "{{#if task.due.string}}Due {{task.due.string}} - {{/if}}{{{task.content}}} {{#with (lookup projects task.project_id)~}}(#{{name}}){{/with}} - {{task.id}}" -f "view all"
