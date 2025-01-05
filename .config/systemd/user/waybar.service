@@ -10,4 +10,4 @@ RestartSec=1
 ExecStart=waybar
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
