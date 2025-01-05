@@ -435,6 +435,12 @@ then
     ln -s $SRC_ROOT/.config/hypr/config.d ~/.config/hypr/config.d
 fi
 
+if [ ! -d "$HOME/.config/hypr/colors.conf" ]
+then
+    print_note "Creating hypr color.conf"
+    ln -s $SRC_ROOT/.config/hypr/colors.conf ~/.config/hypr/colors.conf
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
     if ! type "playerctl" > /dev/null;
