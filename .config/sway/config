@@ -156,7 +156,7 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+space scratchpad show
 # Allows for stacking windows easily
-bindsym $mod+Shift+y split vertical, layout stacking
+bindsym $mod+Shift+o split vertical, layout stacking
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -191,6 +191,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # reset button for display
 bindsym $mod+Shift+d exec $display_reset
+# todo items
+bindsym $mod+y exec $todo
+bindsym $mod+Shift+y exec $todoNew
 
 gaps inner 5
 gaps outer 5
