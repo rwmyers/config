@@ -39,7 +39,7 @@ for f in ~/.aliases.local/*(N); do
     source $f
 done
 
-if [ ! -d "$HOME/.local/aliases/" ]
+if [ -d "$HOME/.local/aliases/" ]
 then
     for f in ~/.local/aliases/*; do
         source $f
@@ -54,7 +54,7 @@ for f in ~/.functions.local/*(N); do
     source $f
 done
 
-if [ ! -d "$HOME/.local/functions/" ]
+if [ -d "$HOME/.local/functions/" ]
 then
     for f in ~/.local/functions/*; do
         source $f
