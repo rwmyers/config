@@ -39,6 +39,13 @@ for f in ~/.aliases.local/*(N); do
     source $f
 done
 
+if [ ! -d "$HOME/.local/aliases/" ]
+then
+    for f in ~/.local/aliases/*; do
+        source $f
+    done
+fi
+
 # ---- Functions----
 # General
 for f in ~/.functions/*; do source $f; done
@@ -46,6 +53,13 @@ for f in ~/.functions/*; do source $f; done
 for f in ~/.functions.local/*(N); do
     source $f
 done
+
+if [ ! -d "$HOME/.local/functions/" ]
+then
+    for f in ~/.local/functions/*; do
+        source $f
+    done
+fi
 
 # Rust
 export PATH="$HOME/.cargo/bin:$HOME/.cargo/env:$PATH"
