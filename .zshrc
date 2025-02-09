@@ -117,8 +117,3 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # ---- Snap installs ----
 export PATH="$PATH:/snap/bin"
-
-# Start a tmux session if not in one
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
-fi
