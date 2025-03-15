@@ -589,3 +589,10 @@ then
     print_note "Linking todo to /usr/local/bin"
     sudo ln -s $HOME/.cargo/bin/todoist /usr/local/bin
 fi
+
+# GTK configurations
+if [ ! -e "$HOME/.gtkrc-2.0" ]
+then
+    print_note "Linking GTK 2.0 configuration"
+    ln -s $SRC_ROOT/.gtkrc-2.0 ~/.gtkrc-2.0
+fi
