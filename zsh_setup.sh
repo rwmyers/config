@@ -596,3 +596,11 @@ then
     print_note "Linking GTK 2.0 configuration"
     ln -s $SRC_ROOT/.gtkrc-2.0 ~/.gtkrc-2.0
 fi
+
+if [ ! -e "$HOME/.config/gtk-3.0/settings.ini" ]
+then
+    print_note "Linking GTK 3.0 configuration"
+    mkdir -p $HOME/.config/gtk-3.0/
+    ln -s $SRC_ROOT/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
+fi
+
