@@ -441,6 +441,12 @@ then
     ln -s $SRC_ROOT/.config/hypr/colors.conf ~/.config/hypr/colors.conf
 fi
 
+if [ ! -f "$HOME/.config/hypr/bindings.conf" ]
+then
+    print_note "Creating hypr bindings.conf"
+    ln -s $SRC_ROOT/.config/hypr/bindings.conf ~/.config/hypr/bindings.conf
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
     if ! type "playerctl" > /dev/null;
