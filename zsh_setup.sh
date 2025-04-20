@@ -596,6 +596,25 @@ then
     sudo ln -s $HOME/.cargo/bin/todoist /usr/local/bin
 fi
 
+if [ ! -d "$HOME/src/hyprland-dynamic-workspaces-manager" ]
+then
+    print_note "Cloning hyprland-dynamic-workspaces-manager"
+    pushd ~/src > /dev/null
+    git clone git@github.com:rwmyers/hyprland-dynamic-workspaces-manager.git hyprland-dynamic-workspaces-manager
+    popd
+else
+    print_note "Updating hyprland-dynamic-workspaces-manager"
+    pushd ~/src/hyprland-dynamic-workspaces-manager
+    git pull
+    popd
+fi
+
+if [ ! -d "$HOME/.config/hypr/hyprland-dynamic-workspaces-manager" ]
+then
+    print_note "Creating hyprland-dynamic-workspaces-manager link"
+    ln -s $HOME/src/hyprland-dynamic-workspaces-manager/ ~/.config/hypr/hyprland-dynamic-workspaces-manager
+fi
+
 # GTK configurations
 if [ ! -e "$HOME/.gtkrc-2.0" ]
 then
