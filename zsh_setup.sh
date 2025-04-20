@@ -437,7 +437,7 @@ fi
 
 if [ ! -f "$HOME/.config/hypr/colors.conf" ]
 then
-    print_note "Creating hypr color.conf"
+    print_note "Creating hypr colors.conf"
     ln -s $SRC_ROOT/.config/hypr/colors.conf ~/.config/hypr/colors.conf
 fi
 
