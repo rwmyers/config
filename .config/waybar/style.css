@@ -33,14 +33,14 @@ window#waybar {
 }
 
 #workspaces button {
-    color: @base;
+    color: @crit;
     border-radius: 50%;
     margin-left: 8px;
     margin-right: 8px;
 }
 
 #workspaces button:hover {
-    color: @active;
+    color: @crit;
     box-shadow: none;
     /* Remove predefined box-shadow */
     text-shadow: none;
@@ -50,6 +50,21 @@ window#waybar {
 }
 
 #workspaces button:hover * {
+    color: @crit;
+    background-color: @base;
+}
+
+#workspaces button.active {
+    color: @active;
+    box-shadow: none;
+    /* Remove predefined box-shadow */
+    text-shadow: none;
+    /* Remove predefined text-shadow */
+    border: 0px;
+    background: none;
+}
+
+#workspaces button.active * {
     color: @active;
     background-color: @base;
 }
@@ -67,12 +82,12 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    color: @active;
+    color: @crit;
     border-radius: 10px;
 }
 
 #workspaces button.focused * {
-    color: @active;
+    color: @crit;
 }
 
 #mode {
