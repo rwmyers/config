@@ -90,6 +90,15 @@ window#waybar {
     color: @crit;
 }
 
+#workspaces button.urgent {
+    color: @crit;
+    border-radius: 10px;
+}
+
+#workspaces button.urgent * {
+    color: @crit;
+}
+
 #mode {
     color: #ebcb8b;
     padding: 8px;
