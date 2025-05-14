@@ -12,3 +12,7 @@ style = "Italic"
 [font.normal]
 family = "MesloLGS NF"
 style = "Regular"
+
+[scrolling]
+# Limit is 100K
+history = 90000
