@@ -355,6 +355,18 @@ else
     popd
 fi
 
+if [ ! -d "$HOME/src/fzf-tab" ]
+then
+    print_note "Installing fzf-tab"
+    pushd ~/src/
+    git clone https://github.com/Aloxaf/fzf-tab
+    popd
+else
+    print_note "Updating fzf-tab"
+    pushd ~/src/fzf-tab
+    git pull
+    popd
+fi
 
 if [ ! -d "$HOME/bin" ]
 then
