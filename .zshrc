@@ -117,3 +117,7 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # ---- Snap installs ----
 export PATH="$PATH:/snap/bin"
+
+# ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
+autoload -U compinit; compinit
+source ~/src/fzf-tab/fzf-tab.plugin.zsh
