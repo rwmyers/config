@@ -441,6 +441,12 @@ then
     cp $SRC_ROOT/.config/hypr/local/* ~/.config/hypr/local
 fi
 
+if [ ! -d "$HOME/.config/hypr/hyprland" ]
+then
+    print_note "Linking root hyprland folder"
+    ln -s $SRC_ROOT/.config/hypr/hyprland ~/.config/hypr/hyprland
+fi
+
 if [ ! -d "$HOME/.config/hypr/config.d" ]
 then
     print_note "Creating hypr config.d link"
