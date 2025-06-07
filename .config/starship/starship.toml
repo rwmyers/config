@@ -9,9 +9,7 @@ $directory\
 $git_branch\
 $git_status\
 [](fg:yellow bg:sapphire)\
-[](fg:sapphire bg:lavender)\
-$time\
-[ ](fg:lavender)\
+[](fg:sapphire)\
 $cmd_duration\
 $line_break\
 $character"""
