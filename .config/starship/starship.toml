@@ -19,7 +19,7 @@ palette = 'catppuccin_macchiato'
 [hostname]
 ssh_only = false
 style = "bg:red fg:crust"
-format = '[$ssh_symbol](bold blue)[$hostname ]($style)'
+format = '[$ssh_symbol](bold fg:crust bg:red)[$hostname ]($style)'
 trim_at = '.companyname.com'
 disabled = false
 
