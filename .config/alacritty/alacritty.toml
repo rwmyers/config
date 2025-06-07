@@ -16,3 +16,10 @@ style = "Regular"
 [scrolling]
 # Limit is 100K
 history = 90000
+
+[keyboard]
+# https://github.com/alacritty/alacritty/issues/4451#issuecomment-1982419177
+bindings = [
+    { key = "Tab", mods = "Control", chars = "\u001b[27;5;9~" },
+    { key = "Tab", mods = "Control|Shift", chars = "\u001b[27;6;9~" },
+]
