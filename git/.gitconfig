@@ -10,7 +10,7 @@
     a = add
     l = log
     co = checkout
-    co = checkout
+    cp = cherry-pick
     br = branch
     ci = commit
     st = status
