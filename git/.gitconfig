@@ -9,6 +9,7 @@
     c = commit
     a = add
     l = log
+    lo = log --oneline
     co = checkout
     cp = cherry-pick
     br = branch
