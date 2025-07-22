@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <attempts> <command>"
+    echo "Example: $0 50 \"echo 'hi'\""
+    exit 1
+fi
+
+# Get the number of attempts from the first argument
+ATTEMPTS=$1
+shift # Shift arguments so that "$@" now contains only the command parts
+
+# Reconstruct the command from the remaining arguments
+COMMAND="$@"
+
+echo "Starting to execute '$COMMAND' for $ATTEMPTS times."
+echo "---"
+
+# Loop for the specified number of attempts
+for i in $(seq 1 "$ATTEMPTS"); do
+    echo "Running command (attempt $i/$ATTEMPTS): $COMMAND"
+    $COMMAND
+    # Optional: Add a small delay between runs if needed
+    # sleep 1
+done
+
+echo "---"
+echo "Script finished. Command '$COMMAND' executed $ATTEMPTS times."
