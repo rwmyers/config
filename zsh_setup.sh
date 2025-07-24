@@ -142,6 +142,7 @@ then
     install_linux_package rg ripgrep
     install_linux_package neofetch
     install_linux_package dunst
+    install_linux_package brightnessctl
 
     dpkg -l pkg-config &> /dev/null
     if [ ! $? -eq 0 ]
