@@ -213,8 +213,12 @@ then
         # add the uinput mod and give permissions to your user
         sudo modprobe uinput
         sudo groupadd uinput
-        sudo usermod -aG input $USER
-        sudo usermod -aG uinput $USER
+        sudo usermod -aG input,uinput $USER
+
+        if [ $? -eq 0 ]; then
+            print_note "Added input and uinput groups."
+            print_note "You must log out and log back in for changes to take effect."
+        fi
 
         echo "Adding udev kmonad rules"
         echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee -a /etc/udev/rules.d/40-kmonad.rules > /dev/null
