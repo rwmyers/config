@@ -1,1 +1,1 @@
-git branch -D derp && git branch derp && echo 'derped'
+git task derp && echo "derped"
