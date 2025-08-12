@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+  echo "Error: Branch name not provided."
+  exit 1
+fi
+
+git branch -d "$1" 2>/dev/null || true
+git branch "$1"
+echo "Branch '$1' created."
