@@ -5,6 +5,8 @@
     ui = true
 [alias]
     s = status
+    st = status
+    sl = status --long
     d = diff
     c = commit
     a = add
@@ -14,7 +16,6 @@
     cp = cherry-pick
     br = branch
     ci = commit
-    st = status
     di = diff
     unstage = reset HEAD .
     undo = checkout -- .
