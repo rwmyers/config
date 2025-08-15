@@ -140,7 +140,7 @@ then
     install_linux_package pavucontrol
     install_linux_package pulseaudio
     install_linux_package rg ripgrep
-    install_linux_package neofetch
+    install_linux_package fastfatch
     install_linux_package dunst
     install_linux_package brightnessctl
     install_linux_package btop
