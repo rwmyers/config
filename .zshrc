@@ -74,8 +74,15 @@ then
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
 
-# Git scripts
-export PATH="$PATH:$HOME/src/config/git"
+# GIT
+export CONFIG_GIT="$HOME/src/config/git"
+## Scripts
+export PATH="$PATH:$CONFIG_GIT"
+
+## Completions
+for c in $CONFIG_GIT/completion/*; do source $c; done
+
+# NVIM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -1,0 +1,12 @@
+#compdef _git-task git-task
+
+_git-task() {
+    local -a git_tasks
+
+    # Get a list of all branches with the "task-" prefix
+    # The --format='%b' part ensures we only get the branch name without any extra info
+    git_tasks=($(git branch --list 'task-*' --format='%(refname:short)'))
+
+    # Use the Zsh completion system to provide these branches as options
+    _describe 'git tasks' git_tasks
+}
