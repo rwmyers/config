@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# This script lists all Git branches with the "task-" prefix.
+git branch --list 'task-*'
