@@ -5,7 +5,6 @@
     "spacing": 0,
     "height": 26,
     "modules-left": [
-        "custom/omarchy",
         "custom/poweroff",
         "hyprland/workspaces"
     ],
@@ -15,12 +14,20 @@
     "modules-right": [
         "group/tray-expander",
         "custom/dunst",
+        "idle_inhibitor",
         "bluetooth",
         "network",
         "pulseaudio",
         "cpu",
         "battery"
     ],
+    "idle_inhibitor": {
+        "format": " {icon} ",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
     "hyprland/workspaces": {
         "format": "{icon}",
     },

@@ -79,3 +79,7 @@ tooltip {
 #custom-dunst.disabled {
     color: @urgent;
 }
+
+#idle_inhibitor.activated {
+    color: @urgent;
+}
