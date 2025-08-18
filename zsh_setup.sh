@@ -1,47 +1,6 @@
 #!/bin/zsh
-NOTE='\033[1;32m'
-NC='\033[0m'
-SRC_ROOT="$HOME/src/config"
 
-print_note()
-{
-    printf "${NOTE}$1${NC}\n"
-}
-
-install_linux_package()
-{
-    local check="$1"
-    # Use the check as package if not provided.
-    local pkg="${2:-$check}"
-    # Use the package if there is not an arch package.
-    local arch_pkg="${3:-$pkg}"
-
-    if [[ "$OSTYPE" == "linux-gnu"* ]];
-    then
-        if ! type "${check}" > /dev/null;
-        then
-            print_note "Installing ${pkg}"
-            if [ -f "/etc/arch-release" ]
-            then
-                sudo pamac install ${arch_pkg}
-            else
-                sudo apt -y install ${pkg}
-            fi
-        fi
-    fi
-}
-
-install_snap()
-{
-    if [[ "$OSTYPE" == "linux-gnu"* ]];
-    then
-        if ! type "$1" > /dev/null;
-        then
-            print_note "Installing $1"
-            sudo snap install $1
-        fi
-    fi
-}
+source install/common.sh
 
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
@@ -286,32 +245,6 @@ fi
 if [ ! -f "$HOME/.p10k.zsh" ]
 then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
-fi
-
-if [ ! -d "$HOME/src/fonts/" ]
-then
-    mkdir -p ~/src/fonts/
-    cp ~/src/config/fonts/* ~/src/fonts
-    pushd ~/src/fonts/
-    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
-    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
-    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
-    wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
-    popd
-    if [[ "$OSTYPE" == "darwin"* ]];
-    then
-        for file in ~/src/fonts//**/*(.); do
-            cp $file /Library/Fonts/
-        done
-    else
-        mkdir -p $HOME/.fonts
-        for file in ~/src/fonts//**/*(.); do
-            cp $file $HOME/.fonts/
-        done
-    fi
-    printf "${NOTE}IMPORTANT: Set fonts the ~$HOME/src/fonts/${NC}\n"
-    printf "${NOTE}MesloLGS NF:${NC} For nerd fonts / terminal usage\n"
-    printf "${NOTE}Pull Cascadia Code here: https://github.com/microsoft/cascadia-code/releases${NC}\n"
 fi
 
 if [ ! -f "$HOME/.config/alacritty/alacritty.toml" ]

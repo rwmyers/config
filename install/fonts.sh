@@ -1,7 +1,11 @@
 #!/bin/zsh
 
+source install/common.sh
+
 # Fonts
 FONT_DIR="$HOME/.local/share/fonts"
+FONT_CONFIG_DIR="$SRC_ROOT/fonts"
+
 mkdir -p "$FONT_DIR"
 
 # The (N) is a Zsh "glob qualifier" that makes the pattern
@@ -18,4 +22,11 @@ if (( ${#files[@]} == 0 )); then
     unzip -o CascadiaMono.zip -d $FONT_DIR
     popd $font_tmp_dir
     rm -rf $font_tmp_dir
+fi
+
+files=("$FONT_DIR"/MesloLGS*(N))
+
+if (( ${#files[@]} == 0 )); then
+    print_note "Copying fonts from config"
+    cp $FONT_CONFIG_DIR/* $FONT_DIR
 fi
