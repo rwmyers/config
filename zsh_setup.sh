@@ -641,3 +641,8 @@ then
     ln -s $SRC_ROOT/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 fi
 
+if [ ! -e "$HOME/themes" ]
+then
+    print_note "Linking themes"
+    sudo ln -s $SRC_ROOT/themes $HOME/themes
+fi
