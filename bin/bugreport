@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Define the directory to save bug reports
+export BUG_REPORT_DIR="$HOME/bugs"
+
+# Create the directory if it doesn't exist
+mkdir -p "$BUG_REPORT_DIR"
+
+# Get the current timestamp
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+
+# Check if an argument was provided
+if [ -n "$1" ]; then
+  # Use the argument as a prefix
+  PREFIX="${1}_"
+else
+  # Otherwise, an empty prefix
+  PREFIX=""
+fi
+
+# Define the full path for the bug report file
+BUG_REPORT="$BUG_REPORT_DIR/${PREFIX}bugreport_$TIMESTAMP.zip"
+
+echo "Creating bug report..."
+
+# Run the adb bugreport command
+adb bugreport "$BUG_REPORT"
+
+# Check the exit status of the adb command
+if [ $? -eq 0 ]; then
+  echo "Bug report saved successfully to: $BUG_REPORT"
+else
+  echo "Error: Failed to create bug report."
+  exit 1
+fi
