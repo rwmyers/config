@@ -1,0 +1,1 @@
+../../../../../../themes/current/neovim.lua
