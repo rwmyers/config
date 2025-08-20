@@ -1,1 +1,1 @@
-../../../../../../themes/current/neovim.lua
+../../../../themes/current/neovim.lua
