@@ -1,5 +1,8 @@
 import = [ "~/themes/current/alacritty.toml" ]
 
+[window]
+opacity = 0.95
+
 [font]
 normal = { family = "CaskaydiaMono Nerd Font", style = "Regular" }
 bold = { family = "CaskaydiaMono Nerd Font", style = "Bold" }
