@@ -80,7 +80,6 @@ then
 
     install_linux_package vim
     install_linux_package nvim neovim
-    install_linux_package sway
     install_linux_package swayidle
     install_linux_package hyprland
     install_linux_package wofi
