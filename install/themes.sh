@@ -2,8 +2,8 @@
 
 source install/common.sh
 
-if [ ! -e "$HOME/themes" ]
-then
-    print_note "Linking themes"
-    sudo ln -s $SRC_ROOT/themes $HOME/themes
-fi
+ln -snf $SRC_ROOT/themes $HOME/themes
+
+# btop theme linkage
+mkdir -p $HOME/.config/btop/themes
+ln -snf $HOME/themes/current/btop.theme $HOME/.config/btop/themes/current.theme
