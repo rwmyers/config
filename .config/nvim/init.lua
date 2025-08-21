@@ -36,3 +36,4 @@ vim.g.mapleader = " "
 vim.keymap.set("", "<C-o>", function()
   require("fzf-lua").files()
 end, { desc = "Find files in current working directory" })
+
