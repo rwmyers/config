@@ -33,6 +33,6 @@ vim.opt.filetype = 'on'
 vim.g.mapleader = " "
 
 -- fzf-lua setup
-vim.keymap.set("n", "<leader>ff", function()
+vim.keymap.set("", "<C-o>", function()
   require("fzf-lua").files()
 end, { desc = "Find files in current working directory" })
