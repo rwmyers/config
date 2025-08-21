@@ -29,3 +29,10 @@ vim.keymap.set('n', '<M-Left>', ':bp!<CR>')
 -- filetypes
 vim.opt.filetype = 'on'
 
+-- Bind the leader key to space
+vim.g.mapleader = " "
+
+-- fzf-lua setup
+vim.keymap.set("n", "<leader>ff", function()
+  require("fzf-lua").files()
+end, { desc = "Find files in current working directory" })
