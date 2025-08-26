@@ -2,6 +2,8 @@
 
 source install/common.sh
 
+print_note "Installing themes"
+
 ln -snf $SRC_ROOT/themes $HOME/themes
 
 # btop theme linkage

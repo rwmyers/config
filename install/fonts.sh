@@ -2,6 +2,8 @@
 
 source install/common.sh
 
+print_note "Installing fonts"
+
 # Fonts
 FONT_DIR="$HOME/.local/share/fonts"
 FONT_CONFIG_DIR="$SRC_ROOT/fonts"

@@ -1,5 +1,4 @@
 #!/bin/zsh
-
 source install/common.sh
 
 if [ ! -d "$HOME/.oh-my-zsh" ]
@@ -513,7 +512,7 @@ then
     ln -s $SRC_ROOT/.config/dunst/ ~/.config/dunst
 fi
 
-exec $SRC_ROOT/install/development.sh
+$SRC_ROOT/install/development.sh
 
 if [ ! -d "$HOME/src/todoist" ]
 then
@@ -570,5 +569,5 @@ then
     ln -s $SRC_ROOT/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 fi
 
-exec $SRC_ROOT/install/themes.sh
-exec $SRC_ROOT/install/fonts.sh
+$SRC_ROOT/install/themes.sh
+$SRC_ROOT/install/fonts.sh

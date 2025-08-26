@@ -2,6 +2,8 @@
 
 source install/common.sh
 
+print_note "Installing development tools"
+
 # Rust
 if ! type "cargo" > /dev/null;
 then
