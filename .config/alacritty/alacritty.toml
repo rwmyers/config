@@ -1,4 +1,5 @@
-general.import = [ "~/themes/current/alacritty.toml" ]
+[general]
+import = [ "~/themes/current/alacritty.toml" ]
 
 [window]
 opacity = 0.95
