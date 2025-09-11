@@ -8,8 +8,9 @@ $directory\
 [](bg:yellow fg:peach)\
 $git_branch\
 $git_status\
-[](fg:yellow bg:sapphire)\
-[](fg:sapphire)\
+[](fg:yellow bg:lavender)\
+$time\
+[](fg:lavender)\
 $cmd_duration\
 $line_break\
 $character"""
