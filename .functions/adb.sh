@@ -29,7 +29,7 @@ function get_devices_with_aliases {
         alias=$(grep $device $ALIASES_FILE | cut -d$ALIASES_DELIMITER -f2)
         devicelist_with_aliases=$devicelist_with_aliases$device$ALIASES_DELIMITER$alias$SEPARATOR
     done
-    
+
     echo -e $devicelist_with_aliases | sed '$ d'
 }
 
@@ -57,19 +57,19 @@ function adb-select {
 
     select device in $device_list_with_alias; do
         case $device in
-	    Unset)
-	        echo "Unsetting device associations for adb and fastboot."
-	        unset ANDROID_SERIAL
-	        unset FASTBOOT_SERIAL
-	        ;;
-	    *)
-	        echo "Setting device associations for adb and fastboot to $device."
-		device=$(cut -d' ' -f1 <<< $device)
+        Unset)
+            echo "Unsetting device associations for adb and fastboot."
+            unset ANDROID_SERIAL
+            unset FASTBOOT_SERIAL
+            ;;
+        *)
+            echo "Setting device associations for adb and fastboot to $device."
+        device=$(cut -d' ' -f1 <<< $device)
 
-	        export ANDROID_SERIAL=$device
-	        export FASTBOOT_SERIAL=$device
-	        ;;
-	esac
+            export ANDROID_SERIAL=$device
+            export FASTBOOT_SERIAL=$device
+            ;;
+    esac
         break
     done
 }
@@ -101,7 +101,7 @@ function adb-alias {
 }
 
 function adb-which {
-    dsn=$ANDROID_SERIAL    
+    dsn=$ANDROID_SERIAL
     deviceAlias=$(get_alias_for_device $ANDROID_SERIAL)
 
     answer=$dsn
