@@ -57,7 +57,13 @@ function adb-select {
         return
     fi
 
-    echo "Select the device to set as ANDROID_SERIAL:"
+    if [ -n "$ANDROID_SERIAL" ]; then
+        echo "Currently selected device: $(adb-which)"
+    else
+        echo "No device currently selected."
+    fi
+
+    echo "Select a device:"
 
     device_list_with_alias=($(get_devices_with_aliases))
     device_list_with_alias=($(sed 's/=*$//g' <<< "$device_list_with_alias" | sed 's/=/ - /g' && printf "\nUnset"))
