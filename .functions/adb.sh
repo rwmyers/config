@@ -50,6 +50,13 @@ function adb-devices {
 }
 
 function adb-select {
+    if [ -n "$1" ]; then
+        echo "ANDROID_SERIAL set to $1 from argument."
+        export ANDROID_SERIAL=$1
+        export FASTBOOT_SERIAL=$1
+        return
+    fi
+
     echo "Select the device to set as ANDROID_SERIAL:"
 
     device_list_with_alias=($(get_devices_with_aliases))
