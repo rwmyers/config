@@ -58,9 +58,9 @@ function adb-select {
     fi
 
     if [ -n "$ANDROID_SERIAL" ]; then
-        echo "Currently selected device: $(adb-which)"
+        echo -e "Currently selected device: \033[0;32m$(adb-which)\033[0m"
     else
-        echo "No device currently selected."
+        echo -e "\033[0;31mNo device currently selected.\033[0m"
     fi
 
     echo "Select a device:"
