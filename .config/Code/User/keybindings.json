@@ -9,7 +9,7 @@
         "command": "-workbench.action.showAllSymbols"
     },
     {
-        "key": "ctrl+t",
+        "key": "ctrl+n",
         "command": "workbench.action.quickOpen"
     },
     {
@@ -17,7 +17,7 @@
         "command": "-workbench.action.quickOpen"
     },
     {
-        "key": "ctrl+t",
+        "key": "ctrl+n",
         "command": "workbench.action.quickOpenNavigateNextInFilePicker",
         "when": "inFilesPicker && inQuickOpen"
     },
@@ -29,5 +29,24 @@
     {
         "key": "shift+f6",
         "command": "github.copilot.toggleCopilot"
+    },
+    {
+      "key": "ctrl+n",
+      "command": "-workbench.action.files.newUntitledFile"
+    },
+    {
+      "key": "ctrl+n",
+      "command": "-chatEditor.action.undoHunk",
+      "when": "chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.hasEditorModifications && notebookCellListFocused && !chatEdits.isCurrentlyBeingModified"
+    },
+    {
+      "key": "ctrl+n",
+      "command": "-workbench.action.chat.newChat",
+      "when": "chatIsEnabled && inChat"
+    },
+    {
+      "key": "ctrl+n",
+      "command": "-workbench.action.openChat",
+      "when": "chatIsEnabled && inChat && inChatEditor"
     }
 ]
