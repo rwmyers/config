@@ -33,3 +33,5 @@ else
   echo "Error: Failed to create bug report."
   exit 1
 fi
+
+notify-send "Bugreport captured!"
