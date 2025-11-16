@@ -12,14 +12,14 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 # Check if an argument was provided
 if [ -n "$1" ]; then
   # Use the argument as a prefix
-  PREFIX="${1}_"
+  POSTFIX="_${1}"
 else
   # Otherwise, an empty prefix
-  PREFIX=""
+  POSTFIX=""
 fi
 
 # Define the full path for the bug report file
-BUG_REPORT="$BUG_REPORT_DIR/${PREFIX}bugreport_$TIMESTAMP.zip"
+BUG_REPORT="$BUG_REPORT_DIR/bugreport_$TIMESTAMP${POSTFIX}.zip"
 
 echo "Creating bug report..."
 
