@@ -25,12 +25,6 @@ alias zs='source ~/.zshrc'
 
 setopt sh_word_split
 
-# The positiion of this is important as we'd like some GNU tools to be prepended to path.
-if [ -f "$HOME/.zshrc.local" ]
-then
-    source $HOME/.zshrc.local
-fi
-
 # ---- Aliases ----
 # General
 for f in ~/.aliases/*; do source $f; done
@@ -128,3 +122,8 @@ export PATH="$PATH:/snap/bin"
 # ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
 autoload -U compinit; compinit
 source ~/src/fzf-tab/fzf-tab.plugin.zsh
+
+if [ -f "$HOME/.zshrc.local" ]
+then
+    source $HOME/.zshrc.local
+fi
