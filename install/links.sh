@@ -32,6 +32,12 @@ then
     mkdir -p $HOME/.aliases.local
 fi
 
+if [ ! -d "$HOME/.completions" ]
+then
+    print_note "Creating .completions"
+    ln -s ~/src/config/.completions/ ~/.completions
+fi
+
 if [ ! -d "$HOME/.functions" ]
 then
     print_note "Creating .functions"
