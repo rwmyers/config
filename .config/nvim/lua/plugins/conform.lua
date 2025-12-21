@@ -20,6 +20,8 @@ return {
 		-- Define your formatters
 		formatters_by_ft = {
 			lua = { "stylua" },
+			toml = { "taplo" },
+			rust = { "rustfmt" },
 		},
 		-- Set default options
 		default_format_opts = {
