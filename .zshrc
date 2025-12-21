@@ -55,6 +55,18 @@ then
     done
 fi
 
+# ---- Completions ----
+# General. Recursively match all sub-directories and files
+for f in ~/.completions/**/*(.); do source $f; done
+
+# Local
+if [ -d "$HOME/.local/completions/" ]
+then
+    for f in ~/.local/completions/**/*(.); do
+        source $f
+    done
+fi
+
 # Rust
 export PATH="$HOME/.cargo/bin:$HOME/.cargo/env:$PATH"
 
