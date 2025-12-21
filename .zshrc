@@ -55,18 +55,6 @@ then
     done
 fi
 
-# ---- Completions ----
-# General. Recursively match all sub-directories and files
-for f in ~/.completions/**/*(.); do source $f; done
-
-# Local
-if [ -d "$HOME/.local/completions/" ]
-then
-    for f in ~/.local/completions/**/*(.); do
-        source $f
-    done
-fi
-
 # Rust
 export PATH="$HOME/.cargo/bin:$HOME/.cargo/env:$PATH"
 
@@ -131,9 +119,23 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 # ---- Snap installs ----
 export PATH="$PATH:/snap/bin"
 
-# ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
+# ---- Completions ----
 autoload -U compinit; compinit
+
+# General. Recursively match all sub-directories and files
+for f in ~/.completions/**/*(.); do source $f; done
+
+# ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
 source ~/src/fzf-tab/fzf-tab.plugin.zsh
+
+# Local
+if [ -d "$HOME/.local/completions/" ]
+then
+    for f in ~/.local/completions/**/*(.); do
+        source $f
+    done
+fi
+
 
 if [ -f "$HOME/.zshrc.local" ]
 then
