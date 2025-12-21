@@ -41,8 +41,8 @@ then
 fi
 
 # ---- Functions----
-# General
-for f in ~/.functions/*; do source $f; done
+# General. Recursively match all sub-directories and files
+for f in ~/.functions/**/*(.); do source $f; done
 # Local
 for f in ~/.functions.local/*(N); do
     source $f
