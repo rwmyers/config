@@ -1,0 +1,34 @@
+# Dotfiles completions
+
+function _dot() {
+    local -a commands
+    local context state state_descr line
+
+    commands=(
+        'root:Execute the root command'
+        'update:Updates the setup'
+    )
+
+    _arguments -C \
+        '1: :->cmds' \
+        '*:: :-> args'
+
+    case "$state" in
+        cmds)
+            _describe -t commands 'commands' commands
+            ;;
+        args)
+            case $line[1] in
+                root)
+                    _message "No arguments for root"
+                    ;;
+                update)
+                    _message "No arguments for update"
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+# Link the completion function
+compdef _dot dot

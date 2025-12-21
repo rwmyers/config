@@ -1,0 +1,18 @@
+function dot() {
+    if [[ -z "$1" ]]; then
+        dot-root
+        return
+    fi
+
+    local command="$1"
+    # Shift so $2 becomes $1 for the subcommand
+    shift
+
+    if [[ "$command" == "root" ]]; then
+        dot-root "$@"
+    elif [[ "$command" == "update" ]]; then
+        dot-update "$@"
+    else
+        echo "Usage: dot update"
+    fi
+}

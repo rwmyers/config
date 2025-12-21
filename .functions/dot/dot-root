@@ -1,0 +1,3 @@
+function dot-root() {
+    cd $HOME/src/config
+}

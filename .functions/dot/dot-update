@@ -1,0 +1,5 @@
+function dot-update() {
+    pushd $HOME/src/config
+    ./zsh_setup.sh
+    popd
+}
