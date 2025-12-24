@@ -119,6 +119,9 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 # ---- Snap installs ----
 export PATH="$PATH:/snap/bin"
 
+# ---- Clippy (https://github.com/nedn/clippy) ----
+export PATH="$PATH:$HOME/src/clippy"
+
 # ---- Completions ----
 autoload -U compinit; compinit
 
