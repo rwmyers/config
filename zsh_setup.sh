@@ -1,6 +1,8 @@
 #!/bin/zsh
 source install/common.sh
 
+$SRC_ROOT/install/pkg_mgmt.sh
+
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
     pushd ~/ > /dev/null
