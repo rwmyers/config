@@ -1,6 +1,5 @@
 #!/bin/bash
 
-IFS=$'\n'
 adb-root-remount() {
     adb root && adb remount
 }
@@ -21,6 +20,7 @@ function ensureAliasFile {
 ensureAliasFile
 
 function get_devices_with_aliases {
+    local IFS=$'\n'
     devicelist_with_aliases=""
 
     device_list=($(adb devices | grep "device$" | cut -f1))
@@ -34,22 +34,26 @@ function get_devices_with_aliases {
 }
 
 function get_devices_with_aliases_user_formatted {
+    local IFS=$'\n'
     device_list_with_aliases=$(get_devices_with_aliases)
     device_list_with_aliases=$(sed "s/$ALIASES_DELIMITER*$//g" <<< "$device_list_with_aliases" | column -s $ALIASES_DELIMITER -t)
     echo -e "$device_list_with_aliases"
 }
 
 function get_alias_for_device {
+    local IFS=$'\n'
     device=$1
     grep "^$device$ALIASES_DELIMITER" $ALIASES_FILE | cut -d$ALIASES_DELIMITER -f2
 }
 
 function adb-devices {
+    local IFS=$'\n'
     echo -e "List of devices\n"
     get_devices_with_aliases_user_formatted
 }
 
 function adb-select {
+    local IFS=$'\n'
     if [ -n "$1" ]; then
         echo "ANDROID_SERIAL set to $1 from argument."
         export ANDROID_SERIAL=$1
@@ -88,6 +92,7 @@ function adb-select {
 }
 
 function adb-alias {
+    local IFS=$'\n'
     ensureAliasFile
 
     device_list=($(adb devices | grep "device$" | cut -f1))
@@ -114,6 +119,7 @@ function adb-alias {
 }
 
 function adb-which {
+    local IFS=$'\n'
     dsn=$ANDROID_SERIAL
     deviceAlias=$(get_alias_for_device $ANDROID_SERIAL)
 
