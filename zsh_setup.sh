@@ -2,6 +2,7 @@
 source install/common.sh
 
 $SRC_ROOT/install/pkg_mgmt.sh
+$SRC_ROOT/install/env.sh
 
 if [ ! -d "$HOME/.oh-my-zsh" ]
 then
