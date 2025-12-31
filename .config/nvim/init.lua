@@ -2,11 +2,11 @@
 require("config.lazy")
 
 -- allows backspace over anything
-vim.opt.backspace = { 'indent', 'eol', 'start' }
+vim.opt.backspace = { "indent", "eol", "start" }
 
 -- show whitespace
 vim.opt.list = true
-vim.opt.listchars = { eol = '$', tab = '>-', trail = '~', extends = '>', precedes = '<' }
+vim.opt.listchars = { eol = "$", tab = ">-", trail = "~", extends = ">", precedes = "<" }
 
 -- show line numbers
 vim.opt.number = true
@@ -21,19 +21,18 @@ vim.opt.expandtab = true
 vim.opt.laststatus = 2
 
 -- syntax
-vim.opt.syntax = 'on'
+vim.opt.syntax = "on"
 
-vim.keymap.set('n', '<M-Right>', ':bn!<CR>')
-vim.keymap.set('n', '<M-Left>', ':bp!<CR>')
+vim.keymap.set("n", "<M-Right>", ":bn!<CR>")
+vim.keymap.set("n", "<M-Left>", ":bp!<CR>")
 
 -- filetypes
-vim.opt.filetype = 'on'
+vim.opt.filetype = "on"
 
 -- Bind the leader key to space
 vim.g.mapleader = " "
 
 -- fzf-lua setup
 vim.keymap.set("", "<C-n>", function()
-  require("fzf-lua").files()
+	require("fzf-lua").files()
 end, { desc = "Find files in current working directory" })
-
