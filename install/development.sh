@@ -16,3 +16,5 @@ then
     print_note "Installing rust-analyzer"
     rustup component add rust-analyzer
 fi
+
+for f in install/development/*; do $f; done
