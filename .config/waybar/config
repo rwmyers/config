@@ -101,7 +101,7 @@
         "format-disabled": "󰂲",
         "format-connected": "",
         "tooltip-format": "Devices connected: {num_connections}",
-        "on-click": "blueberry"
+        "on-click": "alacritty --class=Bluetui -e $HOME/.cargo/bin/bluetui"
     },
     "pulseaudio": {
         "format": "{icon}",
