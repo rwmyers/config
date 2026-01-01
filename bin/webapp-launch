@@ -1,0 +1,4 @@
+#!/bin/bash
+
+google-chrome --app="$1" ${@:2}
+
