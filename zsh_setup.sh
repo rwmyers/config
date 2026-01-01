@@ -2,6 +2,7 @@
 source install/common.sh
 
 $SRC_ROOT/install/pkg_mgmt.sh
+$SRC_ROOT/install/development.sh
 $SRC_ROOT/install/env.sh
 
 if [ ! -d "$HOME/.oh-my-zsh" ]
@@ -464,8 +465,6 @@ then
     print_note "Adding dunst configuration"
     ln -s $SRC_ROOT/.config/dunst/ ~/.config/dunst
 fi
-
-$SRC_ROOT/install/development.sh
 
 if [ ! -d "$HOME/src/todoist" ]
 then
