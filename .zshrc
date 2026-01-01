@@ -18,6 +18,10 @@ export PATH=$PATH:~/bin
 # Custom scripts for this device
 export PATH=$PATH:~/bin.local
 
+# Go binaries
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/go/bin
+
 # For random things like what's in Haskell stack (for kmonad)
 export PATH=$PATH:~/.local/bin
 
