@@ -50,3 +50,11 @@ then
     popd # walker
     popd # SRC
 fi
+
+if [ ! -d "$HOME/.config/walker/themes/default/" ]
+then
+    print_note "-- Linking walker theme data"
+    mkdir -p $HOME/.config/walker/themes/default/
+    ln -s $SRC_ROOT/.config/walker/themes/default/layout.xml $HOME/.config/walker/themes/default/layout.xml
+    ln -s $SRC_ROOT/.config/walker/themes/default/style.css $HOME/.config/walker/themes/default/style.css
+fi
