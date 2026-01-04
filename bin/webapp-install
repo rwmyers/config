@@ -23,6 +23,13 @@ if [[ -z "$APP_NAME" || -z "$APP_URL" || -z "$ICON_REF" ]]; then
   exit 1
 fi
 
+DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
+if [ -e $DESKTOP_FILE ]
+then
+    echo "$DESKTOP_FILE already exists"
+    exit 0
+fi
+
 # Refer to local icon or fetch remotely from URL
 ICON_DIR="$HOME/.local/share/applications/icons"
 if [[ $ICON_REF =~ ^https?:// ]]; then
@@ -47,8 +54,6 @@ else
 fi
 
 # Create application .desktop file
-DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
-
 cat >"$DESKTOP_FILE" <<EOF
 [Desktop Entry]
 Name=$APP_NAME
