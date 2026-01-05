@@ -43,7 +43,7 @@ then
     git clone https://github.com/abenz1267/walker.git
     pushd walker
     # Dependency of walker
-    sudo apt install libpoppler-glib-dev
+    sudo apt install libpoppler-glib-dev libgtk-4-dev libgtk4-layer-shell-dev libgtk-4-dev protobuf-compiler libprotobuf-dev
     # Build release target
     cargo build --release
     sudo cp target/release/walker /usr/bin/walker
