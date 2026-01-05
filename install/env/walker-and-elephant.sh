@@ -32,7 +32,7 @@ then
     # Create an elephant system service and start it
     print_note "--- Creating elephant user service"
     elephant service enable
-    systemctl --user start elephant
+    systemctl --user enable --now elephant.service
 fi
 
 # Walker - An application launcher (https://github.com/abenz1267/walker)
