@@ -32,6 +32,7 @@ fi
 
 # Refer to local icon or fetch remotely from URL
 ICON_DIR="$HOME/.local/share/applications/icons"
+mkdir -p $ICON_DIR
 if [[ $ICON_REF =~ ^https?:// ]]; then
   ICON_PATH="$ICON_DIR/$APP_NAME.png"
   echo $ICON_REF
