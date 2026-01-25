@@ -1,0 +1,22 @@
+# Configuration for gemini-start
+# You can override these in your local config if needed, but defaults are set here.
+export GEMINI_START_DIR="${GEMINI_START_DIR:-$HOME/src/gemini}"
+export GEMINI_CMD="${GEMINI_CMD:-gemini}"
+
+function gemini-start {
+    local target_dir="$GEMINI_START_DIR"
+
+    # If the first argument is a valid directory, use it as the starting point.
+    if [[ $# -gt 0 && -d "$1" ]]; then
+        target_dir="$1"
+        shift
+    fi
+
+    if [ ! -d "$target_dir" ]; then
+        echo "Error: Directory '$target_dir' not found. Please set GEMINI_START_DIR correctly or provide a valid directory."
+        return 1
+    fi
+
+    # Navigate to the directory and execute the command with any remaining arguments.
+    cd "$target_dir" && "$GEMINI_CMD" "$@"
+}
