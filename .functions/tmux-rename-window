@@ -1,0 +1,3 @@
+function tmux-rename-window {
+    [ -n "$TMUX" ] && tmux rename-window $1
+}
