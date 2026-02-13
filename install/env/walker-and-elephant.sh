@@ -32,7 +32,21 @@ then
     # Create an elephant system service and start it
     print_note "--- Creating elephant user service"
     elephant service enable
-    systemctl --user enable --now elephant.service
+
+    # Override the default unit to use default.target instead of
+    # graphical-session.target, which is often inactive
+    local OVERRIDE_DIR=$HOME/.config/systemd/user/elephant.service.d
+    mkdir -p $OVERRIDE_DIR
+    cat > $OVERRIDE_DIR/override.conf <<'EOF'
+[Unit]
+After=default.target
+
+[Install]
+WantedBy=default.target
+EOF
+
+    systemctl --user daemon-reload
+    systemctl --user reenable --now elephant.service
 fi
 
 # Walker - An application launcher (https://github.com/abenz1267/walker)
