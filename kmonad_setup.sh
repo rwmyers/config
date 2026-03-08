@@ -29,7 +29,16 @@ then
     sudo usermod -aG uinput $USER
     echo "Restart or relog to get group access to uinput..."
 fi
-echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/70-kmonad.rules > /dev/null
+
+# Ensure the uinput kernel module loads automatically on boot
+echo "uinput" | sudo tee /etc/modules-load.d/uinput.conf > /dev/null
+
+# Write the robust udev rule (adding SUBSYSTEM=="misc")
+echo 'KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/70-kmonad.rules > /dev/null
+
+# Reload and trigger udev to apply the new permissions immediately
+sudo udevadm control --reload-rules
+sudo udevadm trigger
 
 # Run kmonad as a user service. This already exists in src/config, which is symlinked
 if [ $(systemctl --user --type=service | grep kmonad | wc -c) -eq 0 ]
