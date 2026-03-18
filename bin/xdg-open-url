@@ -1,0 +1,15 @@
+#!/bin/bash
+URL=$1
+if test -z "$URL" ; then
+  echo "Bad usage: $0 <URL>"
+  exit 1
+fi
+
+# Prepend http:// if no protocol is specified
+if [[ ! "$URL" =~ ^[a-zA-Z]+:// ]]; then
+  URL="http://$URL"
+fi
+
+# Use xdg-open to open the URL
+xdg-open "$URL"
+
