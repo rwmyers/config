@@ -33,18 +33,7 @@ then
     print_note "--- Creating elephant user service"
     elephant service enable
 
-    # Override the default unit to use default.target instead of
-    # graphical-session.target, which is often inactive
-    local OVERRIDE_DIR=$HOME/.config/systemd/user/elephant.service.d
-    mkdir -p $OVERRIDE_DIR
-    cat > $OVERRIDE_DIR/override.conf <<'EOF'
-[Unit]
-After=default.target
-
-[Install]
-WantedBy=default.target
-EOF
-
+    # Enable the service
     systemctl --user daemon-reload
     systemctl --user reenable --now elephant.service
 fi
