@@ -142,6 +142,6 @@
     "custom/poweroff": {
         "tooltip": false,
         "format": "",
-        "on-click": "bash $HOME/.config/sway/scripts/power.sh"
+        "on-click": "$HOME/bin/system-menu"
     }
 }

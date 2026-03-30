@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+selection=$(echo -e "󰌾  Lock\n󰒲  Suspend\n󰍃  Logout\n󰜉  Restart\n󰐥  Shutdown" | walker --dmenu 2>/dev/null)
+
+case $selection in
+    *Lock*)
+        swaylock -f -c 000000
+        ;;
+    *Suspend*)
+        systemctl suspend
+        ;;
+    *Logout*)
+        hyprctl dispatch exit
+        ;;
+    *Restart*)
+        systemctl reboot
+        ;;
+    *Shutdown*)
+        systemctl poweroff
+        ;;
+esac
