@@ -12,3 +12,10 @@ if ! type "bat" > /dev/null;
 then
     ln -s $(which batcat) ~/.local/bin/bat
 fi
+
+# bat configuration
+if [ ! -d "$HOME/.config/bat" ]
+then
+    print_note " -- Linking bat configuration"
+    ln -s $HOME/src/config/.config/bat ~/.config/bat
+fi
