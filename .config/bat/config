@@ -1,2 +1,2 @@
 --theme="Catppuccin Mocha"
---map-syntax=".functions/*:Bash"
+--map-syntax="**/.functions/*:Bourne Again Shell (bash)"
