@@ -1,0 +1,31 @@
+# Create a multi-pane swarm layout with the same command in each pane
+# Usage: tsl <pane_count> <command>
+tsl() {
+  [[ -z $1 || -z $2 ]] && { echo "Usage: tsl <pane_count> <command>"; return 1; }
+  [[ -z $TMUX ]] && { echo "You must start tmux to use tsl."; return 1; }
+
+  local count="$1"
+  local cmd="$2"
+  local current_dir="${PWD}"
+  local -a panes
+
+  tmux rename-window -t "$TMUX_PANE" "$(basename "$current_dir")"
+
+  panes+=("$TMUX_PANE")
+
+  while (( ${#panes[@]} < count )); do
+    local new_pane
+    local split_target="${panes[-1]}"
+    # Split direction doesn't matter — tiled layout rebalances everything
+    new_pane=$(tmux split-window -h -t "$split_target" -c "$current_dir" -P -F '#{pane_id}')
+    panes+=("$new_pane")
+    # Rebalance all panes into an auto-arranged grid (e.g. 4 panes = 2x2)
+    tmux select-layout -t "${panes[0]}" tiled
+  done
+
+  for pane in "${panes[@]}"; do
+    tmux send-keys -t "$pane" "$cmd" C-m
+  done
+
+  tmux select-pane -t "${panes[0]}"
+}
