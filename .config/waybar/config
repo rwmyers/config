@@ -5,7 +5,7 @@
     "spacing": 0,
     "height": 26,
     "modules-left": [
-        "custom/poweroff",
+        "custom/system-menu",
         "hyprland/workspaces"
     ],
     "modules-center": [
@@ -139,9 +139,9 @@
         "exec": "bash $HOME/.config/waybar/scripts/dunst_status.sh",
         "on-click": "dunstctl set-paused toggle"
     },
-    "custom/poweroff": {
+    "custom/system-menu": {
         "tooltip": false,
         "format": "",
-        "on-click": "$HOME/bin/system-menu"
+        "on-click": "system-menu"
     }
 }

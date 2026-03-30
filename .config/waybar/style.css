@@ -63,7 +63,7 @@
 #pulseaudio,
 #clock,
 #custom-dunst,
-#custom-poweroff {
+#custom-system-menu {
     min-width: 12px;
     margin: 0 7.5px;
 }
