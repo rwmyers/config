@@ -45,7 +45,6 @@ then
     install_linux_package alacritty
     install_linux_package kitty
     install_linux_package fdfind fd-find
-    install_linux_package batcat bat
     install_linux_package pavucontrol
     install_linux_package pulseaudio
     install_linux_package rg ripgrep
@@ -78,11 +77,6 @@ then
         ln -s $(which fdfind) ~/.local/bin/fd
     fi
 
-    ## bat link from batcat
-    if ! type "bat" > /dev/null;
-    then
-        ln -s $(which batcat) ~/.local/bin/bat
-    fi
 
     ## eza, a better ls (github.com/eza-community/eza)
     # this can't yet be installed from apt directly
