@@ -1,4 +1,5 @@
 
+export EDITOR=nvim
 export HISTSIZE=10000
 export SAVEHIST=12000
 export HISTFILE="$HOME/.cache/zsh/history"
