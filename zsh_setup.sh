@@ -45,7 +45,6 @@ then
     install_linux_package alacritty
     install_linux_package kitty
     install_linux_package fdfind fd-find
-    install_linux_package delta git-delta
     install_linux_package batcat bat
     install_linux_package pavucontrol
     install_linux_package pulseaudio
