@@ -1,21 +1,92 @@
 #!/usr/bin/env bash
 
-selection=$(echo -e "󰌾  Lock\n󰒲  Suspend\n󰍃  Logout\n󰜉  Restart\n󰐥  Shutdown" | walker --dmenu 2>/dev/null)
+# Allow jumping directly to a submenu via argument
+BACK_TO_EXIT=false
 
-case $selection in
-    *Lock*)
-        swaylock -f -c 000000
-        ;;
-    *Suspend*)
-        systemctl suspend
-        ;;
-    *Logout*)
-        hyprctl dispatch exit
-        ;;
-    *Restart*)
-        systemctl reboot
-        ;;
-    *Shutdown*)
-        systemctl poweroff
-        ;;
-esac
+back_to() {
+    local parent_menu="$1"
+    if [[ $BACK_TO_EXIT == "true" ]]; then
+        exit 0
+    elif [[ -n $parent_menu ]]; then
+        "$parent_menu"
+    else
+        show_main_menu
+    fi
+}
+
+menu() {
+    local prompt="$1"
+    local options="$2"
+    echo -e "$options" | walker --dmenu 2>/dev/null
+}
+
+show_system_menu() {
+    local selection
+    selection=$(menu "System" "󰌾  Lock\n󰒲  Suspend\n󰍃  Logout\n󰜉  Restart\n󰐥  Shutdown")
+
+    case $selection in
+        *Lock*)
+            swaylock -f -c 000000
+            ;;
+        *Suspend*)
+            systemctl suspend
+            ;;
+        *Logout*)
+            hyprctl dispatch exit
+            ;;
+        *Restart*)
+            systemctl reboot
+            ;;
+        *Shutdown*)
+            systemctl poweroff
+            ;;
+        *)
+            back_to show_main_menu
+            ;;
+    esac
+}
+
+show_update_menu() {
+    local selection
+    selection=$(menu "Update" "Restart Walker\nRestart Hyprland")
+
+    case $selection in
+        *Walker*)
+            walker-restart
+            ;;
+        *Hyprland*)
+            hyprctl reload
+            ;;
+        *)
+            back_to show_main_menu
+            ;;
+    esac
+}
+
+show_main_menu() {
+    local selection
+    selection=$(menu "Go" "󰀻  Apps\n󰑐  Update\n󰐥  System")
+
+    case $selection in
+        *Apps*)
+            walker
+            ;;
+        *Update*)
+            show_update_menu
+            ;;
+        *System*)
+            show_system_menu
+            ;;
+    esac
+}
+
+if [[ -n $1 ]]; then
+    BACK_TO_EXIT=true
+    case "${1,,}" in
+        system) show_system_menu ;;
+        update) show_update_menu ;;
+        *) show_main_menu ;;
+    esac
+else
+    show_main_menu
+fi

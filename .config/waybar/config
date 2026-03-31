@@ -141,7 +141,7 @@
     },
     "custom/system-menu": {
         "tooltip": false,
-        "format": "",
+        "format": "󰍜",
         "on-click": "system-menu"
     }
 }
