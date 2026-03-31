@@ -5,3 +5,4 @@ bin/template.txt
 .config/systemd/user/default.target.wants/
 .DS_Store
 .config/bat/themes/
+bin/networkmanager_dmenu
