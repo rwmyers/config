@@ -63,13 +63,37 @@ show_update_menu() {
     esac
 }
 
+THEMES_DIR="$HOME/themes"
+
+show_theme_menu() {
+    local current_theme themes selection
+    current_theme=$(readlink "$THEMES_DIR/current")
+
+    # List theme directories, excluding 'current'
+    themes=$(find -L "$THEMES_DIR" -mindepth 1 -maxdepth 1 -type d -not -name current -printf '%f\n' | sort)
+
+    selection=$(echo "$themes" | walker --dmenu 2>/dev/null)
+
+    if [[ -n $selection && $selection != "CNCLD" ]]; then
+        ln -snf "$selection" "$THEMES_DIR/current"
+        hyprctl reload
+        swaybg -i "$THEMES_DIR/current/background" &
+        walker-restart
+    else
+        back_to show_main_menu
+    fi
+}
+
 show_main_menu() {
     local selection
-    selection=$(menu "Go" "󰀻  Apps\n󰑐  Update\n󰐥  System")
+    selection=$(menu "Go" "󰀻  Apps\n󰸌  Themes\n󰑐  Update\n󰐥  System")
 
     case $selection in
         *Apps*)
             walker
+            ;;
+        *Themes*)
+            show_theme_menu
             ;;
         *Update*)
             show_update_menu
@@ -84,6 +108,7 @@ if [[ -n $1 ]]; then
     BACK_TO_EXIT=true
     case "${1,,}" in
         system) show_system_menu ;;
+        themes) show_theme_menu ;;
         update) show_update_menu ;;
         *) show_main_menu ;;
     esac
