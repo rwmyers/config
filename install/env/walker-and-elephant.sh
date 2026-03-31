@@ -49,6 +49,16 @@ then
     popd # internal/providers/websearch
 fi
 
+# Bookmarks provider for elephant
+if [ ! -e "$PROVIDERS_DIR/bookmarks.so" ]
+then
+    print_note "--- Building bookmarks provider"
+    pushd $SRC/elephant/internal/providers/bookmarks
+    go build -buildmode=plugin
+    cp bookmarks.so $PROVIDERS_DIR
+    popd # internal/providers/bookmarks
+fi
+
 # Generate websearch config with correct icon path
 if [ ! -e "$HOME/.config/elephant/websearch.toml" ]
 then
