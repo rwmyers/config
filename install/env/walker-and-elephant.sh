@@ -64,6 +64,8 @@ if [ ! -e "$HOME/.config/elephant/websearch.toml" ]
 then
     print_note " -- Creating websearch config"
     cat > "$HOME/.config/elephant/websearch.toml" <<EOF
+command = "webapp-open"
+
 [[entries]]
 name = "Google"
 default = true

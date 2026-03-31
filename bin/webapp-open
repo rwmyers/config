@@ -1,0 +1,5 @@
+#!/bin/bash
+
+google-chrome --new-window "$1" &
+sleep 0.5
+hyprctl dispatch focuswindow "class:Google-chrome"
