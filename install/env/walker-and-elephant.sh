@@ -49,6 +49,28 @@ then
     popd # internal/providers/websearch
 fi
 
+# Generate websearch config with correct icon path
+if [ ! -e "$HOME/.config/elephant/websearch.toml" ]
+then
+    print_note " -- Creating websearch config"
+    cat > "$HOME/.config/elephant/websearch.toml" <<EOF
+[[entries]]
+name = "Google"
+default = true
+url = "https://www.google.com/search?q=%TERM%"
+icon = "$HOME/.config/elephant/icons/google.png"
+EOF
+fi
+
+# Download websearch icon
+local ICONS_DIR=$HOME/.config/elephant/icons
+if [ ! -e "$ICONS_DIR/google.png" ]
+then
+    print_note " -- Downloading Google icon"
+    mkdir -p $ICONS_DIR
+    curl -sL -o "$ICONS_DIR/google.png" "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google.png"
+fi
+
 # Walker - An application launcher (https://github.com/abenz1267/walker)
 if [ ! -e "/usr/bin/walker" ]
 then
