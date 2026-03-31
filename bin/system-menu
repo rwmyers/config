@@ -84,13 +84,33 @@ show_theme_menu() {
     fi
 }
 
+show_web_menu() {
+    local selection
+    selection=$(menu "Web" "󰍉  Websearch\n󰃀  Bookmarks")
+
+    case $selection in
+        *Websearch*)
+            walker -m websearch
+            ;;
+        *Bookmarks*)
+            walker -m bookmarks
+            ;;
+        *)
+            back_to show_main_menu
+            ;;
+    esac
+}
+
 show_main_menu() {
     local selection
-    selection=$(menu "Go" "󰀻  Apps\n󰸌  Themes\n󰑐  Update\n󰐥  System")
+    selection=$(menu "Go" "󰀻  Apps\n󰖟  Web\n󰸌  Themes\n󰑐  Update\n󰐥  System")
 
     case $selection in
         *Apps*)
             walker
+            ;;
+        *Web*)
+            show_web_menu
             ;;
         *Themes*)
             show_theme_menu
@@ -108,6 +128,7 @@ if [[ -n $1 ]]; then
     BACK_TO_EXIT=true
     case "${1,,}" in
         system) show_system_menu ;;
+        web) show_web_menu ;;
         themes) show_theme_menu ;;
         update) show_update_menu ;;
         *) show_main_menu ;;
