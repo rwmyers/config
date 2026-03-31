@@ -38,6 +38,17 @@ then
     systemctl --user reenable --now elephant.service
 fi
 
+# Websearch provider for elephant
+local PROVIDERS_DIR=$HOME/.config/elephant/providers
+if [ ! -e "$PROVIDERS_DIR/websearch.so" ]
+then
+    print_note "--- Building websearch provider"
+    pushd $SRC/elephant/internal/providers/websearch
+    go build -buildmode=plugin
+    cp websearch.so $PROVIDERS_DIR
+    popd # internal/providers/websearch
+fi
+
 # Walker - An application launcher (https://github.com/abenz1267/walker)
 if [ ! -e "/usr/bin/walker" ]
 then
