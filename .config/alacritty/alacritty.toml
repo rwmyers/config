@@ -31,7 +31,6 @@ bindings = [
   { key = "Key8", mods = "Control", chars = "\u001b[56;5u" },
   { key = "Key9", mods = "Control", chars = "\u001b[57;5u" },
   { key = "Back", mods = "Control", chars = "\u0017" },
-  { key = "W", mods = "Control", action = "None" },
 ]
 
 [hints]
