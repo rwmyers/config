@@ -1,5 +1,7 @@
 
 export EDITOR=nvim
+# Keep emacs mode for zsh (prevents Home/End keys from entering vi mode and capitalizing text)
+bindkey -e
 export HISTSIZE=10000
 export SAVEHIST=12000
 export HISTFILE="$HOME/.cache/zsh/history"
