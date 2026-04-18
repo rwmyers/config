@@ -6,8 +6,14 @@ _tmux_sessions() {
     _describe -t sessions 'sessions' sessions
 }
 
+_tmux_sessions_with_flag() {
+    local -a sessions
+    sessions=($(command tmux list-sessions -F "-t#S" 2>/dev/null))
+    _describe -t sessions 'sessions' sessions
+}
+
 local context state state_descr line
-local -a commands
+local -a attach_cmds other_cmds
 
 _arguments -C \
     '1: :->cmds' \
@@ -15,29 +21,33 @@ _arguments -C \
 
 case "$state" in
     cmds)
-        commands=(
+        attach_cmds=(
             'attach-session:Attach to a session'
             'attach:Attach to a session'
             'at:Attach to a session'
+        )
+        other_cmds=(
             'list-sessions:List sessions'
             'list-session:List sessions'
             'ls:List sessions'
             'new-session:Create a new session'
             'kill-session:Kill a session'
         )
-        _describe -t commands 'tmux commands' commands
+        # Use -S to automatically add " -t " when an attach command is selected
+        _describe -t commands 'tmux commands' attach_cmds -S ' -t '
+        _describe -t commands 'tmux commands' other_cmds
         ;;
     args)
         case $line[1] in
             attach|attach-session|at)
                 _arguments \
                     '-t[target session]:session:_tmux_sessions' \
-                    '::session:_tmux_sessions'
+                    '::session:_tmux_sessions_with_flag'
                 ;;
             kill-session)
                 _arguments \
                     '-t[target session]:session:_tmux_sessions' \
-                    '1:session:_tmux_sessions'
+                    '1:session:_tmux_sessions_with_flag'
                 ;;
             *)
                 ;;
