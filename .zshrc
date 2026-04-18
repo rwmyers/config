@@ -80,8 +80,13 @@ export CONFIG_GIT="$HOME/src/config/git"
 ## Scripts
 export PATH="$PATH:$CONFIG_GIT"
 
-## Completions
-for c in $CONFIG_GIT/completion/*; do source $c; done
+# ---- Completions ----
+# fpath (Function Path) is a Zsh array that tells the shell where to look for 
+# completion definitions (files starting with '_') and other autoloadable functions.
+# Directories added to fpath must be set BEFORE calling 'compinit'.
+fpath=($HOME/.completions $CONFIG_GIT/completion $HOME/.local/completions $fpath)
+
+autoload -U compinit; compinit
 
 # NVIM
 export NVM_DIR="$HOME/.nvm"
@@ -129,25 +134,12 @@ export PATH="$PATH:/snap/bin"
 # ---- Clippy (https://github.com/nedn/clippy) ----
 export PATH="$PATH:$HOME/src/clippy"
 
-# ---- Completions ----
-autoload -U compinit; compinit
-
-# General. Recursively match all sub-directories and files
-for f in ~/.completions/**/*(.); do source $f; done
-
 # ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
 source ~/src/fzf-tab/fzf-tab.plugin.zsh
 
 # Local
-if [ -d "$HOME/.local/completions/" ]
-then
-    for f in ~/.local/completions/**/*(.); do
-        source $f
-    done
-fi
-
-
 if [ -f "$HOME/.zshrc.local" ]
 then
     source $HOME/.zshrc.local
 fi
+

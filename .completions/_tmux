@@ -1,0 +1,46 @@
+#compdef tmux
+
+_tmux_sessions() {
+    local -a sessions
+    sessions=($(command tmux list-sessions -F "#S" 2>/dev/null))
+    _describe -t sessions 'sessions' sessions
+}
+
+local context state state_descr line
+local -a commands
+
+_arguments -C \
+    '1: :->cmds' \
+    '*:: :->args'
+
+case "$state" in
+    cmds)
+        commands=(
+            'attach-session:Attach to a session'
+            'attach:Attach to a session'
+            'at:Attach to a session'
+            'list-sessions:List sessions'
+            'list-session:List sessions'
+            'ls:List sessions'
+            'new-session:Create a new session'
+            'kill-session:Kill a session'
+        )
+        _describe -t commands 'tmux commands' commands
+        ;;
+    args)
+        case $line[1] in
+            attach|attach-session|at)
+                _arguments \
+                    '-t[target session]:session:_tmux_sessions' \
+                    '::session:_tmux_sessions'
+                ;;
+            kill-session)
+                _arguments \
+                    '-t[target session]:session:_tmux_sessions' \
+                    '1:session:_tmux_sessions'
+                ;;
+            *)
+                ;;
+        esac
+        ;;
+esac
