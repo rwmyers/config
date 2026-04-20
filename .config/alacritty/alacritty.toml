@@ -30,7 +30,7 @@ bindings = [
   { key = "Key7", mods = "Control", chars = "\u001b[55;5u" },
   { key = "Key8", mods = "Control", chars = "\u001b[56;5u" },
   { key = "Key9", mods = "Control", chars = "\u001b[57;5u" },
-  { key = "Back", mods = "Control", chars = "\u0017" },
+  { key = "Back", mods = "Control", chars = "\u001b\u007f" },
 ]
 
 [hints]
