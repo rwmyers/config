@@ -46,13 +46,19 @@
     color: @active;
 }
 
-#battery.critical:not(.charging) {
+#battery.critical.discharging {
     color: @urgent;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        opacity: 0.2;
+    }
 }
 
 #tray,
