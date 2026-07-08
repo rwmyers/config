@@ -1,0 +1,2 @@
+#!/bin/sh
+exec git -c delta.side-by-side=false show "$@"
