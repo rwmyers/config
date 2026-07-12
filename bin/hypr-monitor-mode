@@ -3,13 +3,14 @@ set -euo pipefail
 
 usage() {
     cat <<EOF
-Usage: $(basename "$0") --lid <0|1>
+Usage: $(basename "$0") --lid <0|1> | --auto
 
 Point ~/.config/hypr/monitors.conf at the right config in
 ~/.config/hypr/monitors/ and reload Hyprland.
 
   --lid 0   Lid closed -> monitors/lidclosed.conf
   --lid 1   Lid open   -> monitors/default.conf
+  --auto    Detect lid state from /proc/acpi (open if unknown)
 EOF
     exit "${1:-1}"
 }
@@ -18,6 +19,13 @@ lid=""
 while [ $# -gt 0 ]; do
     case "$1" in
         --lid) lid="${2:-}"; shift 2 ;;
+        --auto)
+            if grep -q closed /proc/acpi/button/lid/LID*/state 2>/dev/null; then
+                lid=0
+            else
+                lid=1
+            fi
+            shift ;;
         -h|--help) usage 0 ;;
         *) echo "unknown arg: $1" >&2; usage ;;
     esac
@@ -39,4 +47,6 @@ if [ ! -f "$target_path" ]; then
 fi
 
 ln -sfn "$target_path" "$link"
-hyprctl reload >/dev/null
+# Reload is best-effort: at session startup the config is already fresh, and
+# outside a Hyprland session there is nothing to reload.
+hyprctl reload >/dev/null 2>&1 || true
