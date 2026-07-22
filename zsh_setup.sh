@@ -243,10 +243,6 @@ then
     then
         sudo apt -y install xclip
     fi
-    if ! type "rofi" > /dev/null;
-    then
-        sudo apt -y install rofi
-    fi
     if ! type "maim" > /dev/null;
     then
         sudo apt -y install maim
@@ -260,11 +256,6 @@ fi
 if [ ! -e "$HOME/.config/kmonad" ]
 then
     ln -s $SRC_ROOT/.config/kmonad/ ~/.config/kmonad
-fi
-
-if [ ! -e "$HOME/.config/rofi" ]
-then
-    ln -s $SRC_ROOT/.config/rofi/ ~/.config/rofi
 fi
 
 if [ ! -e "$HOME/.config/wofi" ]
