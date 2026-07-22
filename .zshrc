@@ -14,6 +14,11 @@ fi
 # Source zsh config files
 for f in ~/.config/zsh/*; do source $f; done
 
+# Nix: put ~/.nix-profile/bin on PATH (kept here, not /etc, so it's portable).
+if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
+    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+fi
+
 export PATH=$PATH:/Users/rmmyers/gitscripts/
 
 # Scripts
