@@ -17,6 +17,7 @@
     cloc
     delta
     eza
+    fzf
     gum
     stylua
     taplo

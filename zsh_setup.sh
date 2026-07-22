@@ -178,13 +178,6 @@ then
     brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
 fi
 
-if ! type "fzf" > /dev/null;
-then
-    print_note "Installing fzf"
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-fi
-
 if [ ! -d "$HOME/src/fzf-git.sh" ]
 then
     print_note "Installing fzf-git"
