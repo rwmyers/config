@@ -17,5 +17,6 @@
     delta
     gum
     stylua
+    taplo
   ];
 }
