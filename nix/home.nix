@@ -22,6 +22,10 @@
     fzf
     fzf-git-sh
     gum
+    (python3.withPackages (ps: with ps; [
+      jinja2
+      jq
+    ]))
     ripgrep
     starship
     stylua
