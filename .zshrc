@@ -143,7 +143,7 @@ export PATH="$PATH:/snap/bin"
 export PATH="$PATH:$HOME/src/clippy"
 
 # ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
-source ~/src/fzf-tab/fzf-tab.plugin.zsh
+[ -f "$NIX_PROFILE/share/fzf-tab/fzf-tab.plugin.zsh" ] && source "$NIX_PROFILE/share/fzf-tab/fzf-tab.plugin.zsh"
 
 # Local
 if [ -f "$HOME/.zshrc.local" ]

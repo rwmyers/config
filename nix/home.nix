@@ -24,5 +24,6 @@
     taplo
     tmux
     zoxide
+    zsh-fzf-tab
   ];
 }
