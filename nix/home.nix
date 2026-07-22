@@ -27,6 +27,7 @@
     stylua
     taplo
     tmux
+    uv
     zoxide
     zsh-fzf-tab
   ];
