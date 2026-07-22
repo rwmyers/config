@@ -7,9 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, nixgl, ... }:
     let
       # Portable across machines and usernames: the invoking user's identity is
       # read from the environment rather than hardcoded, so the same config works
@@ -39,6 +40,7 @@
       # Activate with: home-manager switch --impure --flake <this-dir>#default
       homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = { inherit nixgl; };
         modules = [
           ./home.nix
           {

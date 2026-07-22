@@ -1,7 +1,24 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixgl, ... }:
 
 let
   srcDir = "${config.home.homeDirectory}/src/config";
+
+  # Wrap a GUI package so it runs under nixGL (system Mesa GL) on Linux, where
+  # Nix apps can't otherwise find the system's libGL/libEGL. No-op on macOS.
+  wrapGL = pkg: exe:
+    if pkgs.stdenv.hostPlatform.isLinux then
+      pkgs.symlinkJoin {
+        name = "${exe}-nixgl";
+        paths = [ pkg ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          rm $out/bin/${exe}
+          makeWrapper ${nixgl.packages.${pkgs.stdenv.hostPlatform.system}.nixGLIntel}/bin/nixGLIntel \
+            $out/bin/${exe} --add-flags ${pkg}/bin/${exe}
+        '';
+      }
+    else
+      pkg;
 in
 {
   imports = [ ./programs/bat.nix ];
@@ -21,7 +38,7 @@ in
 
   # Cross-platform tools that need no configuration.
   home.packages = with pkgs; [
-    alacritty
+    (wrapGL alacritty "alacritty")
     btop
     cloc
     delta
@@ -43,7 +60,7 @@ in
     taplo
     tmux
     uv
-    wezterm
+    (wrapGL wezterm "wezterm")
     zoxide
     zsh-fzf-tab
   ];
