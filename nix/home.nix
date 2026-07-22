@@ -17,6 +17,7 @@ in
 
   # Cross-platform tools that need no configuration.
   home.packages = with pkgs; [
+    alacritty
     btop
     cloc
     delta
@@ -41,4 +42,7 @@ in
 
   home.file.".config/starship".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";
+
+  home.file.".config/alacritty/alacritty.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/alacritty/alacritty.toml";
 }

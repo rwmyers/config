@@ -48,7 +48,6 @@ then
     install_linux_package grim
     install_linux_package curl
     install_linux_package thunar
-    install_linux_package alacritty
     install_linux_package fdfind fd-find
     install_linux_package pavucontrol
     install_linux_package pulseaudio
@@ -156,12 +155,6 @@ fi
 if [ ! -f "$HOME/.p10k.zsh" ]
 then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
-fi
-
-if [ ! -f "$HOME/.config/alacritty/alacritty.toml" ]
-then
-    mkdir -p ~/.config/alacritty
-    ln -s ~/src/config/.config/alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]];
