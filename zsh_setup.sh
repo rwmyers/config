@@ -48,7 +48,6 @@ then
     install_linux_package grim
     install_linux_package curl
     install_linux_package thunar
-    install_linux_package fdfind fd-find
     install_linux_package pavucontrol
     install_linux_package pulseaudio
     install_linux_package dunst
@@ -65,12 +64,6 @@ then
     if [ ! $? -eq 0 ]
     then
         sudo apt install libssl-dev
-    fi
-
-    ## fd-find link
-    if ! type "fd" > /dev/null;
-    then
-        ln -s $(which fdfind) ~/.local/bin/fd
     fi
 
 

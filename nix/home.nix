@@ -44,6 +44,7 @@ in
     delta
     eza
     fastfetch
+    fd
     fzf
     fzf-git-sh
     gum
