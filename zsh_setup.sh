@@ -73,11 +73,6 @@ then
         sudo apt install libssl-dev
     fi
 
-    if ! type "z" > /dev/null;
-    then
-        curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-    fi
-
     ## fd-find link
     if ! type "fd" > /dev/null;
     then

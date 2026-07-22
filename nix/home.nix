@@ -18,5 +18,6 @@
     gum
     stylua
     taplo
+    zoxide
   ];
 }
