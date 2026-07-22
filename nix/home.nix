@@ -13,5 +13,7 @@
   news.display = "silent";
 
   # Cross-platform tools that need no configuration.
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [
+    gum
+  ];
 }
