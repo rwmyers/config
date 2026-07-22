@@ -273,13 +273,6 @@ then
     ln -s $SRC_ROOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
 fi
 
-# Starship configuration
-if [ ! -d "$HOME/.config/starship/" ]
-then
-    print_note "Adding starship configuration"
-    ln -s $SRC_ROOT/.config/starship/ ~/.config/starship
-fi
-
 if [ ! -d "$HOME/.config/dunst/" ]
 then
     print_note "Adding dunst configuration"

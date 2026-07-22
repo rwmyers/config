@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
+let
+  srcDir = "${config.home.homeDirectory}/src/config";
+in
 {
   imports = [ ./programs/bat.nix ];
 
@@ -35,4 +38,7 @@
     zoxide
     zsh-fzf-tab
   ];
+
+  home.file.".config/starship".source =
+    config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";
 }
