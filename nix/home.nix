@@ -23,6 +23,7 @@
     fzf-git-sh
     gum
     ripgrep
+    starship
     stylua
     taplo
     tmux

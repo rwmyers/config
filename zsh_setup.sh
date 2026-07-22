@@ -311,21 +311,6 @@ then
     ln -s $SRC_ROOT/.config/Code/User/settings.json ~/.config/Code/User/settings.json
 fi
 
-# Starship install
-if ! type "starship" > /dev/null;
-then
-    print_note "Installing starship"
-    if [[ "$OSTYPE" == "linux-gnu"* ]];
-    then
-        curl -sS https://starship.rs/install.sh | sh
-    fi
-    if [[ "$OSTYPE" == "darwin"* ]];
-    then
-        brew update
-        brew install starship
-    fi
-fi
-
 # Starship configuration
 if [ ! -d "$HOME/.config/starship/" ]
 then
