@@ -329,6 +329,5 @@ fi
 
 $SRC_ROOT/install/links.sh
 $SRC_ROOT/install/themes.sh
-$SRC_ROOT/install/fonts.sh
 $SRC_ROOT/install/etc.sh
 $SRC_ROOT/install/webapps.sh

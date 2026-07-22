@@ -15,6 +15,10 @@ in
   # Don't print the "unread news items" notice on every switch.
   news.display = "silent";
 
+  # Fontconfig discovers fonts from home.packages (Linux); HM links them into
+  # ~/Library/Fonts on macOS.
+  fonts.fontconfig.enable = true;
+
   # Cross-platform tools that need no configuration.
   home.packages = with pkgs; [
     alacritty
@@ -26,6 +30,9 @@ in
     fzf
     fzf-git-sh
     gum
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.caskaydia-mono
+    nerd-fonts.meslo-lg
     (python3.withPackages (ps: with ps; [
       jinja2
       jq
