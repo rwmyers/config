@@ -38,6 +38,18 @@ then
     exit 90
 fi
 
+# Enable flakes / nix-command for ALL nix invocations, including the nested ones
+# Home Manager makes during activation (the outer --extra-experimental-features
+# flag below doesn't propagate to those). User-level, no sudo, portable — matters
+# on machines whose system nix.conf doesn't already enable it.
+nix_conf="$HOME/.config/nix/nix.conf"
+if ! grep -qs 'experimental-features.*flakes' "$nix_conf"
+then
+    print_note "Enabling nix-command + flakes in $nix_conf"
+    mkdir -p "$(dirname "$nix_conf")"
+    echo "experimental-features = nix-command flakes" >> "$nix_conf"
+fi
+
 # Activate the Home Manager flake. --impure lets the flake read USER/HOME so the
 # same config works for any user; -b backup renames conflicting existing files.
 print_note "Activating Home Manager"
