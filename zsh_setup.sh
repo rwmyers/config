@@ -38,7 +38,6 @@ then
     print_note "snap update"
     sudo snap refresh
 
-    install_linux_package vim
     install_linux_package nvim neovim
     install_linux_package swayidle
     install_linux_package wofi
