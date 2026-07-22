@@ -15,6 +15,7 @@
   # Cross-platform tools that need no configuration.
   home.packages = with pkgs; [
     delta
+    eza
     gum
     stylua
     taplo
