@@ -120,21 +120,6 @@ then
     fi
 fi
 
-if ! type "tmux" > /dev/null;
-then
-    echo "Installing tmux..."
-    if [[ "$OSTYPE" == "darwin"* ]];
-    then
-        brew update
-        brew install tmux
-    fi
-
-    if [[ "$OSTYPE" == "linux-gnu"* ]];
-    then
-        sudo apt -y install tmux
-    fi
-fi
-
 if [ ! -f "$HOME/.tmux.conf" ]
 then
     print_note "Installing tmux config"

@@ -20,6 +20,7 @@
     gum
     stylua
     taplo
+    tmux
     zoxide
   ];
 }
