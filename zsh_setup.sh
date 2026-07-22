@@ -276,10 +276,6 @@ then
     then
         sudo apt -y install xclip
     fi
-    if ! type "blueman-manager" > /dev/null;
-    then
-        sudo apt -y install blueman
-    fi
     if ! type "rofi" > /dev/null;
     then
         sudo apt -y install rofi
