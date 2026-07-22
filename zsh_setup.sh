@@ -6,7 +6,7 @@ $SRC_ROOT/install/clean.sh
 $SRC_ROOT/install/nix.sh
 if [ $? -eq 90 ]
 then
-    print_note "Nix was just installed. Open a new shell and re-run setup to finish."
+    print_note "Halting after the Nix step — see the note above, resolve if needed, then re-run setup."
     exit 0
 fi
 $SRC_ROOT/install/development.sh
