@@ -17,6 +17,7 @@
     cloc
     delta
     eza
+    fastfetch
     fzf
     fzf-git-sh
     gum
