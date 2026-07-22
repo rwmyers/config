@@ -49,7 +49,6 @@ then
     install_linux_package curl
     install_linux_package thunar
     install_linux_package alacritty
-    install_linux_package kitty
     install_linux_package fdfind fd-find
     install_linux_package pavucontrol
     install_linux_package pulseaudio
@@ -283,13 +282,6 @@ if [ ! -d "$HOME/.config/starship/" ]
 then
     print_note "Adding starship configuration"
     ln -s $SRC_ROOT/.config/starship/ ~/.config/starship
-fi
-
-# kitty configuration
-if [ ! -d "$HOME/.config/kitty/" ]
-then
-    print_note "Adding kitty configuration"
-    ln -s $SRC_ROOT/.config/kitty/ ~/.config/kitty
 fi
 
 if [ ! -d "$HOME/.config/dunst/" ]
