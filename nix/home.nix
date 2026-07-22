@@ -20,6 +20,7 @@
     fzf
     fzf-git-sh
     gum
+    ripgrep
     stylua
     taplo
     tmux
