@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 NOTE='\033[1;32m'
+ERROR='\033[1;31m'
 NC='\033[0m'
 SRC_ROOT="$HOME/src/config"
 
@@ -13,6 +14,17 @@ print_note()
         gum log --level info -- "$1"
     else
         printf "${NOTE}$1${NC}\n"
+    fi
+}
+
+print_error()
+{
+    # Errors: gum's error level when available, red text otherwise. To stderr.
+    if type gum > /dev/null 2>&1
+    then
+        gum log --level error -- "$1"
+    else
+        printf "${ERROR}$1${NC}\n" >&2
     fi
 }
 

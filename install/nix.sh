@@ -34,7 +34,7 @@ fi
 
 if ! type nix > /dev/null 2>&1
 then
-    print_note "Nix is installed but not usable in this shell. Open a new shell and re-run setup."
+    print_error "Nix is installed but not usable in this shell. Open a new shell and re-run setup."
     exit 90
 fi
 
@@ -65,7 +65,7 @@ then
         fi
         print_note "nix-users not active in this session. Log out/in (or run 'newgrp nix-users'), then re-run setup."
     else
-        print_note "Nix daemon unreachable (see error above). Resolve and re-run setup."
+        print_error "Nix daemon unreachable (see error above). Resolve and re-run setup."
     fi
     exit 90
 fi
@@ -76,7 +76,7 @@ print_note "Activating Home Manager"
 if ! nix --extra-experimental-features 'nix-command flakes' run home-manager/master -- \
     switch -b backup --impure --flake "$SRC_ROOT/nix#default"
 then
-    print_note "Home Manager activation failed (see the error above). Fix it and re-run setup."
+    print_error "Home Manager activation failed (see the error above). Fix it and re-run setup."
     exit 90
 fi
 
