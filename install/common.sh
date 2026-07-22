@@ -6,7 +6,14 @@ SRC_ROOT="$HOME/src/config"
 
 print_note()
 {
-    printf "${NOTE}$1${NC}\n"
+    # Prefer gum's leveled, styled logging; fall back to plain colored output
+    # before gum is available (e.g. a fresh machine, pre-Nix).
+    if type gum > /dev/null 2>&1
+    then
+        gum log --level info -- "$1"
+    else
+        printf "${NOTE}$1${NC}\n"
+    fi
 }
 
 install_linux_package()
