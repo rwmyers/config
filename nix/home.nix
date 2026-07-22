@@ -18,6 +18,7 @@
     delta
     eza
     fzf
+    fzf-git-sh
     gum
     stylua
     taplo

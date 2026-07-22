@@ -19,6 +19,9 @@ if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
     . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 fi
 
+# Nix profile root — reused when sourcing share/ files from Nix packages.
+NIX_PROFILE="$HOME/.nix-profile"
+
 export PATH=$PATH:/Users/rmmyers/gitscripts/
 
 # Scripts
@@ -124,7 +127,7 @@ _fzf_compgen_dir() {
 }
 
 # -- fzf-git (https://github.com/junegunn/fzf-git.sh) --
-source ~/src/fzf-git.sh/fzf-git.sh
+[ -f "$NIX_PROFILE/share/fzf-git-sh/fzf-git.sh" ] && source "$NIX_PROFILE/share/fzf-git-sh/fzf-git.sh"
 
 # ---- Zoxide (better cd) (https://github.com/ajeetdsouza/zoxide)
 eval "$(zoxide init zsh --cmd cd)"

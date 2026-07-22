@@ -178,18 +178,6 @@ then
     brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
 fi
 
-if [ ! -d "$HOME/src/fzf-git.sh" ]
-then
-    print_note "Installing fzf-git"
-    pushd ~/src/
-    git clone https://github.com/junegunn/fzf-git.sh.git
-    popd
-else
-    pushd ~/src/fzf-git.sh
-    git pull
-    popd
-fi
-
 if [ ! -d "$HOME/src/fzf-tab" ]
 then
     print_note "Installing fzf-tab"
