@@ -193,23 +193,6 @@ then
     brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
 fi
 
-if ! type "cloc" > /dev/null;
-then
-    echo "cloc not installed."
-    if [[ "$OSTYPE" == "darwin"* ]];
-    then
-        echo "Installing cloc on OSX"
-        brew install cloc
-    elif [[ -n "$(command -v yum)" ]]
-    then
-        echo "Installing cloc using yum"
-        sudo yum install cloc
-    else
-        echo "Installing cloc on Linux"
-        sudo apt -y install cloc
-    fi
-fi
-
 if ! type "fzf" > /dev/null;
 then
     print_note "Installing fzf"

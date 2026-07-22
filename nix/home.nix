@@ -14,6 +14,7 @@
 
   # Cross-platform tools that need no configuration.
   home.packages = with pkgs; [
+    cloc
     delta
     eza
     gum
