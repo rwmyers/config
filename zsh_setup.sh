@@ -2,13 +2,13 @@
 source install/common.sh
 
 $SRC_ROOT/install/pkg_mgmt.sh
+$SRC_ROOT/install/clean.sh
 $SRC_ROOT/install/nix.sh
 if [ $? -eq 90 ]
 then
     print_note "Nix was just installed. Open a new shell and re-run setup to finish."
     exit 0
 fi
-$SRC_ROOT/install/clean.sh
 $SRC_ROOT/install/development.sh
 $SRC_ROOT/install/env.sh
 

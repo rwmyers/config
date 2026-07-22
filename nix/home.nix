@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./programs/bat.nix ];
+
   # Bump only intentionally; see Home Manager release notes before changing.
   home.stateVersion = "25.05";
 
@@ -10,7 +12,6 @@
   # Don't print the "unread news items" notice on every switch.
   news.display = "silent";
 
-  home.packages = with pkgs; [
-    bat
-  ];
+  # Cross-platform tools that need no configuration.
+  home.packages = with pkgs; [ ];
 }
