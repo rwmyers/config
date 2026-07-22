@@ -239,10 +239,6 @@ then
     then
         sudo apt -y install playerctl
     fi
-    if ! type "polybar" > /dev/null;
-    then;
-        sudo apt -y install polybar
-    fi
     if ! type "xclip" > /dev/null;
     then
         sudo apt -y install xclip
@@ -259,11 +255,6 @@ then
     then
         sudo apt -y install blueman
     fi
-fi
-
-if [ ! -e "$HOME/.config/polybar" ]
-then
-    ln -s $SRC_ROOT/.config/polybar/ ~/.config/polybar
 fi
 
 if [ ! -e "$HOME/.config/kmonad" ]
