@@ -14,6 +14,6 @@ fi
 # The apt kitty package.
 if dpkg -s kitty > /dev/null 2>&1
 then
-    print_note " -- Removing kitty package"
-    sudo apt -y remove kitty
+    print_note " -- Purging kitty package"
+    sudo apt -y purge kitty
 fi

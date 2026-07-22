@@ -14,6 +14,6 @@ fi
 # The apt polybar package.
 if dpkg -s polybar > /dev/null 2>&1
 then
-    print_note " -- Removing polybar package"
-    sudo apt -y remove polybar
+    print_note " -- Purging polybar package"
+    sudo apt -y purge polybar
 fi

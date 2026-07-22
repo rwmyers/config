@@ -14,6 +14,6 @@ fi
 # The apt rofi package.
 if dpkg -s rofi > /dev/null 2>&1
 then
-    print_note " -- Removing rofi package"
-    sudo apt -y remove rofi
+    print_note " -- Purging rofi package"
+    sudo apt -y purge rofi
 fi
