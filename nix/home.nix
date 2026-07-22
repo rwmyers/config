@@ -43,6 +43,7 @@ in
     taplo
     tmux
     uv
+    wezterm
     zoxide
     zsh-fzf-tab
   ];
