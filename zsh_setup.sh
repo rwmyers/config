@@ -165,41 +165,6 @@ then
     mkdir -p ~/bin.local
 fi
 
-if [ ! -f "$HOME/.config/sway/config" ]
-then
-    mkdir -p ~/.config/sway
-    ln -s $SRC_ROOT/.config/sway/config ~/.config/sway/config
-fi
-
-if [ ! -f "$HOME/.config/sway/config.local" ]
-then
-    cp $SRC_ROOT/.config/sway/config.local ~/.config/sway/config.local
-fi
-
-if [ ! -d "$HOME/.config/sway/scripts" ]
-then
-    print_note "Creating sway scripts link..."
-    ln -s $SRC_ROOT/.config/sway/scripts $HOME/.config/sway/scripts
-fi
-
-if [ ! -d "$HOME/.config/sway/modes" ]
-then
-    print_note "Creating sway modes link..."
-    ln -s $SRC_ROOT/.config/sway/modes $HOME/.config/sway/modes
-fi
-
-if [ ! -f "$HOME/.config/sway/display_mode" ]
-then
-    print_note "Adding display_mode sway link"
-    ln -s $SRC_ROOT/.config/sway/display_mode ~/.config/sway/display_mode
-fi
-
-if [ ! -f "$HOME/.config/sway/default.mode" ]
-then
-    print_note "Copying a default.mode over for use."
-    cp $SRC_ROOT/.config/sway/default.mode ~/.config/sway/default.mode
-fi
-
 if [ ! -f "$HOME/.config/waybar/config" ]
 then
     echo "Creating waybar config links..."
