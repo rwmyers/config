@@ -121,11 +121,6 @@ then
     ln -s ~/src/config/.p10k.zsh ~/.p10k.zsh
 fi
 
-if [[ "$OSTYPE" == "darwin"* ]];
-then
-    brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
-fi
-
 if [ ! -d "$HOME/bin" ]
 then
     ln -s ~/src/config/bin ~/bin

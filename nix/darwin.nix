@@ -13,6 +13,21 @@ in
   targets.darwin.copyApps.enable = true;
   targets.darwin.linkApps.enable = false;
 
+  # GNU userland on macOS (replaces the brew coreutils/findutils/... line and the
+  # gnubin PATH hack — Nix's are unprefixed and already on ~/.nix-profile/bin,
+  # shadowing the BSD tools). Linux already ships GNU, so this is darwin-only.
+  home.packages = with pkgs; [
+    coreutils
+    findutils
+    gawk
+    gnugrep
+    gnused
+    gnutar
+    gnutls
+    indent
+    util-linux
+  ];
+
   # For each app: dock it once (per-app marker stops re-adding if you later remove
   # it; the --find check avoids a duplicate if it's already there). Restart the
   # Dock once at the end, only if something actually changed.

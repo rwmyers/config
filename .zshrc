@@ -77,10 +77,6 @@ export PATH="$HOME/.cargo/bin:$HOME/.cargo/env:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]];
 then
-    # GNU tools
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
     # Add Visual Studio Code (code)
     export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 fi
