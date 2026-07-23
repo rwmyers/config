@@ -81,16 +81,30 @@ then
     fi
 fi
 
-# Generate the config from the template + chosen device (regenerated each run so
-# template edits propagate).
+# Generate the config from the template + chosen device, but only rewrite it (and
+# restart kmonad) when the result actually changed — so template edits propagate
+# while unchanged re-runs stay quiet and don't bounce the service.
+changed=0
 if [ -f "$DEVICE_FILE" ]
 then
     device=$(cat "$DEVICE_FILE")
-    print_note " -- Generating kmonad config for ${device:t}"
-    sed "s|@KBD_DEVICE@|$device|" "$SRC_ROOT/.config/kmonad/mezner.kbd.tmpl" > ~/.config/kmonad/mezner.kbd
+    config="$HOME/.config/kmonad/mezner.kbd"
+    new=$(mktemp)
+    sed "s|@KBD_DEVICE@|$device|" "$SRC_ROOT/.config/kmonad/mezner.kbd.tmpl" > "$new"
+    if cmp -s "$new" "$config"
+    then
+        rm -f "$new"
+    else
+        print_note " -- Generating kmonad config for ${device:t}"
+        mv "$new" "$config"
+        changed=1
+    fi
 fi
 
-# Enable (for boot) and (re)start to apply the current config.
+# Enable for boot; (re)start only when the config changed or it isn't running.
 systemctl --user daemon-reload
 systemctl --user enable kmonad.service > /dev/null 2>&1
-systemctl --user restart kmonad.service
+if [ "$changed" -eq 1 ] || ! systemctl --user is-active --quiet kmonad.service
+then
+    systemctl --user restart kmonad.service
+fi
