@@ -1,7 +1,11 @@
 #!/bin/zsh
 
-# Antigravity, an editor by Google (https://antigravity.google/download/linux)
+# Antigravity, an editor by Google (https://antigravity.google/download/linux).
+# Optional + Linux-only (installed from Google's apt repo). Enable via `dot config`.
 source $HOME/src/config/install/common.sh
+
+[[ "$OSTYPE" == "linux-gnu"* ]] || exit 0
+feature_enabled antigravity || exit 0
 
 if [ ! -e "/usr/bin/antigravity" ]
 then
