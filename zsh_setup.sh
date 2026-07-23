@@ -3,6 +3,7 @@ source install/common.sh
 
 $SRC_ROOT/install/pkg_mgmt.sh
 $SRC_ROOT/install/clean.sh
+$SRC_ROOT/install/features.sh
 $SRC_ROOT/install/nix.sh
 if [ $? -eq 90 ]
 then

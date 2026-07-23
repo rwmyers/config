@@ -1,4 +1,4 @@
-{ config, pkgs, nixgl, ... }:
+{ config, lib, pkgs, nixgl, ... }:
 
 let
   srcDir = "${config.home.homeDirectory}/src/config";
@@ -19,6 +19,18 @@ let
       }
     else
       pkg;
+
+  # Optional installs, toggled per-machine in ~/.config/dotfiles.conf (written by
+  # install/features.sh). Missing file or unset key means disabled.
+  features =
+    let conf = "${config.home.homeDirectory}/.config/dotfiles.conf"; in
+    if builtins.pathExists conf then
+      builtins.listToAttrs (
+        map (l: let p = lib.splitString "=" l; in lib.nameValuePair (lib.head p) (lib.last p == "true"))
+          (lib.filter (l: l != "" && !(lib.hasPrefix "#" l)) (lib.splitString "\n" (builtins.readFile conf)))
+      )
+    else { };
+  enabled = name: features.${name} or false;
 in
 {
   imports = [ ./programs/bat.nix ];
@@ -42,7 +54,6 @@ in
     btop
     cloc
     delta
-    (wrapGL discord "Discord")
     eza
     fastfetch
     fd
@@ -58,7 +69,6 @@ in
       jq
     ]))
     ripgrep
-    (wrapGL spotify "spotify")
     starship
     stylua
     taplo
@@ -69,7 +79,9 @@ in
     zsh-autosuggestions
     zsh-fzf-tab
     zsh-syntax-highlighting
-  ];
+  ]
+  ++ lib.optional (enabled "spotify") (wrapGL spotify "spotify")
+  ++ lib.optional (enabled "discord") (wrapGL discord "Discord");
 
   home.file.".config/starship".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";
