@@ -147,6 +147,8 @@ export PATH="$PATH:$HOME/src/clippy"
 
 # ---- zsh autosuggestions (https://github.com/zsh-users/zsh-autosuggestions) ----
 [ -f "$NIX_PROFILE/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$NIX_PROFILE/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# Accept the current suggestion with Ctrl+Space.
+bindkey '^ ' autosuggest-accept
 
 # Local
 if [ -f "$HOME/.zshrc.local" ]
