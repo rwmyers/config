@@ -30,11 +30,10 @@ then
     if [ -f "/etc/arch-release" ]
     then
             print_note "pamac update"
-            sudo pamac update && sudo apt upgrade
-            sudo pamac install ${arch_pkg}
+            sudo pamac update
     else
-            print_note "apt update"
-            sudo apt -y install ${pkg}
+            print_note "apt update + upgrade"
+            sudo apt update && sudo apt -y upgrade
     fi
 
     install_linux_package nvim neovim
