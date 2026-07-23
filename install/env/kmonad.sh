@@ -2,8 +2,9 @@
 
 # kmonad system setup + service. Runs only on Linux when the "kmonad" optional
 # feature is enabled. The binary comes from Nix (home.packages, gated on the same
-# feature); this handles the uinput/udev/group access Nix can't, links the
-# config, and runs kmonad as a user service.
+# feature); this handles the uinput/udev/group access Nix can't, generates the
+# machine-local config (detecting this machine's keyboard), and runs kmonad as a
+# user service.
 source $HOME/src/config/install/common.sh
 
 [[ "$OSTYPE" == "linux-gnu"* ]] || exit 0
@@ -27,17 +28,40 @@ then
     print_note " -- Added input/uinput groups; log out and back in for it to take effect."
 fi
 
-# Config link.
-if [ ! -e "$HOME/.config/kmonad" ]
+# Old setups symlinked ~/.config/kmonad to the repo; we now generate the config
+# from a template with this machine's keyboard device, so replace the symlink.
+[ -L "$HOME/.config/kmonad" ] && rm "$HOME/.config/kmonad"
+mkdir -p ~/.config/kmonad
+
+# Pick the keyboard device once (stored in .device). To re-pick (new keyboard),
+# delete ~/.config/kmonad/.device and re-run.
+DEVICE_FILE="$HOME/.config/kmonad/.device"
+if [ ! -f "$DEVICE_FILE" ]
 then
-    print_note " -- Linking kmonad config"
-    ln -s $SRC_ROOT/.config/kmonad/ ~/.config/kmonad
+    kbds=(/dev/input/by-id/*-event-kbd(N))
+    if [ ${#kbds} -eq 0 ]
+    then
+        print_error " -- No keyboard devices under /dev/input/by-id/*-event-kbd"
+    elif [ ${#kbds} -eq 1 ]
+    then
+        echo "$kbds[1]" > "$DEVICE_FILE"
+    else
+        print_note " -- Multiple keyboards found; pick the one for kmonad"
+        choice=$(printf '%s\n' ${kbds:t} | gum choose --header="kmonad keyboard device")
+        [ -n "$choice" ] && echo "/dev/input/by-id/$choice" > "$DEVICE_FILE"
+    fi
 fi
 
-# Enable + start the user service (unit deployed via the systemd config link).
-if ! systemctl --user is-enabled kmonad.service > /dev/null 2>&1
+# Generate the config from the template + chosen device (regenerated each run so
+# template edits propagate).
+if [ -f "$DEVICE_FILE" ]
 then
-    print_note " -- Enabling kmonad user service"
-    systemctl --user daemon-reload
-    systemctl --user enable --now kmonad.service
+    device=$(cat "$DEVICE_FILE")
+    print_note " -- Generating kmonad config for ${device:t}"
+    sed "s|@KBD_DEVICE@|$device|" "$SRC_ROOT/.config/kmonad/mezner.kbd.tmpl" > ~/.config/kmonad/mezner.kbd
 fi
+
+# Enable (for boot) and (re)start to apply the current config.
+systemctl --user daemon-reload
+systemctl --user enable kmonad.service > /dev/null 2>&1
+systemctl --user restart kmonad.service
