@@ -13,17 +13,6 @@ fi
 $SRC_ROOT/install/development.sh
 $SRC_ROOT/install/env.sh
 
-if [ ! -d "$HOME/.oh-my-zsh" ]
-then
-    pushd ~/ > /dev/null
-    git clone git@github.com:ohmyzsh/ohmyzsh.git .oh-my-zsh
-    popd
-else
-    pushd ~/.oh-my-zsh
-    git pull
-    popd
-fi
-
 if [[ "$OSTYPE" == "linux-gnu"* ]];
 then
 
