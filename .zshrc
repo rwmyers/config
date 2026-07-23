@@ -94,11 +94,6 @@ fpath=($HOME/.completions $CONFIG_GIT/completion $HOME/.local/completions $fpath
 
 autoload -U compinit; compinit
 
-# NVIM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # SDK MAN - claims it has to be at the end, unclear if that's actually true
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

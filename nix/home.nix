@@ -64,6 +64,7 @@ in
     nerd-fonts.caskaydia-mono
     nerd-fonts.hack
     nerd-fonts.meslo-lg
+    nodejs
     (python3.withPackages (ps: with ps; [
       jinja2
       jq
