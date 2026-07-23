@@ -20,17 +20,9 @@ let
     else
       pkg;
 
-  # Optional installs, toggled per-machine in ~/.config/dotfiles.conf (written by
-  # install/features.sh). Missing file or unset key means disabled.
-  features =
-    let conf = "${config.home.homeDirectory}/.config/dotfiles.conf"; in
-    if builtins.pathExists conf then
-      builtins.listToAttrs (
-        map (l: let p = lib.splitString "=" l; in lib.nameValuePair (lib.head p) (lib.last p == "true"))
-          (lib.filter (l: l != "" && !(lib.hasPrefix "#" l)) (lib.splitString "\n" (builtins.readFile conf)))
-      )
-    else { };
-  enabled = name: features.${name} or false;
+  # Optional installs, toggled per-machine in ~/.config/dotfiles.conf. Linux-only
+  # optionals live in linux.nix; cross-platform ones stay here.
+  enabled = import ./features.nix { inherit config lib; };
 in
 {
   imports = [ ./programs/bat.nix ];
@@ -81,12 +73,9 @@ in
     zsh-fzf-tab
     zsh-syntax-highlighting
   ]
+  # Cross-platform optionals; Linux-only ones (steam, kmonad, bluetui) are in linux.nix.
   ++ lib.optional (enabled "spotify") (wrapGL spotify "spotify")
-  ++ lib.optional (enabled "discord") (wrapGL discord "Discord")
-  # steam is an FHS wrapper (Linux-only); no nixGL wrap.
-  ++ lib.optional (enabled "steam" && pkgs.stdenv.hostPlatform.isLinux) steam
-  # kmonad: Linux-only for now (uinput); see install/env/kmonad.sh for the setup.
-  ++ lib.optional (enabled "kmonad" && pkgs.stdenv.hostPlatform.isLinux) kmonad;
+  ++ lib.optional (enabled "discord") (wrapGL discord "Discord");
 
   home.file.".config/starship".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";

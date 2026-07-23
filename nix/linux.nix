@@ -1,10 +1,19 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  # Same per-machine feature toggles home.nix uses, for Linux-only optionals.
+  enabled = import ./features.nix { inherit config lib; };
+in
 {
-  # Linux-only packages (merged with home.nix's list by Home Manager).
+  # Linux-only packages (merged with home.nix's list by Home Manager). Always-on
+  # tools in the list; feature-toggled optionals appended below.
   home.packages = with pkgs; [
     bluetui # bluetooth TUI; drives BlueZ
-  ];
+  ]
+  # steam is an FHS wrapper; no nixGL wrap.
+  ++ lib.optional (enabled "steam") steam
+  # kmonad needs uinput; see install/env/kmonad.sh for the system setup.
+  ++ lib.optional (enabled "kmonad") kmonad;
 
   # systemd user services (e.g. elephant, walker's app indexer) don't inherit the
   # compositor's environment, so give them the Nix profile paths here.
