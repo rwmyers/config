@@ -35,8 +35,6 @@ then
             print_note "apt update"
             sudo apt -y install ${pkg}
     fi
-    print_note "snap update"
-    sudo snap refresh
 
     install_linux_package nvim neovim
     install_linux_package swayidle
@@ -66,8 +64,6 @@ then
         sudo apt install libssl-dev
     fi
 
-
-    install_snap discord
 
     if ! type "wdisplays" > /dev/null;
     then

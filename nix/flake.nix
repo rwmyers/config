@@ -39,7 +39,10 @@
     {
       # Activate with: home-manager switch --impure --flake <this-dir>#default
       homeConfigurations."default" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
         extraSpecialArgs = { inherit nixgl; };
         modules = [
           ./home.nix

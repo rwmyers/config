@@ -50,15 +50,3 @@ install_linux_package()
         fi
     fi
 }
-
-install_snap()
-{
-    if [[ "$OSTYPE" == "linux-gnu"* ]];
-    then
-        if ! type "$1" > /dev/null;
-        then
-            print_note "Installing $1"
-            sudo snap install $1
-        fi
-    fi
-}

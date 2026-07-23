@@ -42,6 +42,7 @@ in
     btop
     cloc
     delta
+    (wrapGL discord "Discord")
     eza
     fastfetch
     fd
@@ -57,6 +58,7 @@ in
       jq
     ]))
     ripgrep
+    (wrapGL spotify "spotify")
     starship
     stylua
     taplo
