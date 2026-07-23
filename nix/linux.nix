@@ -1,6 +1,11 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+  # Linux-only packages (merged with home.nix's list by Home Manager).
+  home.packages = with pkgs; [
+    bluetui # bluetooth TUI; drives BlueZ
+  ];
+
   # systemd user services (e.g. elephant, walker's app indexer) don't inherit the
   # compositor's environment, so give them the Nix profile paths here.
   systemd.user.sessionVariables = {
