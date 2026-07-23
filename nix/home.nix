@@ -50,6 +50,7 @@ in
     gum
     nerd-fonts.caskaydia-cove
     nerd-fonts.caskaydia-mono
+    nerd-fonts.hack
     nerd-fonts.meslo-lg
     (python3.withPackages (ps: with ps; [
       jinja2
