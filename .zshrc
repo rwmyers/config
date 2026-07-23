@@ -145,9 +145,16 @@ export PATH="$PATH:$HOME/src/clippy"
 # ---- fzf zsh tab competion (https://github.com/Aloxaf/fzf-tab)
 [ -f "$NIX_PROFILE/share/fzf-tab/fzf-tab.plugin.zsh" ] && source "$NIX_PROFILE/share/fzf-tab/fzf-tab.plugin.zsh"
 
+# ---- zsh autosuggestions (https://github.com/zsh-users/zsh-autosuggestions) ----
+[ -f "$NIX_PROFILE/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$NIX_PROFILE/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
 # Local
 if [ -f "$HOME/.zshrc.local" ]
 then
     source $HOME/.zshrc.local
 fi
+
+# ---- zsh syntax highlighting (https://github.com/zsh-users/zsh-syntax-highlighting) ----
+# Must be sourced last, after everything else that touches ZLE.
+[ -f "$NIX_PROFILE/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$NIX_PROFILE/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 

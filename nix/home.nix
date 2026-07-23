@@ -64,7 +64,9 @@ in
     uv
     (wrapGL wezterm "wezterm")
     zoxide
+    zsh-autosuggestions
     zsh-fzf-tab
+    zsh-syntax-highlighting
   ];
 
   home.file.".config/starship".source =
