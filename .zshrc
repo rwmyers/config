@@ -36,7 +36,9 @@ export PATH=$PATH:~/go/bin
 # For random things like what's in Haskell stack (for kmonad)
 export PATH=$PATH:~/.local/bin
 
-alias zs='source ~/.zshrc'
+# Reload config with a fresh shell (re-sourcing double-wraps ZLE plugins like
+# zsh-syntax-highlighting, which floods warnings). exec keeps cwd + env.
+alias zs='exec zsh'
 
 setopt sh_word_split
 
