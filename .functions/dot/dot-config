@@ -1,0 +1,20 @@
+function dot-config() {
+    local conf="$HOME/.config/dotfiles.conf"
+
+    echo "Optional installs ($conf):"
+    if [ -f "$conf" ]; then
+        sed 's/^/  /' "$conf"
+    else
+        echo "  (not configured yet)"
+    fi
+    echo
+
+    # Re-run the toggle picker (always prompts).
+    "$HOME/src/config/install/features.sh" --force
+
+    if command -v gum > /dev/null 2>&1 && gum confirm "Apply now (home-manager switch)?"; then
+        "$HOME/src/config/install/nix.sh"
+    else
+        echo "Run 'dot update' to apply."
+    fi
+}

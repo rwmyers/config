@@ -10,6 +10,11 @@ CONF="$HOME/.config/dotfiles.conf"
 # Available optional features (each is also gated in nix/home.nix).
 FEATURES=(spotify discord)
 
+# --force always prompts (used by `dot config`); otherwise only prompt when the
+# conf is missing or a feature isn't recorded yet.
+force=0
+[ "$1" = "--force" ] && force=1
+
 # The prompt needs gum; skip silently if it isn't on PATH yet (fresh machine,
 # before Nix installs gum). A later run will prompt once gum exists.
 if ! type gum > /dev/null 2>&1
@@ -28,7 +33,7 @@ then
 fi
 
 # Prompt only if the file is missing or a known feature isn't recorded.
-need_prompt=0
+need_prompt=$force
 [ -f "$CONF" ] || need_prompt=1
 for f in $FEATURES
 do

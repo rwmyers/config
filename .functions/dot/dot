@@ -12,7 +12,9 @@ function dot() {
         dot-root "$@"
     elif [[ "$command" == "update" ]]; then
         dot-update "$@"
+    elif [[ "$command" == "config" ]]; then
+        dot-config "$@"
     else
-        echo "Usage: dot update"
+        echo "Usage: dot [root|update|config]"
     fi
 }
