@@ -71,4 +71,7 @@ in
 
   home.file.".config/alacritty/alacritty.toml".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/alacritty/alacritty.toml";
+
+  home.file.".config/wezterm/wezterm.lua".source =
+    config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/wezterm/wezterm.lua";
 }
