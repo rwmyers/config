@@ -28,6 +28,15 @@ print_error()
     fi
 }
 
+feature_enabled()
+{
+    # True if the given optional feature is enabled in ~/.config/dotfiles.conf
+    # (the same file the nix config reads; written by install/features.sh).
+    local conf="$HOME/.config/dotfiles.conf"
+    [ -f "$conf" ] || return 1
+    grep -qx "$1=true" "$conf"
+}
+
 install_linux_package()
 {
     local check="$1"

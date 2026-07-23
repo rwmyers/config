@@ -76,32 +76,6 @@ then
         sudo apt -y install waybar
     fi
 
-    if ! type "kmonad" > /dev/null;
-    then
-        # install stack, which is a dependency to build kmonad
-        curl -sSL https://get.haskellstack.org/ | sh
-
-        # pull kmonad and build it
-        pushd $HOME/src/
-        git clone https://github.com/kmonad/kmonad.git
-        pushd kmonad
-        stack install
-        popd
-        popd
-
-        # add the uinput mod and give permissions to your user
-        sudo modprobe uinput
-        sudo groupadd uinput
-        sudo usermod -aG input,uinput $USER
-
-        if [ $? -eq 0 ]; then
-            print_note "Added input and uinput groups."
-            print_note "You must log out and log back in for changes to take effect."
-        fi
-
-        echo "Adding udev kmonad rules"
-        echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' | sudo tee -a /etc/udev/rules.d/40-kmonad.rules > /dev/null
-    fi
 fi
 
 if [ ! -f "$HOME/.tmux.conf" ]
@@ -194,11 +168,6 @@ then
     then
         sudo apt -y install blueman
     fi
-fi
-
-if [ ! -e "$HOME/.config/kmonad" ]
-then
-    ln -s $SRC_ROOT/.config/kmonad/ ~/.config/kmonad
 fi
 
 if [ ! -e "$HOME/.config/wofi" ]

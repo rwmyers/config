@@ -8,7 +8,7 @@ source $HOME/src/config/install/common.sh
 CONF="$HOME/.config/dotfiles.conf"
 
 # Available optional features (each is also gated in nix/home.nix).
-FEATURES=(spotify discord steam)
+FEATURES=(spotify discord steam kmonad)
 
 # --force always prompts (used by `dot config`); otherwise only prompt when the
 # conf is missing or a feature isn't recorded yet.

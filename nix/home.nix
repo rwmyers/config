@@ -83,7 +83,9 @@ in
   ++ lib.optional (enabled "spotify") (wrapGL spotify "spotify")
   ++ lib.optional (enabled "discord") (wrapGL discord "Discord")
   # steam is an FHS wrapper (Linux-only); no nixGL wrap.
-  ++ lib.optional (enabled "steam" && pkgs.stdenv.hostPlatform.isLinux) steam;
+  ++ lib.optional (enabled "steam" && pkgs.stdenv.hostPlatform.isLinux) steam
+  # kmonad: Linux-only for now (uinput); see install/env/kmonad.sh for the setup.
+  ++ lib.optional (enabled "kmonad" && pkgs.stdenv.hostPlatform.isLinux) kmonad;
 
   home.file.".config/starship".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";
