@@ -81,7 +81,9 @@ in
     zsh-syntax-highlighting
   ]
   ++ lib.optional (enabled "spotify") (wrapGL spotify "spotify")
-  ++ lib.optional (enabled "discord") (wrapGL discord "Discord");
+  ++ lib.optional (enabled "discord") (wrapGL discord "Discord")
+  # steam is an FHS wrapper (Linux-only); no nixGL wrap.
+  ++ lib.optional (enabled "steam" && pkgs.stdenv.hostPlatform.isLinux) steam;
 
   home.file.".config/starship".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";
