@@ -3,6 +3,9 @@
 source $HOME/src/config/install/common.sh
 SRC=$HOME/src
 
+# Wayland launcher (walker) + its backend (elephant); Linux-only.
+[[ "$OSTYPE" == "linux-gnu"* ]] || exit 0
+
 # Elephant - Data service provider and back end (https://github.com/abenz1267/elephant)
 if [ ! -e "/usr/bin/elephant" ]
 then

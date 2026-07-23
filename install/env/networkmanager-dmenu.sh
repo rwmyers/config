@@ -2,6 +2,9 @@
 
 source "$(dirname "$0")/../common.sh"
 
+# NetworkManager front-end; Linux-only.
+[[ "$OSTYPE" == "linux-gnu"* ]] || exit 0
+
 INSTALL_DIR="$HOME/.local/share/networkmanager-dmenu"
 
 if [ ! -d "$INSTALL_DIR" ]; then

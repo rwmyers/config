@@ -1,7 +1,9 @@
 #!/bin/zsh
 
-# A tool for shell script input and output (https://github.com/charmbracelet/gum)
+# Hyprland Wayland compositor (https://hypr.land); Linux-only.
 source $HOME/src/config/install/common.sh
+
+[[ "$OSTYPE" == "linux-gnu"* ]] || exit 0
 
 install_linux_package hyprland
 
