@@ -72,7 +72,7 @@
         "tooltip-format-disconnected": "Disconnected",
         "interval": 3,
         "nospacing": 1,
-        "on-click": "wifi-menu"
+        "on-click": "alacritty --class=Wifitui -e wifitui"
     },
     "battery": {
         "format": "{capacity}% {icon}",
@@ -101,7 +101,7 @@
         "format-disabled": "󰂲",
         "format-connected": "",
         "tooltip-format": "Devices connected: {num_connections}",
-        "on-click": "alacritty --class=Bluetui -e $HOME/.cargo/bin/bluetui"
+        "on-click": "alacritty --class=Bluetui -e bluetui"
     },
     "pulseaudio": {
         "format": "{icon}",

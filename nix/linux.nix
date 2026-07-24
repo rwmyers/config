@@ -9,6 +9,7 @@ in
   # tools in the list; feature-toggled optionals appended below.
   home.packages = with pkgs; [
     bluetui # bluetooth TUI; drives BlueZ
+    wifitui # NetworkManager Wi-Fi TUI (nicer nmtui); Waybar network right-click
   ]
   # steam is an FHS wrapper; no nixGL wrap.
   ++ lib.optional (enabled "steam") steam
