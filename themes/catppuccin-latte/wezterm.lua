@@ -1,0 +1,12 @@
+-- Generated from alacritty.toml. Mirrors the theme's alacritty palette.
+return {
+	foreground = "#4c4f69",
+	background = "#eff1f5",
+	cursor_bg = "#dc8a78",
+	cursor_border = "#dc8a78",
+	cursor_fg = "#eff1f5",
+	selection_bg = "#dc8a78",
+	selection_fg = "#eff1f5",
+	ansi = { "#bcc0cc", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#5c5f77" },
+	brights = { "#acb0be", "#d20f39", "#40a02b", "#df8e1d", "#1e66f5", "#ea76cb", "#179299", "#6c6f85" },
+}

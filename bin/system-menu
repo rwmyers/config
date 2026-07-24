@@ -79,6 +79,9 @@ show_theme_menu() {
         hyprctl reload
         swaybg -i "$THEMES_DIR/current/background" &
         walker-restart
+        # wezterm reads ~/themes/current/wezterm.lua; touch its config so the
+        # symlink flip triggers a live reload.
+        command -v wezterm >/dev/null && touch "$HOME/.config/wezterm/wezterm.lua"
     else
         back_to show_main_menu
     fi
