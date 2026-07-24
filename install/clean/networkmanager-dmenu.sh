@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Remove networkmanager-dmenu, replaced by bin/wifi-menu (nmcli + walker). It
+# Remove networkmanager-dmenu, replaced by wifitui (Waybar network on-click). It
 # never worked here anyway — it needs PyGObject (`gi`), which the Nix python3
 # lacks. Unconditional — no Nix gate. Delete this file once every machine is cleaned.
 source $HOME/src/config/install/common.sh
