@@ -1,0 +1,52 @@
+# GRUB theme - ristretto
+#
+# Sized for a 2560x1600 panel, where the stock 16px unicode.pf2 is unreadable.
+# Geometry is in percentages so it survives a different GRUB_GFXMODE.
+#
+# gfxmenu's boot_menu has no text-align property - only item_font, item_color,
+# item_height, item_spacing and item_padding - so item text is always
+# left-aligned inside the box. The list is centered by centering the box and
+# sizing it to just fit the longest entry ("Windows Boot Manager (on
+# /dev/nvme0n1p1)", ~40 chars). Widen `width` if an entry starts clipping.
+
+desktop-color: "#2c2525"
+
+title-text: "Select an operating system"
+title-font: "DejaVu Sans Mono Regular 32"
+title-color: "#c3b7b8"
+
+# Font for the `c` command line and `e` entry editor.
+terminal-font: "DejaVu Sans Mono Regular 32"
+terminal-left: "5%"
+terminal-top: "5%"
+terminal-width: "90%"
+terminal-height: "90%"
+
++ boot_menu {
+    left = 33%
+    top = 30%
+    width = 34%
+    height = 36%
+
+    item_font = "DejaVu Sans Mono Regular 32"
+    selected_item_font = "DejaVu Sans Mono Regular 32"
+    item_color = "#e6d9db"
+    selected_item_color = "#f9cc6c"
+
+    item_height = 56
+    item_spacing = 14
+    item_padding = 12
+
+    scrollbar = false
+}
+
++ label {
+    id = "__timeout__"
+    left = 0
+    top = 72%
+    width = 100%
+    align = "center"
+    font = "DejaVu Sans Mono Regular 32"
+    color = "#c3b7b8"
+    text = "@TIMEOUT_NOTIFICATION_SHORT@"
+}

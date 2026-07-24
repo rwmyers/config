@@ -7,8 +7,9 @@ source $HOME/src/config/install/common.sh
 
 CONF="$HOME/.config/dotfiles.conf"
 
-# Available optional features (each is also gated in nix/home.nix).
-FEATURES=(spotify discord steam kmonad antigravity bazelisk)
+# Available optional features. Most are gated in nix/home.nix; `grub` is a
+# system-level tweak applied by install/etc/grub.sh instead.
+FEATURES=(spotify discord steam kmonad antigravity bazelisk grub)
 
 # --force always prompts (used by `dot config`); otherwise only prompt when the
 # conf is missing or a feature isn't recorded yet.

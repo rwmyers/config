@@ -1,0 +1,34 @@
+#! /bin/sh
+#
+# Emit the menu as: Ubuntu, Windows, Advanced options for Ubuntu.
+#
+# grub-mkconfig concatenates the output of /etc/grub.d/* in filename order, so
+# os-prober's Windows entry can only ever land *after* everything 10_linux
+# prints - i.e. third, below "Advanced options for Ubuntu". Renaming the
+# generators cannot fix that, because the two entries we need to separate come
+# from the same script.
+#
+# Rather than reimplementing either generator (and re-breaking it on every
+# kernel update), run both unmodified and splice os-prober's output into
+# 10_linux's at the "Advanced options" submenu. 10_linux always emits that
+# line unindented at column 0 and emits at most one of them, so `^submenu ` is
+# an unambiguous split point that doesn't depend on the locale.
+#
+# 10_linux and 30_os-prober are chmod -x'd by install/etc/grub.sh so
+# grub-mkconfig skips them directly. Both are dpkg conffiles, so a grub-common
+# upgrade can restore their exec bit and reintroduce duplicate entries -
+# re-run install/etc/grub.sh if that happens.
+
+set -e
+
+linux_out=$(sh /etc/grub.d/10_linux)
+osprober_out=$(sh /etc/grub.d/30_os-prober)
+
+# The top-level distro entry: everything before the submenu.
+printf '%s\n' "$linux_out" | sed '/^submenu /,$d'
+
+printf '%s\n' "$osprober_out"
+
+# The "Advanced options" submenu and its closing brace. With a single kernel
+# installed 10_linux emits no submenu at all, and this prints nothing.
+printf '%s\n' "$linux_out" | sed -n '/^submenu /,$p'
