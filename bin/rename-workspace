@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Prompt for a new name via walker and rename the current Hyprland workspace.
+name=$(walker --dmenu --inputonly --placeholder "Rename workspace to") || exit 0
+[ -z "$name" ] && exit 0
+
+id=$(hyprctl activeworkspace -j | jq -r '.id')
+hyprctl dispatch renameworkspace "$id" "$name"
