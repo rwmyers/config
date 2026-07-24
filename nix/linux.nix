@@ -9,6 +9,7 @@ in
   # tools in the list; feature-toggled optionals appended below.
   home.packages = with pkgs; [
     bluetui # bluetooth TUI; drives BlueZ
+    brightnessctl # backlight/LED control; needs the system udev rules (see below)
     wifitui # NetworkManager Wi-Fi TUI (nicer nmtui); Waybar network right-click
   ]
   # steam is an FHS wrapper; no nixGL wrap.
