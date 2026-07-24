@@ -49,4 +49,19 @@ in
       run /usr/bin/killall Dock || true
     fi
   '';
+
+  # Swap Control and Fn/Globe. hidutil remaps don't survive a reboot, so a
+  # LaunchAgent re-applies it at every login (RunAtLoad). Note: mapping *to* the
+  # Fn/Globe key is version-dependent and may not stick even when Fn->Control does.
+  launchd.agents.ctrl-fn-swap = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/usr/bin/hidutil" "property" "--set"
+        # Left Control (0x7000000E0) <-> Fn/Globe (0xFF00000003)
+        ''{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x7000000E0,"HIDKeyboardModifierMappingDst":0xFF00000003},{"HIDKeyboardModifierMappingSrc":0xFF00000003,"HIDKeyboardModifierMappingDst":0x7000000E0}]}''
+      ];
+      RunAtLoad = true;
+    };
+  };
 }
