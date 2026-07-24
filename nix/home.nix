@@ -51,7 +51,14 @@ in
     fd
     fzf
     fzf-git-sh
+    # Not wrapGL-wrapped (the exception to the GUI-app rule): Chrome's .desktop
+    # files hardcode an absolute store path, so a launcher click would bypass the
+    # symlinkJoin wrapper anyway, and Chrome falls back to software GL rather than
+    # crashing. Wrap later (rewriting the desktop Exec too) only if GPU accel is
+    # needed and chrome://gpu shows software-only.
+    google-chrome
     gum
+    herdr
     nerd-fonts.caskaydia-cove
     nerd-fonts.caskaydia-mono
     nerd-fonts.hack
