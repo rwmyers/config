@@ -1,0 +1,76 @@
+# ────────────────────────────────────────────────────────────
+# Google Pastel — Google's Material dark accents on matte grey
+# ────────────────────────────────────────────────────────────
+
+[window]
+padding.x = 12
+padding.y = 12
+
+[font]
+size = 12.0
+
+[colors.primary]
+background = "#202124"
+foreground = "#e3e3e3"
+dim_foreground = "#9aa0a6"
+bright_foreground = "#ffffff"
+
+[colors.cursor]
+text = "#202124"
+cursor = "#8ab4f8"
+
+[colors.vi_mode_cursor]
+text = "#202124"
+cursor = "#f28b82"
+
+[colors.selection]
+text = "#e3e3e3"
+background = "#394457"
+
+[colors.search.matches]
+foreground = "#202124"
+background = "#9aa0a6"
+
+[colors.search.focused_match]
+foreground = "#202124"
+background = "#81c995"
+
+[colors.footer_bar]
+foreground = "#e3e3e3"
+background = "#35363a"
+
+[colors.hints.start]
+foreground = "#202124"
+background = "#fdd663"
+
+[colors.hints.end]
+foreground = "#202124"
+background = "#9aa0a6"
+
+[colors.normal]
+black = "#3c4043"
+red = "#f28b82"
+green = "#81c995"
+yellow = "#fdd663"
+blue = "#8ab4f8"
+magenta = "#c58af9"
+cyan = "#78d9ec"
+white = "#dadce0"
+
+[colors.bright]
+black = "#5f6368"
+red = "#f6a9a2"
+green = "#a8dab5"
+yellow = "#fde293"
+blue = "#aecbfa"
+magenta = "#d7aefb"
+cyan = "#a1e4f2"
+white = "#ffffff"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#f5a97f"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#f28b82"
