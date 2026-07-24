@@ -11,7 +11,10 @@ output, so a freshly parsed session is never left blank. Lid state is
 re-derived from ground truth here rather than remembered across reboots, so a
 machine that goes down lid-closed and comes back lid-open recovers on its own.
 
-  --lid 0   Lid closed -> disable internal panel(s) via 'hyprctl keyword'
+  --lid 0   Lid closed -> disable internal panel(s) via 'hyprctl keyword'.
+                          Suspend if no external display remains, so a closed
+                          lid with nothing to drive sleeps instead of running
+                          headless (logind ignores the lid; see hyprland.sh).
   --lid 1   Lid open   -> reload config, restoring each panel's configured
                           position/resolution/scale from monitors.conf
   --auto    Detect lid state from /proc/acpi (open if unknown)
@@ -22,6 +25,24 @@ EOF
 # Internal panels. eDP enumeration is not stable across kernel/firmware
 # updates, so act on both names; hyprctl ignores outputs that don't exist.
 panels=(eDP-1 eDP-2)
+
+# True if an active output that isn't an internal panel is present, i.e. there
+# is still a screen to drive with the lid shut (clamshell/docked). Fail closed:
+# if the monitor list can't be read, assume no external display so we suspend
+# rather than silently run headless.
+external_display_present() {
+    local names name p
+    names=$(hyprctl monitors -j 2>/dev/null | jq -r '.[].name' 2>/dev/null) || return 1
+    [ -n "$names" ] || return 1
+    while IFS= read -r name; do
+        [ -n "$name" ] || continue
+        for p in "${panels[@]}"; do
+            [ "$name" = "$p" ] && continue 2
+        done
+        return 0
+    done <<< "$names"
+    return 1
+}
 
 lid=""
 while [ $# -gt 0 ]; do
@@ -44,7 +65,9 @@ done
 case "$lid" in
     0) for m in "${panels[@]}"; do
            hyprctl keyword monitor "$m, disable" >/dev/null 2>&1 || true
-       done ;;
+       done
+       # Nothing left to drive -> sleep instead of running lid-shut and headless.
+       external_display_present || systemctl suspend >/dev/null 2>&1 || true ;;
     # Re-source the config rather than hardcode a mode, so the panel's
     # configured position/resolution/scale (incl. local overrides) is restored.
     1) hyprctl reload >/dev/null 2>&1 || true ;;
