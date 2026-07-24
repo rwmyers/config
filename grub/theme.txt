@@ -40,6 +40,8 @@ terminal-height: "90%"
     scrollbar = false
 }
 
+# @TIMEOUT_NOTIFICATION_*@ only expands on progress_bar; a label prints it
+# verbatim but does format %d with the seconds remaining.
 + label {
     id = "__timeout__"
     left = 0
@@ -48,5 +50,5 @@ terminal-height: "90%"
     align = "center"
     font = "DejaVu Sans Mono Regular 32"
     color = "#c3b7b8"
-    text = "@TIMEOUT_NOTIFICATION_SHORT@"
+    text = "Booting in %ds"
 }
