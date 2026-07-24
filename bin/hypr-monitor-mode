@@ -5,15 +5,23 @@ usage() {
     cat <<EOF
 Usage: $(basename "$0") --lid <0|1> | --auto
 
-Point ~/.config/hypr/monitors.conf at the right config in
-~/.config/hypr/monitors/ and reload Hyprland.
+Match the internal laptop panel(s) to lid state, applied live. Nothing is
+persisted: the sourced monitor config (monitors.conf) always enables every
+output, so a freshly parsed session is never left blank. Lid state is
+re-derived from ground truth here rather than remembered across reboots, so a
+machine that goes down lid-closed and comes back lid-open recovers on its own.
 
-  --lid 0   Lid closed -> monitors/lidclosed.conf
-  --lid 1   Lid open   -> monitors/default.conf
+  --lid 0   Lid closed -> disable internal panel(s) via 'hyprctl keyword'
+  --lid 1   Lid open   -> reload config, restoring each panel's configured
+                          position/resolution/scale from monitors.conf
   --auto    Detect lid state from /proc/acpi (open if unknown)
 EOF
     exit "${1:-1}"
 }
+
+# Internal panels. eDP enumeration is not stable across kernel/firmware
+# updates, so act on both names; hyprctl ignores outputs that don't exist.
+panels=(eDP-1 eDP-2)
 
 lid=""
 while [ $# -gt 0 ]; do
@@ -31,22 +39,14 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+# Best-effort: a rule for an output that isn't present is a harmless no-op,
+# and outside a running Hyprland session there is nothing to talk to.
 case "$lid" in
-    0) target="lidclosed.conf" ;;
-    1) target="default.conf" ;;
+    0) for m in "${panels[@]}"; do
+           hyprctl keyword monitor "$m, disable" >/dev/null 2>&1 || true
+       done ;;
+    # Re-source the config rather than hardcode a mode, so the panel's
+    # configured position/resolution/scale (incl. local overrides) is restored.
+    1) hyprctl reload >/dev/null 2>&1 || true ;;
     *) echo "--lid must be 0 or 1" >&2; usage ;;
 esac
-
-monitors_dir="$HOME/.config/hypr/monitors"
-link="$HOME/.config/hypr/monitors.conf"
-target_path="$monitors_dir/$target"
-
-if [ ! -f "$target_path" ]; then
-    echo "missing config: $target_path" >&2
-    exit 2
-fi
-
-ln -sfn "$target_path" "$link"
-# Reload is best-effort: at session startup the config is already fresh, and
-# outside a Hyprland session there is nothing to reload.
-hyprctl reload >/dev/null 2>&1 || true
