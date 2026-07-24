@@ -7,6 +7,11 @@ set -uo pipefail
 MENU() { walker --dmenu "$@"; }
 notify() { command -v notify-send >/dev/null 2>&1 && notify-send -a "Wi-Fi" "$@"; }
 
+# Show cached scan results for an instant menu; only force a fresh (slow) scan
+# when re-invoked via the Rescan action. NetworkManager rescans in the background
+# on its own, so the cache is normally current.
+scan=no; [ "${1:-}" = "--rescan" ] && scan=yes
+
 iface=$(nmcli -t -f DEVICE,TYPE device | awk -F: '$2=="wifi"{print $1; exit}')
 if [ -z "$iface" ]; then
     notify "No Wi-Fi device found"
@@ -44,7 +49,7 @@ while IFS= read -r line; do
     mark="  "; [ "$inuse" = "*" ] && mark="● "
     seen[$ssid]=${#labels[@]}
     add "${mark}${bars}  ${ssid}${lock}" "$ssid" "$sec" "net"
-done < <(nmcli --terse --fields IN-USE,BARS,SECURITY,SSID device wifi list --rescan yes)
+done < <(nmcli --terse --fields IN-USE,BARS,SECURITY,SSID device wifi list --rescan "$scan")
 
 add "󰑓  Rescan networks" "" "" "rescan"
 add "󰖪  Disable Wi-Fi"   "" "" "disable"
@@ -56,7 +61,7 @@ idx=$(printf '%s\n' "${labels[@]}" | MENU --index) || exit 0
 
 kind=${kinds[$idx]}; ssid=${ssids[$idx]}; sec=${secs[$idx]}
 case "$kind" in
-    rescan)     exec "$0" ;;
+    rescan)     exec "$0" --rescan ;;
     disable)    nmcli radio wifi off && notify "Wi-Fi disabled"; exit 0 ;;
     disconnect) nmcli connection down id "$ssid" && notify "Disconnected from $ssid"; exit 0 ;;
 esac
