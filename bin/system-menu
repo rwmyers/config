@@ -26,7 +26,7 @@ show_system_menu() {
 
     case $selection in
         *Lock*)
-            swaylock -f -c 000000
+            "$HOME/bin/lock" -f
             ;;
         *Suspend*)
             systemctl suspend

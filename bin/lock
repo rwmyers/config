@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Lock the session with a blurred screenshot of the current desktop as the
+# background, instead of a flat color. Vanilla swaylock has no blur/screenshot
+# support (that lives in the swaylock-effects fork, which isn't packaged for
+# Ubuntu), so we grab the frame with grim, blur it with ImageMagick, and hand
+# the result to swaylock via -i. Passing any extra args through means callers
+# can still add flags (e.g. swayidle passes none, a menu could add -f).
+
+BLUR="${LOCK_BLUR:-0x8}"   # ImageMagick sigma; higher == more aggressive
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
+
+magick_bin=$(command -v magick || command -v convert)
+
+# One blurred image per active output so multi-monitor setups aren't stretched.
+images=()
+while read -r name; do
+    shot="$tmpdir/$name.png"
+    if grim -o "$name" "$shot" 2>/dev/null; then
+        "$magick_bin" "$shot" -blur "$BLUR" "$shot"
+        images+=(-i "$name:$shot")
+    fi
+done < <(hyprctl monitors -j | jq -r '.[].name')
+
+if [ ${#images[@]} -eq 0 ]; then
+    # Screenshot path failed for every output; fall back to the flat background.
+    exec swaylock -f -c 000000 "$@"
+fi
+
+exec swaylock "${images[@]}" -s fill "$@"
