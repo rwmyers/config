@@ -252,8 +252,6 @@
 (defalias
   num  (layer-toggle numbers) ;; Bind num to a button that switches to a layer
   L    (tap-hold-next 500 ; @num)
-  sl   (tap-hold-next 500 / rsft)
-  quo  (tap-hold-next 500 ' rsft)
   cap  (tap-hold-next 500 bspc lsft)
   kil  C-A-del                ;; Bind kil to a button that Ctrl-Alt-deletes
 )
@@ -312,8 +310,8 @@
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  del
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @cap a    s    d    f    g    h    j    k    l    @L    @quo ret
-  lsft z    x    c    v    b    n    m    ,    .    @sl  rsft
+  @cap a    s    d    f    g    h    j    k    l    @L   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           spc            ralt rmet cmp  rctl
 )
 
