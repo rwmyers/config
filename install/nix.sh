@@ -9,6 +9,16 @@
 # (one that sources Nix via .zshrc) to finish.
 source $HOME/src/config/install/common.sh
 
+# --upgrade refreshes nix/flake.lock to the latest upstream inputs before
+# activating; by default the pinned lock is used. Remaining arguments name
+# specific inputs to update (e.g. nixpkgs); with none, all inputs move.
+upgrade=0
+if [ "$1" = "--upgrade" ]
+then
+    upgrade=1
+    shift
+fi
+
 # Did the calling shell already have Nix on PATH? Capture before we touch PATH.
 if type nix > /dev/null 2>&1
 then
@@ -68,6 +78,19 @@ then
         print_error "Nix daemon unreachable (see error above). Resolve and re-run setup."
     fi
     exit 90
+fi
+
+# Move the lock forward when asked. Kept separate from activation so a failed
+# fetch leaves the working lock in place rather than a half-updated one.
+if [ $upgrade -eq 1 ]
+then
+    print_note "Updating nix/flake.lock"
+    if ! nix --extra-experimental-features 'nix-command flakes' \
+        flake update --flake "$SRC_ROOT/nix" "$@"
+    then
+        print_error "Flake update failed (see the error above). The existing lock is unchanged."
+        exit 1
+    fi
 fi
 
 # Activate the Home Manager flake. --impure lets the flake read USER/HOME so the

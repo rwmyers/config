@@ -1,0 +1,11 @@
+function dot-upgrade() {
+    # Pull nix packages forward instead of installing the versions pinned in
+    # nix/flake.lock, then activate. Name inputs to limit the bump, e.g.
+    # 'dot upgrade nixpkgs'.
+    "$HOME/src/config/install/nix.sh" --upgrade "$@" || return
+
+    if ! git -C "$HOME/src/config" diff --quiet -- nix/flake.lock
+    then
+        echo "nix/flake.lock moved — commit it to carry the upgrade to your other machines."
+    fi
+}

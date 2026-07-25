@@ -7,6 +7,8 @@ local context state state_descr line
 commands=(
     'root:Execute the root command'
     'update:Updates the setup'
+    'upgrade:Upgrade nix packages past the pinned flake.lock'
+    'config:Toggle optional installs'
 )
 
 _arguments -C \
@@ -24,6 +26,17 @@ case "$state" in
                 ;;
             update)
                 _message "No arguments for update"
+                ;;
+            upgrade)
+                # Flake input names, read from the top-level inputs block.
+                local -a inputs
+                inputs=(${(f)"$(sed -n '/^  inputs = {/,/^  };/p' \
+                    $HOME/src/config/nix/flake.nix \
+                    | grep -oE '^    [A-Za-z0-9_-]+' | tr -d ' ')"})
+                _describe -t inputs 'flake input (default: all)' inputs
+                ;;
+            config)
+                _message "No arguments for config"
                 ;;
         esac
         ;;
