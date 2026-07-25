@@ -38,10 +38,13 @@ mkdir -p ~/.config/kmonad
 DEVICE_FILE="$HOME/.config/kmonad/.device"
 if [ ! -f "$DEVICE_FILE" ]
 then
+    # by-id only lists devices with unique hardware IDs (USB/Bluetooth); internal
+    # laptop keyboards (i8042) only appear under by-path, so fall back to that.
     kbds=(/dev/input/by-id/*-event-kbd(N))
+    [ ${#kbds} -eq 0 ] && kbds=(/dev/input/by-path/*-event-kbd(N))
     if [ ${#kbds} -eq 0 ]
     then
-        print_error " -- No keyboard devices under /dev/input/by-id/*-event-kbd"
+        print_error " -- No keyboard devices under /dev/input/{by-id,by-path}/*-event-kbd"
     elif [ ${#kbds} -eq 1 ]
     then
         echo "$kbds[1]" > "$DEVICE_FILE"
