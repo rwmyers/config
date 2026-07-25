@@ -22,10 +22,4 @@ return {
       vim.cmd([[colorscheme monokai-pro]])
     end,
   },
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "monokai-pro",
-    },
-  },
 }

@@ -10,10 +10,4 @@ return {
 			vim.cmd.colorscheme("catppuccin-latte")
 		end,
 	},
-	{
-		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "catppuccin-latte",
-		},
-	},
 }
