@@ -18,6 +18,10 @@ else
 	config.color_scheme = "rose-pine"
 end
 
+-- Always spawn zsh directly (non-login, like alacritty) so the session's
+-- inherited PATH survives; corporate /etc/zprofile resets PATH in login shells.
+config.default_prog = { "zsh" }
+
 config.window_background_opacity = 0.9
 
 config.scrollback_lines = 90000
