@@ -63,5 +63,7 @@ HandleLidSwitch=ignore
 HandleLidSwitchDocked=ignore
 HandleLidSwitchExternalPower=ignore
 EOF
-    sudo systemctl restart systemd-logind
+    # reload, not restart: restarting logind revokes device access from the
+    # running Wayland compositor and kills the graphical session.
+    sudo systemctl reload systemd-logind
 fi
