@@ -1,7 +1,8 @@
-
 [Unit]
 Description=Elephant
 After=graphical-session.target
+# Tear elephant down with the session so the next login starts a fresh one.
+PartOf=graphical-session.target
 
 [Service]
 Type=simple
@@ -10,4 +11,3 @@ Restart=on-failure
 
 [Install]
 WantedBy=graphical-session.target
-							

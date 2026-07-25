@@ -1,0 +1,8 @@
+[Unit]
+Description=Hyprland session
+# graphical-session.target sets RefuseManualStart, so it can only be activated
+# by a compositor-specific target that binds to it.
+BindsTo=graphical-session.target
+Before=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target

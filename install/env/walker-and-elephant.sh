@@ -32,11 +32,10 @@ then
     popd # elephant
     popd # SRC
 
-    # Create an elephant system service and start it
-    print_note "--- Creating elephant user service"
-    elephant service enable
-
-    # Enable the service
+    # Not "elephant service enable" - that generates its own unit file, which
+    # would land on top of the one this repo tracks. 00-systemd-user.sh has
+    # already linked ours into place.
+    print_note "--- Enabling elephant user service"
     systemctl --user daemon-reload
     systemctl --user reenable --now elephant.service
 fi
