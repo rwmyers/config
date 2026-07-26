@@ -75,8 +75,6 @@ in
     zsh-syntax-highlighting
   ]
   # Cross-platform optionals; Linux-only ones are in linux.nix.
-  ++ lib.optional (enabled "spotify") (wrapGL spotify "spotify")
-  ++ lib.optional (enabled "discord") (wrapGL discord "Discord")
   ++ lib.optional (enabled "bazelisk") bazelisk
   ++ lib.optional (enabled "claude-code") claude-code;
 

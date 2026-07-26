@@ -25,6 +25,12 @@ then
             sudo apt update && sudo apt -y upgrade
     fi
 
+    if type flatpak > /dev/null 2>&1
+    then
+        print_note "flatpak update"
+        sudo flatpak update -y
+    fi
+
     install_linux_package nvim neovim
     install_linux_package swayidle
     install_linux_package wofi

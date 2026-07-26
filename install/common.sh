@@ -37,6 +37,22 @@ feature_enabled()
     grep -qx "$1=true" "$conf"
 }
 
+flatpak_install()
+{
+    # Install a Flathub app if it isn't already present, setting up flatpak
+    # and the flathub remote on first use.
+    local app="$1"
+    install_linux_package flatpak
+    flatpak remotes | grep -q flathub \
+        || sudo flatpak remote-add --if-not-exists flathub \
+            https://dl.flathub.org/repo/flathub.flatpakrepo
+    if ! flatpak info "$app" > /dev/null 2>&1
+    then
+        print_note " -- Installing $app"
+        sudo flatpak install -y flathub "$app"
+    fi
+}
+
 install_linux_package()
 {
     local check="$1"

@@ -21,7 +21,7 @@ in
     # NOTE: ${XDG_DATA_DIRS} expands to EMPTY in the systemd user manager (unlike
     # PATH), so the system dirs must be spelled out or they get dropped — losing
     # /usr/share breaks the whole graphical session.
-    XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:/nix/var/nix/profiles/default/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop";
+    XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:${config.home.homeDirectory}/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/nix/var/nix/profiles/default/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop";
     PATH = "${config.home.homeDirectory}/.nix-profile/bin:\${PATH}";
   };
 }
