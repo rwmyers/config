@@ -74,7 +74,7 @@ in
     zsh-fzf-tab
     zsh-syntax-highlighting
   ]
-  # Cross-platform optionals; Linux-only ones (steam, kmonad, bluetui) are in linux.nix.
+  # Cross-platform optionals; Linux-only ones are in linux.nix.
   ++ lib.optional (enabled "spotify") (wrapGL spotify "spotify")
   ++ lib.optional (enabled "discord") (wrapGL discord "Discord")
   ++ lib.optional (enabled "bazelisk") bazelisk

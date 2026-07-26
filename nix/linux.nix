@@ -12,8 +12,6 @@ in
     brightnessctl # backlight/LED control; needs the system udev rules (see below)
     wifitui # NetworkManager Wi-Fi TUI (nicer nmtui); Waybar network right-click
   ]
-  # steam is an FHS wrapper; no nixGL wrap.
-  ++ lib.optional (enabled "steam") steam
   # kmonad needs uinput; see install/env/kmonad.sh for the system setup.
   ++ lib.optional (enabled "kmonad") kmonad;
 
