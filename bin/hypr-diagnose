@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+# hypr-diagnose — collect Hyprland config/theme errors for analysis.
+# Read-only: gathers versions, config errors, logs, and file-layout info.
+# Run it and paste the whole output (or /tmp/hypr-diagnose.txt) back.
+
+OUT=/tmp/hypr-diagnose.txt
+exec > >(tee "$OUT") 2>&1
+
+section() { printf '\n===== %s =====\n' "$1"; }
+
+section "SYSTEM"
+uname -a
+grep -E '^(NAME|VERSION)=' /etc/os-release 2>/dev/null
+
+section "HYPRLAND VERSION"
+if command -v hyprctl >/dev/null; then
+  hyprctl version 2>&1
+else
+  echo "hyprctl not in PATH"
+fi
+command -v Hyprland >/dev/null && Hyprland --version 2>&1 | head -5
+
+section "RUNNING INSTANCE"
+echo "HYPRLAND_INSTANCE_SIGNATURE=${HYPRLAND_INSTANCE_SIGNATURE:-<unset>}"
+echo "XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-<unset>}"
+ls "${XDG_RUNTIME_DIR:-/run/user/$UID}/hypr/" 2>/dev/null || echo "no hypr runtime dir"
+
+section "LIVE CONFIG ERRORS (hyprctl configerrors)"
+hyprctl configerrors 2>&1 || echo "hyprctl unavailable (Hyprland not running?)"
+
+section "OFFLINE CONFIG VERIFY (Hyprland --verify-config)"
+if command -v Hyprland >/dev/null; then
+  Hyprland --verify-config 2>&1
+else
+  echo "Hyprland binary not in PATH"
+fi
+
+section "SOURCED FILE CHECK"
+# Every path this config expects to exist; flag what's missing or dangling.
+check() {
+  local p="$1" expanded
+  expanded="${p/#\~/$HOME}"
+  if [ -L "$expanded" ]; then
+    local target
+    target=$(readlink -f "$expanded")
+    if [ -e "$target" ]; then
+      echo "OK  (symlink) $p -> $target"
+    else
+      echo "BAD (dangling symlink) $p -> $(readlink "$expanded")"
+    fi
+  elif [ -e "$expanded" ]; then
+    echo "OK  $p"
+  else
+    echo "MISSING $p"
+  fi
+}
+check "~/.config/hypr/hyprland.conf"
+for f in theme-defaults env commands autostart general input bindings window_rules monitor; do
+  check "~/.config/hypr/hyprland/$f.conf"
+done
+check "~/themes/current"
+check "~/themes/current/hyprland.conf"
+check "~/.config/hypr/config.d"
+check "~/.config/hypr/local"
+check "~/.config/hypr/monitors.conf"
+echo "--- glob contents ---"
+ls -la ~/.config/hypr/config.d/ 2>/dev/null || echo "config.d: empty or missing"
+ls -la ~/.config/hypr/local/ 2>/dev/null || echo "local: empty or missing"
+echo "--- theme symlink ---"
+ls -la ~/themes/ 2>/dev/null | head -30
+
+section "CONFIG GIT STATE"
+for d in ~/.config/hypr ~/src/config; do
+  if [ -d "$d/.git" ] || git -C "$d" rev-parse --git-dir >/dev/null 2>&1; then
+    echo "--- $d ---"
+    git -C "$d" log -1 --oneline 2>/dev/null
+    git -C "$d" status --short 2>/dev/null | head -20
+  fi
+done
+
+section "REFERENCED PROGRAMS"
+# exec/bind lines fail at runtime if these are missing
+grep -rhoE '^[[:space:]]*(exec(-once)?|bind[a-z]*)[[:space:]]*=.*' \
+  ~/.config/hypr/hyprland/ ~/themes/current/hyprland.conf 2>/dev/null |
+  grep -oE '(exec|,)[[:space:]]*[a-zA-Z0-9_./-]+' |
+  sed -E 's/^(exec|,)[[:space:]]*//' | sort -u |
+  while read -r cmd; do
+    case "$cmd" in
+      /*|~*) [ -x "${cmd/#\~/$HOME}" ] || echo "MISSING: $cmd" ;;
+      *) command -v "$cmd" >/dev/null 2>&1 || echo "not in PATH: $cmd" ;;
+    esac
+  done
+echo "(only missing ones listed)"
+
+section "HYPRLAND LOG (errors/warnings, current + previous session)"
+logdir="${XDG_RUNTIME_DIR:-/run/user/$UID}/hypr"
+found=0
+for d in $(ls -t "$logdir" 2>/dev/null | head -2); do
+  log="$logdir/$d/hyprland.log"
+  if [ -f "$log" ]; then
+    found=1
+    echo "--- $log ---"
+    grep -inE 'err|warn|fail|invalid|config' "$log" | head -80
+  fi
+done
+[ "$found" = 1 ] || echo "no hyprland.log found under $logdir"
+
+section "DONE"
+echo "Full output saved to $OUT — paste it back for analysis."
