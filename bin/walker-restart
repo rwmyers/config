@@ -4,6 +4,12 @@ restart_services() {
   if systemctl --user is-enabled elephant.service &>/dev/null; then
     systemctl --user restart elephant.service
   fi
+
+  # Kick the resident walker and bring it back detached via a transient unit,
+  # so it inherits the user manager's current environment instead of whatever
+  # the caller (or the login that started it) had.
+  pkill -x walker
+  systemd-run --user --collect -- walker --gapplication-service
 }
 
 if (( EUID == 0 )); then
