@@ -1,0 +1,36 @@
+#!/bin/bash
+
+echo "=== 1. Checking for running 'adb' processes ==="
+# Search for any process with 'adb' in the name, excluding this grep command
+ADB_PROCESSES=$(ps -ef | grep -i adb | grep -v grep)
+
+if [ -z "$ADB_PROCESSES" ]; then
+  echo "No adb processes found running."
+else
+  echo "$ADB_PROCESSES"
+fi
+
+echo ""
+echo "=== 2. Checking if any process is using the ADB port (5037) ==="
+# Check if port 5037 is in use (typically by the ADB server)
+if command -v lsof >/dev/null 2>&1; then
+  PORT_USAGE=$(lsof -i tcp:5037 2>/dev/null)
+  if [ -z "$PORT_USAGE" ]; then
+    echo "Port 5037 is free."
+  else
+    echo "$PORT_USAGE"
+  fi
+else
+  # Fallback if lsof is not available
+  PORT_USAGE=$(netstat -an | grep 5037)
+  if [ -z "$PORT_USAGE" ]; then
+    echo "Port 5037 appears to be free (via netstat)."
+  else
+    echo "Port 5037 activity detected:"
+    echo "$PORT_USAGE"
+  fi
+fi
+
+echo ""
+echo "=== 3. Checking which 'adb' is default in your PATH ==="
+which adb 2>/dev/null || echo "adb not found in PATH"
