@@ -11,7 +11,7 @@ if [ "$#" -lt 2 ]; then
   echo -e "\e[32mLet's add a search to the web search menu (super+s).\n\e[0m"
   NAME=$(gum input --prompt "Name> " --placeholder "My favorite site")
   URL=$(gum input --prompt "URL> " --placeholder "https://example.com/search?q=%TERM% (omit %TERM% to just open the URL)")
-  PREFIX=$(gum input --prompt "Prefix> " --placeholder "Optional, e.g. '!' to trigger with '!query'")
+  PREFIX=$(gum input --prompt "Prefix> " --placeholder "e.g. 'gh ' to trigger with 'gh query'. Blank = shows in every search")
   ICON_REF=$(gum input --prompt "Icon URL> " --placeholder "Optional, see https://dashboardicons.com (must use PNG!)")
   INTERACTIVE_MODE=true
 else
@@ -90,5 +90,12 @@ if systemctl --user is-enabled elephant.service &>/dev/null; then
 fi
 
 if [[ $INTERACTIVE_MODE == true ]]; then
-  echo -e "You can now find $NAME in the web search menu (super+s)\n"
+  if [[ -n $PREFIX ]]; then
+    echo -e "Search $NAME by typing \"$PREFIX<query>\" (super+s)\n"
+  else
+    # elephant shows every prefix-less entry for every query, and passes the
+    # typed text through untouched, so a prefix is what makes an entry usable.
+    echo -e "Added $NAME. Without a prefix it appears in the results for every"
+    echo -e "search, and your whole query is sent to it verbatim.\n"
+  fi
 fi
