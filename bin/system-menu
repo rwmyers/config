@@ -89,7 +89,7 @@ show_theme_menu() {
 
 show_web_menu() {
     local selection
-    selection=$(menu "Web" "󰍉  Websearch\n󰃀  Bookmarks")
+    selection=$(menu "Web" "󰍉  Websearch\n󰃀  Bookmarks\n󰐕  Add Search\n󰍴  Remove Search")
 
     case $selection in
         *Websearch*)
@@ -97,6 +97,12 @@ show_web_menu() {
             ;;
         *Bookmarks*)
             walker -m bookmarks
+            ;;
+        *"Add Search"*)
+            alacritty --class=WebsearchInstall -e websearch-install
+            ;;
+        *"Remove Search"*)
+            alacritty --class=WebsearchRemove -e websearch-remove
             ;;
         *)
             back_to show_main_menu

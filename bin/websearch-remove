@@ -1,0 +1,88 @@
+#!/bin/bash
+
+# Remove entries from the walker/elephant websearch menu (super+s).
+# Counterpart to websearch-install; see it for where the config lives.
+
+CONFIG="$HOME/.config/elephant/websearch.toml"
+ICON_DIR="$HOME/.config/elephant/icons"
+
+if [ ! -e "$CONFIG" ]; then
+  echo "No web search config at $CONFIG."
+  exit 1
+fi
+
+# Name of each [[entries]] block, in file order.
+entry_names() {
+  awk '/^\[\[entries\]\]/ { in_block = 1; next }
+       in_block && /^name[[:space:]]*=/ {
+         name = $0
+         sub(/^[^"]*"/, "", name)
+         sub(/".*$/, "", name)
+         print name
+         in_block = 0
+       }' "$CONFIG"
+}
+
+if [ "$#" -eq 0 ]; then
+  mapfile -t ENTRIES < <(entry_names)
+
+  if ((${#ENTRIES[@]} == 0)); then
+    echo "No web search entries to remove."
+    exit 1
+  fi
+
+  NAMES_STRING=$(gum choose --no-limit --header "Select web search entries to remove..." --selected-prefix="✗ " "${ENTRIES[@]}")
+  NAMES=()
+  while IFS= read -r line; do
+    [[ -n "$line" ]] && NAMES+=("$line")
+  done <<<"$NAMES_STRING"
+else
+  NAMES=("$@")
+fi
+
+if [[ ${#NAMES[@]} -eq 0 ]]; then
+  echo "You must select at least one entry to remove."
+  exit 1
+fi
+
+REMOVED=false
+for NAME in "${NAMES[@]}"; do
+  TMP=$(mktemp)
+  # Buffer each [[entries]] block and drop it whole if its name matches.
+  awk -v target="$NAME" '
+    /^\[\[entries\]\]/ {
+      if (n > 0 && !drop) for (i = 1; i <= n; i++) print buf[i]
+      n = 0; drop = 0; in_block = 1
+      buf[++n] = $0
+      next
+    }
+    in_block {
+      buf[++n] = $0
+      if ($0 ~ /^name[[:space:]]*=/) {
+        name = $0
+        sub(/^[^"]*"/, "", name)
+        sub(/".*$/, "", name)
+        if (name == target) drop = 1
+      }
+      next
+    }
+    { print }
+    END { if (n > 0 && !drop) for (i = 1; i <= n; i++) print buf[i] }
+  ' "$CONFIG" >"$TMP"
+
+  if cmp -s "$CONFIG" "$TMP"; then
+    rm -f "$TMP"
+    echo "No web search entry named $NAME"
+    continue
+  fi
+
+  mv "$TMP" "$CONFIG"
+  rm -f "$ICON_DIR/$NAME.png"
+  REMOVED=true
+  echo "Removed $NAME"
+done
+
+# elephant only reads websearch.toml at startup.
+if [[ $REMOVED == true ]] && systemctl --user is-enabled elephant.service &>/dev/null; then
+  systemctl --user restart elephant.service
+fi
