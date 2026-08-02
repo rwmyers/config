@@ -1,8 +1,18 @@
 #!/bin/bash
 
-# No --new-window: Chrome puts the URL in a new tab of the most recently used
-# tabbed window, and only opens a window when there isn't one. Webapp windows
-# (class chrome-<host>__-Default) are never reused for this.
-google-chrome "$1" &
-sleep 0.5
-hyprctl dispatch focuswindow "class:^google-chrome$"
+# Focusing a Chrome window first makes it Chrome's most recently used one, so
+# the URL lands there as a tab. Prefer a window on the current workspace, else
+# any other one (which switches to it), else make a new window.
+# Webapp windows (class chrome-<host>__-Default) are not tabbed and don't count.
+WORKSPACE=$(hyprctl activeworkspace -j | jq -r '.id')
+ADDRESS=$(hyprctl clients -j |
+  jq -r --argjson ws "$WORKSPACE" \
+    '[.[] | select(.class == "google-chrome")] as $windows
+     | (($windows | map(select(.workspace.id == $ws))) + $windows)[0].address // empty')
+
+if [[ -n $ADDRESS ]]; then
+  hyprctl dispatch focuswindow "address:$ADDRESS"
+  google-chrome "$1" &
+else
+  google-chrome --new-window "$1" &
+fi
