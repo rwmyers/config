@@ -1,5 +1,8 @@
 #!/bin/bash
 
-google-chrome --new-window "$1" &
+# No --new-window: Chrome puts the URL in a new tab of the most recently used
+# tabbed window, and only opens a window when there isn't one. Webapp windows
+# (class chrome-<host>__-Default) are never reused for this.
+google-chrome "$1" &
 sleep 0.5
-hyprctl dispatch focuswindow "class:Google-chrome"
+hyprctl dispatch focuswindow "class:^google-chrome$"
