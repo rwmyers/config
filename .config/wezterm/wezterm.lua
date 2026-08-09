@@ -18,9 +18,15 @@ else
 	config.color_scheme = "rose-pine"
 end
 
--- Always spawn zsh directly (non-login, like alacritty) so the session's
--- inherited PATH survives; corporate /etc/zprofile resets PATH in login shells.
-config.default_prog = { "zsh" }
+-- Non-login on Linux (like alacritty), where a corporate /etc/zprofile resets
+-- PATH. macOS needs login: GUI apps start from launchd with a bare PATH, and
+-- only /etc/zprofile's path_helper supplies /etc/paths.d. .zshrc prepends the
+-- Nix profile after either one, so Nix still wins.
+if wezterm.target_triple:find("darwin") then
+	config.default_prog = { "zsh", "-l" }
+else
+	config.default_prog = { "zsh" }
+end
 
 config.window_background_opacity = 0.9
 
