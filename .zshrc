@@ -22,12 +22,12 @@ fi
 # Nix profile root — reused when sourcing share/ files from Nix packages.
 NIX_PROFILE="$HOME/.nix-profile"
 
-export PATH=$PATH:/Users/rmmyers/gitscripts/
-
 # Scripts
 export PATH=$PATH:~/bin
 # Custom scripts for this device
 export PATH=$PATH:~/bin.local
+# Git helper scripts; only present on some machines
+export PATH=$PATH:~/gitscripts
 
 # Go binaries
 export PATH=$PATH:/usr/local/go/bin
