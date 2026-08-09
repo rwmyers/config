@@ -7,6 +7,18 @@ source $HOME/src/config/install/common.sh
 
 install_linux_package hyprland
 
+# hyprexpo workspace overview; install_linux_package can't check for a .so.
+if [ ! -f "/usr/lib/$(uname -m)-linux-gnu/hyprland/plugins/libhyprexpo.so" ]
+then
+    print_note " -- Installing hyprexpo overview plugin"
+    if [ -f "/etc/arch-release" ]
+    then
+        sudo pamac install hyprland-plugins
+    else
+        sudo apt -y install hyprland-plugin-hyprexpo
+    fi
+fi
+
 if [ ! -d "$HOME/.config/hypr/" ]
 then
     print_note " -- Creating hyprland config links"
