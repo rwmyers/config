@@ -6,31 +6,37 @@ SRC=$HOME/src
 # Wayland launcher (walker) + its backend (elephant); Linux-only.
 [[ "$OSTYPE" == "linux-gnu"* ]] || exit 0
 
+# Both builds need a C toolchain: walker's crates compile C, and elephant's
+# providers are -buildmode=plugin, which forces cgo. Without cc the Rust build
+# dies on "linker `cc` not found" and every plugin build fails, leaving walker
+# missing and elephant with an empty providers directory.
+install_linux_package cc build-essential base-devel
+
+# Walker's own build dependencies. Installed up front so a failure here is
+# obvious rather than surfacing later as a broken build.
+if [[ ! -f "/etc/arch-release" ]]
+then
+    sudo apt -y install libpoppler-glib-dev libgtk-4-dev libgtk4-layer-shell-dev \
+        protobuf-compiler libprotobuf-dev
+fi
+
+PROVIDERS_DIR=$HOME/.config/elephant/providers
+mkdir -p $PROVIDERS_DIR
+
 # Elephant - Data service provider and back end (https://github.com/abenz1267/elephant)
+if [ ! -d "$SRC/elephant" ]
+then
+    print_note "-- Cloning elephant"
+    git clone https://github.com/abenz1267/elephant $SRC/elephant
+fi
+
 if [ ! -e "/usr/bin/elephant" ]
 then
     print_note "-- Building elephant"
-    pushd $SRC
-    git clone https://github.com/abenz1267/elephant
-    pushd elephant
-
-    # Build the main binary
-    pushd cmd/elephant
+    pushd $SRC/elephant/cmd/elephant
     go install elephant.go
     sudo cp $HOME/go/bin/elephant /usr/bin/elephant
     popd # cmd/elephant
-
-    # Create configuration directory
-    local PROVIDERS_DIR=$HOME/.config/elephant/providers
-    mkdir -p $PROVIDERS_DIR
-
-    print_note "--- Building desktopapplications provider"
-    pushd internal/providers/desktopapplications
-    go build -buildmode=plugin
-    cp desktopapplications.so $PROVIDERS_DIR
-    popd # internal/providers/desktopapplications
-    popd # elephant
-    popd # SRC
 
     # Not "elephant service enable" - that generates its own unit file, which
     # would land on top of the one this repo tracks. 00-systemd-user.sh has
@@ -40,26 +46,20 @@ then
     systemctl --user reenable --now elephant.service
 fi
 
-# Websearch provider for elephant
-local PROVIDERS_DIR=$HOME/.config/elephant/providers
-if [ ! -e "$PROVIDERS_DIR/websearch.so" ]
-then
-    print_note "--- Building websearch provider"
-    pushd $SRC/elephant/internal/providers/websearch
-    go build -buildmode=plugin
-    cp websearch.so $PROVIDERS_DIR
-    popd # internal/providers/websearch
-fi
-
-# Bookmarks provider for elephant
-if [ ! -e "$PROVIDERS_DIR/bookmarks.so" ]
-then
-    print_note "--- Building bookmarks provider"
-    pushd $SRC/elephant/internal/providers/bookmarks
-    go build -buildmode=plugin
-    cp bookmarks.so $PROVIDERS_DIR
-    popd # internal/providers/bookmarks
-fi
+# Elephant providers. Each is guarded on its own .so rather than on the elephant
+# binary: a provider added later still gets built on a machine that already has
+# elephant installed.
+for provider in desktopapplications websearch bookmarks
+do
+    if [ ! -e "$PROVIDERS_DIR/$provider.so" ]
+    then
+        print_note "--- Building $provider provider"
+        pushd $SRC/elephant/internal/providers/$provider
+        go build -buildmode=plugin
+        cp $provider.so $PROVIDERS_DIR
+        popd # internal/providers/$provider
+    fi
+done
 
 # Generate websearch config with correct icon path
 if [ ! -e "$HOME/.config/elephant/websearch.toml" ]
@@ -77,7 +77,7 @@ EOF
 fi
 
 # Download websearch icon
-local ICONS_DIR=$HOME/.config/elephant/icons
+ICONS_DIR=$HOME/.config/elephant/icons
 if [ ! -e "$ICONS_DIR/google.png" ]
 then
     print_note " -- Downloading Google icon"
@@ -86,19 +86,19 @@ then
 fi
 
 # Walker - An application launcher (https://github.com/abenz1267/walker)
+if [ ! -d "$SRC/walker" ]
+then
+    print_note "-- Cloning walker"
+    git clone https://github.com/abenz1267/walker.git $SRC/walker
+fi
+
 if [ ! -e "/usr/bin/walker" ]
 then
     print_note "-- Building walker"
-    pushd $SRC
-    git clone https://github.com/abenz1267/walker.git
-    pushd walker
-    # Dependency of walker
-    sudo apt install libpoppler-glib-dev libgtk-4-dev libgtk4-layer-shell-dev libgtk-4-dev protobuf-compiler libprotobuf-dev
-    # Build release target
+    pushd $SRC/walker
     cargo build --release
     sudo cp target/release/walker /usr/bin/walker
     popd # walker
-    popd # SRC
 fi
 
 if [ ! -d "$HOME/.config/walker/themes/default/" ]
