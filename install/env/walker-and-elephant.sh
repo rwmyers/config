@@ -34,7 +34,11 @@ if [ ! -e "/usr/bin/elephant" ]
 then
     print_note "-- Building elephant"
     pushd $SRC/elephant/cmd/elephant
-    go install elephant.go
+    # CGO_ENABLED=1 explicitly: go defaults it to 0 when cc is missing, and the
+    # resulting static binary builds and runs fine but silently loads no
+    # providers ("plugin: not implemented"), so walker comes up with an empty
+    # result list. Forcing it turns a missing toolchain into a build failure.
+    CGO_ENABLED=1 go install elephant.go
     sudo cp $HOME/go/bin/elephant /usr/bin/elephant
     popd # cmd/elephant
 
