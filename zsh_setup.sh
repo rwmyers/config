@@ -1,6 +1,9 @@
 #!/bin/zsh
 source install/common.sh
 
+# Links first: the Nix step can halt asking for a fresh shell, and only the
+# repo's .zshrc puts Nix on a new shell's PATH. Linking it later would deadlock.
+$SRC_ROOT/install/links.sh
 $SRC_ROOT/install/pkg_mgmt.sh
 $SRC_ROOT/install/clean.sh
 $SRC_ROOT/install/features.sh
@@ -240,7 +243,6 @@ then
     ln -s $SRC_ROOT/.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/settings.ini
 fi
 
-$SRC_ROOT/install/links.sh
 $SRC_ROOT/install/themes.sh
 $SRC_ROOT/install/etc.sh
 $SRC_ROOT/install/webapps.sh

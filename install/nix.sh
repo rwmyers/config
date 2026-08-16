@@ -35,12 +35,16 @@ then
         https://install.determinate.systems/nix | sh -s -- install --no-confirm --no-modify-profile
 fi
 
-# Bring nix onto PATH for this script's own use.
-if ! type nix > /dev/null 2>&1 && \
-   [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]
-then
-    source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-fi
+# Bring nix onto PATH for this script's own use. Mirrors .zshrc: nix-daemon.sh
+# first, nix.sh as the fallback for builds that drop it.
+for profile_script in /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh \
+                      /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+do
+    if ! type nix > /dev/null 2>&1 && [ -e "$profile_script" ]
+    then
+        source "$profile_script"
+    fi
+done
 
 if ! type nix > /dev/null 2>&1
 then

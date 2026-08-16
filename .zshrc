@@ -15,9 +15,15 @@ fi
 for f in ~/.config/zsh/*; do source $f; done
 
 # Nix: put ~/.nix-profile/bin on PATH (kept here, not /etc, so it's portable).
-if [ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then
-    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-fi
+# nix-daemon.sh first, nix.sh as the fallback for builds that drop it.
+for f in /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh \
+         /nix/var/nix/profiles/default/etc/profile.d/nix.sh; do
+    if [ -e "$f" ]; then
+        . "$f"
+        break
+    fi
+done
+unset f
 
 # Nix profile root — reused when sourcing share/ files from Nix packages.
 NIX_PROFILE="$HOME/.nix-profile"

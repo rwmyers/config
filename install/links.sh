@@ -4,9 +4,14 @@ source install/common.sh
 
 print_note "Linking items"
 
-if [ ! -f "$HOME/.zshrc" ]
+# Nothing else puts Nix on a new shell's PATH, so a ~/.zshrc that isn't ours
+# silently breaks the rest of setup. Say so rather than skipping quietly.
+if [ ! -e "$HOME/.zshrc" ]
 then
     ln -s ~/src/config/.zshrc ~/.zshrc
+elif [ ! -L "$HOME/.zshrc" ]
+then
+    print_error "~/.zshrc exists and isn't our symlink; move it aside and re-run setup."
 fi
 
 if [ ! -f "$HOME/.zshrc.local" ]
