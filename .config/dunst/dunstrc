@@ -36,12 +36,14 @@
     #       and the given value is treated as the maximum height
 
     # Position the notification in the top right corner
-    origin = bottom-right
+    origin = top-right
 
     # Offset from the origin
     # NOTE: Dunst from version 1.11 and older use this alternative notation
     # offset = 10x50
-    offset = (5, 15)
+    # Measured from below waybar: dunst respects its exclusive zone, so the
+    # vertical offset does not need to account for the bar's height.
+    offset = (5, 7)
 
     # Scale factor. It is auto-detected if value is 0.
     # NOTE: The screenshot was made with scale = 2
