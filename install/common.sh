@@ -28,6 +28,54 @@ print_error()
     fi
 }
 
+path_append()
+{
+    # Append a directory to PATH unless it's already there. The directory need
+    # not exist yet — setup creates several of them as it goes.
+    case ":$PATH:" in
+        *":$1:"*) ;;
+        *) export PATH="$PATH:$1" ;;
+    esac
+}
+
+source_nix_env()
+{
+    # Put Nix (and the Home Manager profile) on PATH for this process and every
+    # child it spawns. Setup can't rely on inheriting it: these scripts run
+    # non-interactively, so zsh never reads ~/.zshrc, and the login shell may not
+    # be zsh at all. Mirrors .zshrc: nix-daemon.sh first, nix.sh as the fallback
+    # for builds that drop it. No-op before Nix is installed, and safe to call
+    # repeatedly. Returns non-zero if Nix still isn't usable afterwards.
+    if ! type nix > /dev/null 2>&1
+    then
+        for profile_script in /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh \
+                              /nix/var/nix/profiles/default/etc/profile.d/nix.sh
+        do
+            if [ -e "$profile_script" ]
+            then
+                source "$profile_script"
+                break
+            fi
+        done
+    fi
+    type nix > /dev/null 2>&1
+}
+
+setup_path()
+{
+    # Build the PATH setup itself needs. These scripts run non-interactively, so
+    # zsh never reads ~/.zshrc, and the login shell they were launched from may
+    # not be zsh at all — nothing can be assumed to be inherited. Covers the same
+    # home-relative bin dirs .zshrc exports, plus Nix. Safe to call repeatedly.
+    source_nix_env
+    path_append "$HOME/bin"
+    path_append "$HOME/bin.local"
+    path_append "$HOME/.local/bin"
+    path_append "$HOME/.cargo/bin"
+    path_append "$HOME/go/bin"
+    path_append "/usr/local/go/bin"
+}
+
 feature_enabled()
 {
     # True if the given optional feature is enabled in ~/.config/dotfiles.conf

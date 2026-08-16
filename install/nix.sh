@@ -3,10 +3,10 @@
 # Cross-platform package layer: install Nix if needed, then activate the Home
 # Manager flake at nix/. See nix/ for details.
 #
-# Exit code 90 signals zsh_setup.sh to halt. It fires whenever the calling shell
-# does not already have Nix on PATH: in that case downstream setup steps won't
-# have the Home Manager profile either, so setup must be re-run from a new shell
-# (one that sources Nix via .zshrc) to finish.
+# Exit code 90 signals zsh_setup.sh to halt. It is reserved for things the user
+# has to resolve out-of-band (an unreachable daemon, a failed activation) — never
+# for "Nix isn't on this shell's PATH", which setup fixes for itself via
+# source_nix_env.
 source $HOME/src/config/install/common.sh
 
 # --upgrade refreshes nix/flake.lock to the latest upstream inputs before
@@ -19,14 +19,6 @@ then
     shift
 fi
 
-# Did the calling shell already have Nix on PATH? Capture before we touch PATH.
-if type nix > /dev/null 2>&1
-then
-    nix_inherited=1
-else
-    nix_inherited=0
-fi
-
 if [ ! -d /nix ]
 then
     print_note "Installing Nix"
@@ -35,20 +27,11 @@ then
         https://install.determinate.systems/nix | sh -s -- install --no-confirm --no-modify-profile
 fi
 
-# Bring nix onto PATH for this script's own use. Mirrors .zshrc: nix-daemon.sh
-# first, nix.sh as the fallback for builds that drop it.
-for profile_script in /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh \
-                      /nix/var/nix/profiles/default/etc/profile.d/nix.sh
-do
-    if ! type nix > /dev/null 2>&1 && [ -e "$profile_script" ]
-    then
-        source "$profile_script"
-    fi
-done
-
-if ! type nix > /dev/null 2>&1
+# Bring nix onto PATH for this script's own use (a freshly installed Nix is
+# never on the calling shell's PATH).
+if ! source_nix_env
 then
-    print_error "Nix is installed but not usable in this shell. Open a new shell and re-run setup."
+    print_error "Nix is installed but no usable profile script was found under /nix. Resolve and re-run setup."
     exit 90
 fi
 
@@ -104,14 +87,5 @@ if ! nix --extra-experimental-features 'nix-command flakes' run home-manager/mas
     switch -b backup --impure --flake "$SRC_ROOT/nix#default"
 then
     print_error "Home Manager activation failed (see the error above). Fix it and re-run setup."
-    exit 90
-fi
-
-# If the calling shell didn't already have Nix, downstream setup steps won't see
-# the Home Manager profile on PATH. It's activated now, so re-running from a
-# fresh shell (which sources Nix via .zshrc) will complete cleanly.
-if [ $nix_inherited -eq 0 ]
-then
-    print_note "Nix profile isn't on this shell's PATH yet. Open a new shell and re-run setup to finish."
     exit 90
 fi

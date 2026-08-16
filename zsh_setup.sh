@@ -1,14 +1,25 @@
 #!/bin/zsh
 source install/common.sh
 
-# Links first: the Nix step can halt asking for a fresh shell, and only the
-# repo's .zshrc puts Nix on a new shell's PATH. Linking it later would deadlock.
+# Setup runs non-interactively, so zsh never reads ~/.zshrc — and the login shell
+# it was launched from may not even be zsh. Build the PATH here instead of asking
+# for a fresh shell, so every step below sees Nix, the Home Manager profile and
+# the repo's own bin/ on the first run. Nix is a no-op on a machine that doesn't
+# have it yet, hence the repeat after the Nix step.
+setup_path
+
 $SRC_ROOT/install/links.sh
 $SRC_ROOT/install/pkg_mgmt.sh
 $SRC_ROOT/install/clean.sh
 $SRC_ROOT/install/features.sh
 $SRC_ROOT/install/nix.sh
-if [ $? -eq 90 ]
+nix_status=$?
+
+# Nix is installed now even if it wasn't a moment ago; pick it up before the
+# steps that need what it provides.
+setup_path
+
+if [ $nix_status -eq 90 ]
 then
     print_note "Halting after the Nix step — see the note above, resolve if needed, then re-run setup."
     exit 0
