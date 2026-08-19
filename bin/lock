@@ -7,23 +7,37 @@ set -euo pipefail
 # Ubuntu), so we grab the frame with grim, blur it with ImageMagick, and hand
 # the result to swaylock via -i. Passing any extra args through means callers
 # can still add flags (e.g. swayidle passes none, a menu could add -f).
+#
+# The pretty background is strictly a nicety: every step below is best-effort
+# and falls back to a flat-colour lock, because this script is the only thing
+# standing between a closed lid and an unlocked session. It must fail closed.
+# (It once didn't: with ImageMagick absent, `set -e` aborted the script before
+# swaylock was ever reached, so nothing locked at all - not the lid, not the
+# idle timeout, not Super+L.)
 
 BLUR="${LOCK_BLUR:-0x8}"   # ImageMagick sigma; higher == more aggressive
 
 tmpdir=$(mktemp -d)
 trap 'rm -rf "$tmpdir"' EXIT
 
-magick_bin=$(command -v magick || command -v convert)
+# No ImageMagick -> no blur. Show the flat background rather than an unblurred
+# screenshot, which would leave whatever was on screen readable while locked.
+magick_bin=$(command -v magick || command -v convert || true)
 
 # One blurred image per active output so multi-monitor setups aren't stretched.
+# Note this legitimately comes back empty when the lid shuts: hypr-monitor-mode
+# disables the internal panel before suspending, leaving no outputs to grab.
 images=()
-while read -r name; do
-    shot="$tmpdir/$name.png"
-    if grim -o "$name" "$shot" 2>/dev/null; then
-        "$magick_bin" "$shot" -blur "$BLUR" "$shot"
-        images+=(-i "$name:$shot")
-    fi
-done < <(hyprctl monitors -j | jq -r '.[].name')
+if [ -n "$magick_bin" ]; then
+    while read -r name; do
+        [ -n "$name" ] || continue
+        shot="$tmpdir/$name.png"
+        if grim -o "$name" "$shot" 2>/dev/null \
+            && "$magick_bin" "$shot" -blur "$BLUR" "$shot" 2>/dev/null; then
+            images+=(-i "$name:$shot")
+        fi
+    done < <(hyprctl monitors -j 2>/dev/null | jq -r '.[].name' 2>/dev/null || true)
+fi
 
 if [ ${#images[@]} -eq 0 ]; then
     # Screenshot path failed for every output; fall back to the flat background.

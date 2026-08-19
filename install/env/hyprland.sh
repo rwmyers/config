@@ -7,6 +7,8 @@ source $HOME/src/config/install/common.sh
 
 install_linux_package hyprland
 
+install_linux_package magick imagemagick
+
 # hyprexpo workspace overview; install_linux_package can't check for a .so.
 if [ ! -f "/usr/lib/$(uname -m)-linux-gnu/hyprland/plugins/libhyprexpo.so" ]
 then
