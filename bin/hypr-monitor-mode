@@ -15,6 +15,9 @@ machine that goes down lid-closed and comes back lid-open recovers on its own.
                           Suspend if no external display remains, so a closed
                           lid with nothing to drive sleeps instead of running
                           headless (logind ignores the lid; see hyprland.sh).
+                          Debounced: the switch is re-read from /proc/acpi
+                          after it settles, and a suspend is never issued on
+                          the heels of a resume.
   --lid 1   Lid open   -> reload config, restoring each panel's configured
                           position/resolution/scale from monitors.conf
   --auto    Detect lid state from /proc/acpi (open if unknown)
@@ -25,6 +28,31 @@ EOF
 # Internal panels. eDP enumeration is not stable across kernel/firmware
 # updates, so act on both names; hyprctl ignores outputs that don't exist.
 panels=(eDP-1 eDP-2)
+
+# How long to let the lid switch settle before believing a close, and how long
+# after a resume to refuse to suspend. See the --lid 0 branch for why.
+lid_settle_secs=1.5
+resume_guard_secs=5
+
+# Written by the resume hook; see install/etc/lid-resume-guard.sh.
+resume_stamp=/run/dotfiles-last-resume
+
+# Ground truth for the switch, as opposed to the event that invoked us.
+lid_is_closed() {
+    grep -q closed /proc/acpi/button/lid/LID*/state 2>/dev/null
+}
+
+# True while we are still inside the settling window after a resume. Absent or
+# unparseable stamp means "not resuming" - the hook is optional, and losing the
+# guard should only cost us the debounce below, not wedge the lid handler.
+recently_resumed() {
+    local stamp now
+    [ -r "$resume_stamp" ] || return 1
+    stamp=$(cat "$resume_stamp" 2>/dev/null) || return 1
+    case "$stamp" in ''|*[!0-9]*) return 1 ;; esac
+    now=$(date +%s)
+    [ "$((now - stamp))" -ge 0 ] && [ "$((now - stamp))" -lt "$resume_guard_secs" ]
+}
 
 # True if an active output that isn't an internal panel is present, i.e. there
 # is still a screen to drive with the lid shut (clamshell/docked). Fail closed:
@@ -66,6 +94,27 @@ case "$lid" in
     0) for m in "${panels[@]}"; do
            hyprctl keyword monitor "$m, disable" >/dev/null 2>&1 || true
        done
+       # The hall sensor bounces: it emits close events the lid never saw, at
+       # times microseconds apart, and mostly while the machine is still
+       # settling after a resume. Suspending on one re-enters s2idle a second
+       # or two after waking, and this hardware has no `deep` state to fall
+       # back on when that wedges - the machine hangs with the panel and the
+       # input deck already powered down, and only disconnecting the battery
+       # gets the EC back. So: let the switch settle, sit out any in-flight
+       # resume, then believe /proc/acpi rather than the event that got us
+       # here. Waiting the guard out rather than bailing on it keeps a
+       # deliberate close right after waking working.
+       sleep "$lid_settle_secs"
+       waited=0
+       while recently_resumed && [ "$waited" -lt "$resume_guard_secs" ]; do
+           sleep 1
+           waited=$((waited + 1))
+       done
+       if ! lid_is_closed; then
+           # Bounced back open - undo the disable above and stay awake.
+           hyprctl reload >/dev/null 2>&1 || true
+           exit 0
+       fi
        # Nothing left to drive -> sleep instead of running lid-shut and headless.
        external_display_present || systemctl suspend >/dev/null 2>&1 || true ;;
     # Re-source the config rather than hardcode a mode, so the panel's
