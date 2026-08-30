@@ -18,11 +18,17 @@ then
 fi
 
 print_note " -- Installing antigravity"
-curl -fsSL https://antigravity.google/cli/install.sh | bash
 
-# The bootstrapper hands off to `agy install`, which edits shell rc files. Ours
-# is a symlink into this repo and already has ~/.local/bin on PATH, so say
-# something rather than letting setup silently dirty the working tree.
+# The bootstrapper hands off to `agy install`, which appends a ~/.local/bin PATH
+# export to every shell rc it finds — including ours, a symlink into this repo.
+# It skips that when the directory is already in the environment's PATH, and
+# install scripts don't run under an interactive shell, so put it there first.
+# `agy install --skip-path` says the same thing, but the bootstrapper calls
+# `agy install` with no way to pass flags through.
+curl -fsSL https://antigravity.google/cli/install.sh | PATH="$HOME/.local/bin:$PATH" bash
+
+# Belt and braces: if the PATH nudge above ever stops working, don't let setup
+# silently dirty the working tree.
 if ! git -C "$SRC_ROOT" diff --quiet -- .zshrc
 then
     print_error "antigravity's installer modified $SRC_ROOT/.zshrc; review and revert if unwanted."
