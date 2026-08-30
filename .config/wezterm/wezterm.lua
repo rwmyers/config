@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.font = wezterm.font("Hack Nerd Font")
-config.font_size = 13
+config.font_size = 14
 
 -- Follow the active theme: each theme ships a wezterm.lua colour table (see
 -- themes/<name>/wezterm.lua), mirroring how alacritty imports its per-theme
