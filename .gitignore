@@ -6,3 +6,5 @@ bin/template.txt
 .DS_Store
 .config/bat/themes/
 bin/networkmanager_dmenu
+.claude/
+.director/
