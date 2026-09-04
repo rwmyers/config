@@ -85,6 +85,19 @@ feature_enabled()
     grep -qx "$1=true" "$conf"
 }
 
+android_sdk_dir()
+{
+    # Google's default SDK location per platform. Mirrored in
+    # .config/zsh/android.zsh, which can't source this file (.zshrc must not
+    # depend on the install/ layer) — change both together.
+    if [[ "$OSTYPE" == "darwin"* ]]
+    then
+        echo "$HOME/Library/Android/sdk"
+    else
+        echo "$HOME/Android/Sdk"
+    fi
+}
+
 flatpak_install()
 {
     # Install a Flathub app if it isn't already present, setting up flatpak

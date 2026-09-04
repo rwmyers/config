@@ -76,6 +76,11 @@ in
   ]
   # Cross-platform optionals; Linux-only ones are in linux.nix.
   ++ lib.optional (enabled "bazelisk") bazelisk
+  # sdkmanager (cmdline-tools 19+) needs JDK 17 or newer; Gradle 8.5+ and
+  # AGP 8.9+ run on 21. Studio bundles its own JetBrains Runtime and does not
+  # use this one — it is for sdkmanager and command-line Gradle. Gated on either
+  # Android feature, since install/development/android-sdk.sh needs it too.
+  ++ lib.optional (enabled "android-sdk" || enabled "android-studio") jdk21
   ++ lib.optional (enabled "claude-code") claude-code;
 
   home.file.".config/starship".source =
