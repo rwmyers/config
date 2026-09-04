@@ -25,7 +25,7 @@ let
   enabled = import ./features.nix { inherit config lib; };
 in
 {
-  imports = [ ./programs/bat.nix ];
+  imports = [ ./programs/bat.nix ./programs/godot.nix ];
 
   # Bump only intentionally; see Home Manager release notes before changing.
   home.stateVersion = "25.05";

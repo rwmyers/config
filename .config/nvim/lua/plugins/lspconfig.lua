@@ -48,6 +48,16 @@ return {
                 vim.lsp.enable('ruff')
             end
 
+            -- Godot / GDScript. The LSP lives inside a running Godot editor on
+            -- 127.0.0.1:6005, so there is no binary to probe for - it just fails to
+            -- connect when Godot isn't up. Formatting is conform's gdformat, not this
+            -- server; see conform.lua.
+            vim.lsp.config('gdscript', {
+                cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+                root_markers = { 'project.godot', '.godot' },
+            })
+            vim.lsp.enable('gdscript')
+
             -- Global mappings.
             -- See `:help vim.diagnostic.*` for documentation on any of the below functions
             vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)

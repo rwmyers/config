@@ -19,6 +19,7 @@ return {
 	opts = {
 		-- Define your formatters
 		formatters_by_ft = {
+			gdscript = { "gdformat" },
 			lua = { "stylua" },
 			toml = { "taplo" },
 			rust = { "rustfmt" },
