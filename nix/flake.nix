@@ -3,6 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # herdr gets its own pinned nixpkgs so it can move on its own schedule
+    # without dragging wezterm, alacritty, kmonad, claude-code, Godot and the
+    # JDK along with it. Pinned to an explicit revision rather than a branch so
+    # it only moves when we say so. This one carries 0.8.2; 0.8.0 added the
+    # delay before Enter that stopped large briefs being lost on submit.
+    nixpkgs-herdr.url =
+      "github:nixos/nixpkgs/801bef6abd86b91e51083066b83fb354a11fc640";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,7 +17,7 @@
     nixgl.url = "github:nix-community/nixGL";
   };
 
-  outputs = { nixpkgs, home-manager, nixgl, ... }:
+  outputs = { nixpkgs, nixpkgs-herdr, home-manager, nixgl, ... }:
     let
       # Portable across machines and usernames: the invoking user's identity is
       # read from the environment rather than hardcoded, so the same config works
@@ -43,7 +50,7 @@
           inherit system;
           config.allowUnfree = true;
         };
-        extraSpecialArgs = { inherit nixgl; };
+        extraSpecialArgs = { inherit nixgl nixpkgs-herdr; };
         modules = [
           ./home.nix
           {

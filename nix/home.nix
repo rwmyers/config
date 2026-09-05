@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nixgl, ... }:
+{ config, lib, pkgs, nixgl, nixpkgs-herdr, ... }:
 
 let
   srcDir = "${config.home.homeDirectory}/src/config";
@@ -19,6 +19,11 @@ let
       }
     else
       pkg;
+
+  # herdr comes from its own pinned input (see flake.nix) rather than the shared
+  # nixpkgs, so it can be bumped on its own without moving everything else. This
+  # binding deliberately shadows pkgs.herdr in the `with pkgs` list below.
+  herdr = nixpkgs-herdr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.herdr;
 
   # Optional installs, toggled per-machine in ~/.config/dotfiles.conf. Linux-only
   # optionals live in linux.nix; cross-platform ones stay here.
