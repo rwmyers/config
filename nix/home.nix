@@ -25,6 +25,16 @@ let
   # binding deliberately shadows pkgs.herdr in the `with pkgs` list below.
   herdr = nixpkgs-herdr.legacyPackages.${pkgs.stdenv.hostPlatform.system}.herdr;
 
+  # nixpkgs' bazelisk ships upstream's release-tooling `sha256sum` helper in
+  # bin/ next to the real binary. On PATH it shadows coreutils' sha256sum and
+  # breaks `sha256sum -c` (install/development/android-studio.sh, among anything
+  # else that verifies checksums). Link only the bazelisk binary itself. This
+  # binding deliberately shadows pkgs.bazelisk in the `with pkgs` list below.
+  bazelisk = pkgs.runCommand "bazelisk-${pkgs.bazelisk.version}" { } ''
+    mkdir -p $out/bin
+    ln -s ${pkgs.bazelisk}/bin/bazelisk $out/bin/bazelisk
+  '';
+
   # Optional installs, toggled per-machine in ~/.config/dotfiles.conf. Linux-only
   # optionals live in linux.nix; cross-platform ones stay here.
   enabled = import ./features.nix { inherit config lib; };
