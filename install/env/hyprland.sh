@@ -10,7 +10,8 @@ install_linux_package hyprland
 install_linux_package magick imagemagick
 
 # hyprexpo workspace overview; install_linux_package can't check for a .so.
-if [ ! -f "/usr/lib/$(uname -m)-linux-gnu/hyprland/plugins/libhyprexpo.so" ]
+HYPREXPO_SO="/usr/lib/$(uname -m)-linux-gnu/hyprland/plugins/libhyprexpo.so"
+if [ ! -f "$HYPREXPO_SO" ]
 then
     print_note " -- Installing hyprexpo overview plugin"
     if [ -f "/etc/arch-release" ]
@@ -19,6 +20,16 @@ then
     else
         sudo apt -y install hyprland-plugin-hyprexpo
     fi
+fi
+
+# plugins.conf only loads the plugin at compositor startup, so if we're inside
+# a running Hyprland session (install or package upgrade), load it now.
+if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ] && [ -f "$HYPREXPO_SO" ] && \
+   ! hyprctl plugin list 2>/dev/null | grep -q hyprexpo
+then
+    print_note " -- Loading hyprexpo into the running Hyprland session"
+    hyprctl plugin load "$HYPREXPO_SO" > /dev/null || \
+        print_note "    WARNING: load failed (plugin/compositor version skew?); restart Hyprland."
 fi
 
 if [ ! -d "$HOME/.config/hypr/" ]
