@@ -108,4 +108,8 @@ in
 
   home.file.".config/wezterm/wezterm.lua".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/wezterm/wezterm.lua";
+
+  # Only config.toml: herdr keeps its sockets, logs and session state beside it.
+  home.file.".config/herdr/config.toml".source =
+    config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/herdr/config.toml";
 }
