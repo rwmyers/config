@@ -1,7 +1,126 @@
 onboarding = false
 
+# Keybindings and settings ported from ~/.tmux.conf so herdr feels like the
+# tmux setup. tmux windows map to herdr tabs and tmux sessions to herdr
+# workspaces. "direct" chords below need no prefix, like tmux's `bind -n`.
+#
+# Where a herdr default sat on a key tmux uses for something else, that action
+# is moved to a free key and noted. Other herdr defaults are kept alongside the
+# tmux keys, because setting a field replaces its default.
+#
+# Not portable to herdr 0.8.2:
+#   - prefix2 C-a: herdr has one prefix. C-a passes through to the pane
+#     untouched, and pressing the prefix twice sends a literal C-Space
+#     (tmux's send-prefix).
+#   - C-PageUp/C-PageDown, C-S-PageUp/C-S-PageDown and C-Home/C-End: herdr's
+#     key parser has no names for PageUp, PageDown, Home or End.
+#   - `bind -r` repeat, escape-time, detach-on-destroy, the confirm prompt on
+#     detach: no such options in herdr.
+
+[keys]
+prefix = "ctrl+space"
+
+# tmux `r` (and tmux-sensible's `R`) reloads the config.
+reload_config = ["prefix+r", "prefix+shift+r"]
+# Herdr's resize mode lived on prefix+r; tmux has no resize mode.
+resize_mode = "prefix+alt+r"
+
+# Sessions -> workspaces.
+new_workspace = ["prefix+ctrl+c", "prefix+shift+n"]
+# tmux `x` and `C-x` kill the session, not the pane. ui.confirm_close gives the
+# confirm-before prompt.
+close_workspace = ["prefix+x", "prefix+ctrl+x", "prefix+shift+d"]
+# `C-r` is bound twice in .tmux.conf; the later rename-session wins. `$` is the
+# tmux default.
+rename_workspace = ["prefix+ctrl+r", "prefix+$", "prefix+shift+w"]
+# M-Up/M-Down switch session prefix-free; ( and ) are the tmux defaults.
+previous_workspace = ["alt+up", "prefix+("]
+next_workspace = ["alt+down", "prefix+)"]
+# `C-s` choose-session; `w` choose-tree is also herdr's default.
+workspace_picker = ["prefix+w", "prefix+ctrl+s"]
+# Herdr's goto sat on prefix+g, which tmux uses for gemini. Moved to tmux's
+# find-window key.
+goto = "prefix+f"
+# C-q detaches prefix-free; `d` is the tmux default. Herdr does not confirm.
+detach = ["ctrl+q", "prefix+d", "prefix+q"]
+
+# Copy mode prefix-free on C-s, plus the tmux default `[`.
+copy_mode = ["ctrl+s", "prefix+["]
+
+# Panes.
+close_pane = "ctrl+w"
+focus_pane_left = ["prefix+h", "ctrl+left", "prefix+left"]
+focus_pane_down = ["prefix+j", "ctrl+down", "prefix+down"]
+focus_pane_up = ["prefix+k", "ctrl+up", "prefix+up"]
+focus_pane_right = ["prefix+l", "ctrl+right", "prefix+right"]
+# tmux `>`/`<` swap with the next/previous pane by index. Herdr only swaps by
+# direction, so these swap right/left, which matches side-by-side splits.
+swap_pane_right = ["prefix+>", "prefix+shift+l"]
+swap_pane_left = ["prefix+<", "prefix+shift+h"]
+# tmux default `;` last-pane.
+last_pane = "prefix+semicolon"
+# `+` ran a maximize script; `z` is the tmux default zoom.
+zoom = ["prefix+plus", "prefix+z"]
+# C-S-h/j/k/l and C-S-arrows resize prefix-free. Herdr's step size is fixed,
+# not tmux's 2 cells.
+resize_pane_left = ["ctrl+shift+h", "ctrl+shift+left"]
+resize_pane_down = ["ctrl+shift+j", "ctrl+shift+down"]
+resize_pane_up = ["ctrl+shift+k", "ctrl+shift+up"]
+resize_pane_right = ["ctrl+shift+l", "ctrl+shift+right"]
+# tmux `s` = split-window -v (stacked) and `v` = split-window -h (side by
+# side). Herdr names splits by divider orientation, so tmux -v is herdr
+# split_horizontal. `"` and `%` are the tmux defaults.
+split_horizontal = ["prefix+s", "prefix+double_quote", "prefix+minus"]
+split_vertical = ["prefix+v", "prefix+percent"]
+# Herdr's settings sat on prefix+s, which tmux uses for the split.
+settings = "prefix+shift+s"
+
+# Windows -> tabs.
+# C-, and C-p rename prefix-free; `,` is the tmux default.
+rename_tab = ["ctrl+comma", "ctrl+p", "prefix+comma", "prefix+shift+t"]
+next_tab = ["ctrl+tab", "prefix+n"]
+previous_tab = ["ctrl+shift+tab", "prefix+p"]
+# C-1..C-9 select window prefix-free (base-index 1). C-0 has no herdr
+# equivalent; herdr tabs are numbered 1-9.
+switch_tab = ["ctrl+1..9", "prefix+1..9"]
+# `&` is the tmux default kill-window.
+close_tab = ["prefix+ampersand", "prefix+shift+x"]
+
+# tmux `g` opened a window running gemini. A herdr pane command opens a
+# temporary zoomed pane that closes when the shell exits.
+[[keys.command]]
+key = "prefix+g"
+type = "pane"
+command = "zsh -i -c 'gemini-start; exec zsh'"
+description = "gemini"
+
+[terminal]
+# split-window -c "#{pane_current_path}": new panes start in the focused
+# pane's directory. Herdr applies this to new tabs too.
+new_cwd = "follow"
+
+[advanced]
+# history-limit 50000. Herdr limits scrollback in bytes, not lines; this is 5x
+# herdr's 10 MB default, so the line count it holds depends on pane width.
+scrollback_limit_bytes = 50000000
+
+[theme]
+# catppuccin plugin, mocha flavor. Herdr's "catppuccin" is mocha.
+name = "catppuccin"
+
 [experimental]
 pane_history = true
 
 [ui]
 agent_panel_sort = "spaces"
+# status-position top.
+tab_bar_position = "top"
+# mouse on.
+mouse_capture = true
+# set-titles on, with tmux's default set-titles-string "#S:#I:#W - "#T"".
+# Herdr has no window-index token.
+window_title = "{workspace}:{tab} - \"{terminal_title}\""
+# confirm-before on kill-session.
+confirm_close = true
+# The new-session binding prompted for a name.
+prompt_new_workspace_name = true
