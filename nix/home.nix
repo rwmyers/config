@@ -96,7 +96,9 @@ in
   # use this one — it is for sdkmanager and command-line Gradle. Gated on either
   # Android feature, since install/development/android-sdk.sh needs it too.
   ++ lib.optional (enabled "android-sdk" || enabled "android-studio") jdk21
-  ++ lib.optional (enabled "claude-code") claude-code;
+  ++ lib.optional (enabled "claude-code") claude-code
+  # GitHub CLI, install only; auth and git integration are left to the user.
+  ++ lib.optional (enabled "gh") gh;
 
   home.file.".config/starship".source =
     config.lib.file.mkOutOfStoreSymlink "${srcDir}/.config/starship";
